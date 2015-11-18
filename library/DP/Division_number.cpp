@@ -3,7 +3,7 @@
   Mで割った余りを求める。
 
   O(nm)
- */
+*/
 
 #include <bits/stdc++.h>
 
@@ -19,15 +19,15 @@ int n,m;
 int dp[MAX_M+1][MAX_N+1]; //DPテーブル
 
 void solve(){
-  dp[0][0] = 1;
-  for(int i = 1 ; i <= m ; i++){
-    for(int j = 0 ; j <= n ; j++){
-      if(j - i >= 0){
-        dp[i][j] = (dp[i-1][j] + dp[i][j-1]) % M;
-      }else{
-        dp[i][j] = dp[i-1][j];
-      }
+    dp[0][0] = 1;
+    for(int i = 1 ; i <= m ; i++){
+	for(int j = 0 ; j <= n ; j++){
+	    if(j - i >= 0){
+		dp[i][j] = (dp[i-1][j] + dp[i][j-1]) % M;
+	    }else{
+		dp[i][j] = dp[i-1][j];
+	    }
+	}
     }
-  }
-  printf("%d\n",dp[m][n]);
+    printf("%d\n",dp[m][n]);
 }
