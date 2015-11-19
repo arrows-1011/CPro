@@ -26,7 +26,6 @@ int main(){
             v.push_back(P(p,str));
         }
         stable_sort(v.begin(),v.end(),compare);
-         
         for(int i = 0 ; i < n ; i++){
             cout << v[i].second << "," << v[i].first << endl;
         }

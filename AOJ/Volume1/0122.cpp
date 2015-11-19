@@ -32,7 +32,6 @@ bool solve(int x,int y,int s){
 	int ny = y + py[i];
 	
 	if(!check(nx,ny)) continue;
-     
 	for(int j = 0 ; j < 9 ; j++){
 	    int spx = sp[s].x + dx[j];
 	    int spy = sp[s].y + dy[j];

@@ -27,7 +27,6 @@ int cnt_1000(double t){
  
 int main(){
     double f,t;
-     
     while(cin >> f >> t){
         int grade = max(cnt_500(f),cnt_1000(t));
         switch(grade){

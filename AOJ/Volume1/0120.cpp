@@ -51,7 +51,6 @@ int main(){
 	}      
  
 	dist[N][N] = 0;
- 
 	for(int i = 0 ; i < N ; i++){
 	    dist[i][N] = dist[N][i] = v[i];   
 	}

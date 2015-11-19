@@ -43,7 +43,6 @@ int main(){
     map<string,int> count;
  
     init(count);
- 
     while(cin >> in){
 	puzzle = in;
 	for(int i = 0 ; i < 7 ; i++){

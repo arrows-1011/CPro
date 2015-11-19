@@ -18,7 +18,6 @@ int main(){
     int rem = m;
     bool used[MAX];
     memset(used, false, sizeof(used));
- 
     while(true){
 	if(rem == 0) break;
 	for(int i = 0 ; i < m ; i++){

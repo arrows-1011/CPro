@@ -15,7 +15,7 @@ int main(){
  
 	if(y1 == -1 && m1 == -1 && d1 == -1 && 
 	   y2 == -1 && m2 == -1 && d2 == -1) break;
- 
+	
 	cout << Fairfield(y2,m2,d2) - Fairfield(y1,m1,d1) << endl;
     }
     return 0;
