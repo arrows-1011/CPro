@@ -121,7 +121,6 @@ void judge(){
 	    CinT++;
 	}
     }
- 
     if(CinT == 3 && check()){
 	cout << 'a' << endl;
     }else{

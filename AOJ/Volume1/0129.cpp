@@ -86,7 +86,6 @@ bool judge(){
  
 int main(){
     int M;
-  
     while(cin >> N,N){
 	for(int i = 0 ; i < N ; i++){
 	    cin >> ci[i].x >> ci[i].y >> ci[i].r;

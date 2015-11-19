@@ -56,7 +56,6 @@ int main(){
 	if(check(P[1],P[2],T[0],T[1])){
 	    cnt++;
 	} 
-  
 	if(cnt % 2){
 	    puts("OK");
 	}else{

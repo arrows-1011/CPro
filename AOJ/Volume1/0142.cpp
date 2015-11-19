@@ -25,7 +25,6 @@ int main(){
 	for(it = s.begin() ; it != s.end() ; it++){
 	    v.push_back(*it);
 	}
- 
 	int len = (int)v.size();
 	for(int i = 0 ; i < len ; i++){
 	    for(int j = 0 ; j < len ; j++){

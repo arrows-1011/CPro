@@ -33,7 +33,6 @@ bool check(int &G){
 	Ws2 += N[i].w;
     }
     G = Ws1;
- 
     return true;
 }
  

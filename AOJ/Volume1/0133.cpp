@@ -12,7 +12,6 @@ int main(){
 	    cin >> a[i][j][0];
 	}
     }
- 
     rep(k,3){
 	cout << (k+1)*90 << endl;
 	rep(i,8){

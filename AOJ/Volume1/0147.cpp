@@ -101,7 +101,6 @@ void make(){
   
 int main(){
     int N;
-  
     make();
     while(cin >> N){
 	cout << arr[N] << endl;

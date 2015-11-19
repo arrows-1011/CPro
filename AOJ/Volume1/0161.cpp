@@ -8,7 +8,6 @@ typedef pair<int,int> P;
  
 int main(){
     int n;
- 
     while(cin >> n,n){
 	vector<P> v,b;
 	for(int i = 0 ; i < n ; i++){

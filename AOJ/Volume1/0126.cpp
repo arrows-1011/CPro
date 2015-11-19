@@ -45,7 +45,6 @@ bool check3(int x,int y){
  
     field(x,sx,tx);
     field(y,sy,ty);
- 
     for(int i = sx ; i < tx ; i++){
 	for(int j = sy ; j < ty ; j++){  
 	    if(x == i && y == j) continue;

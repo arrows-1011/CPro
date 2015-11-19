@@ -5,7 +5,6 @@ using namespace std;
  
 int main(){
     int n,x,y,h,w;
-     
     while(cin >> n,n){
         int tc = 0;
         while(n--){

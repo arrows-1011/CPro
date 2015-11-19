@@ -24,7 +24,6 @@ int main(){
 	    cin >> x >> y;
 	    v.push_back(P(x,y));
 	}
- 
 	sort(v.begin(),v.end());
 	int dp[MAX] = {0};
 	int ans = 0;

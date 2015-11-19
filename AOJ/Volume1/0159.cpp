@@ -23,7 +23,6 @@ int main(){
                 bn = num;
                 continue;
             }
-             
             if(tmp > fabs(BMI-best)){
                 tmp = fabs(BMI-best);
                 bn = num;

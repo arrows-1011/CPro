@@ -9,7 +9,6 @@ int main(){
      
     while(cin >> m,m){
         cin >> n;
-     
         int cnt = 0;
         for(int i = m ; i <= n ; i++){
             int tmp = i;

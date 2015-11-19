@@ -67,7 +67,6 @@ void solve(){
  
 int main(){
     int Tc;
- 
     cin >> Tc;
     while(Tc--){
 	for(int i = 0 ; i < 10 ; i++){

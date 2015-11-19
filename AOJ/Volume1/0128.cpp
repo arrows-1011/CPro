@@ -47,7 +47,6 @@ void solve(string s,int count){
  
 int main(){
     init();
- 
     int count = 0;
     while(cin >> in){
 	solve(in,count);

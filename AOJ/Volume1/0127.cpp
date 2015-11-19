@@ -17,7 +17,7 @@ void change(){
 bool judge(string s){
     if(s.size()%2==1) return false;
      
-    for(int i = 0 ; i < s.size(); i++){
+    for(int i = 0 ; i < (int)s.size(); i++){
         if(i%2==1 && !('1' <= s[i] && s[i] <='5')) return false;
         if(i%2==0 && !('1' <= s[i] && s[i] <= '6')) return false;
     }
@@ -33,7 +33,7 @@ int main(){
         if(!judge(str)) cout << "NA" << endl;
         else{
             string ans = "";
-            for(int i = 0 ; i < str.size() ; i++){
+            for(int i = 0 ; i < (int)str.size() ; i++){
                 string k = str.substr(i,2);
                 if(i%2==0){
                     ans += m[k];
@@ -42,6 +42,5 @@ int main(){
             cout << ans << endl;
         }
     }
-     
     return 0;
 }

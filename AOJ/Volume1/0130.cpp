@@ -36,13 +36,13 @@ int main(){
  
 	cin >> str;
 	string tmp;
-	for(int i = 0 ; i < str.size() ; i++){
+	for(int i = 0 ; i < (int)str.size() ; i++){
 	    if(str[i] == '-') continue;
 	    tmp += str[i];
 	}
 	str = tmp;
 	st.insert(str[0]);
-	for(int i = 2 ; i < str.size() ; i += 2){
+	for(int i = 2 ; i < (int)str.size() ; i += 2){
 	    if(str[i-1] == '<'){
 		data[str[i]-'a'][str[i-2]-'a'] = true;
 	    }else{
@@ -64,8 +64,7 @@ int main(){
 		break;
 	    }
 	}
- 
-	for(int i = 0 ; i < ans.size() ; i++){
+	for(int i = 0 ; i < (int)ans.size() ; i++){
 	    cout << ans[i];
 	}
 	cout << endl;

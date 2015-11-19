@@ -29,13 +29,13 @@ int main(){
 	scanf("%d%d%d" ,&tIC ,&th ,&tm);
  
 	sIC--; tIC--;
-	bool ok1 = false,ok2 = false;
+	bool ok1 = 0,ok2 = 0;
 	int ssum = sh*60 + sm , tsum = th*60 + tm;
  
 	if((start <= ssum && ssum <= end) ||
-	   (start <= tsum && tsum <= end)) ok1 = true;
+	   (start <= tsum && tsum <= end)) ok1 = 1;
  
-	if(dist[sIC][tIC] <= 40) ok2 = true;
+	if(dist[sIC][tIC] <= 40) ok2 = 1;
   
 	int ans = price[sIC][tIC];
 	if(ok1 && ok2){

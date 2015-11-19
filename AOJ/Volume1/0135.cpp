@@ -18,7 +18,6 @@ int main(){
  
 	double key = fabs(l-s);
 	key = min(key,360-key);
-   
 	if(0 <= key && key < 30){
 	    puts("alert");
 	}else if(90 <= key && key <= 180){

@@ -16,7 +16,6 @@ vector<int> Point(string s){
     while(ss >> num){
 	v.push_back(num);
     }
- 
     return v;
 }
  

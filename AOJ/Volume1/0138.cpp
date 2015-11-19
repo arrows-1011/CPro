@@ -11,7 +11,6 @@ int main(){
     vector<p> v,th;
     int n = 3,num;
     double data;
-     
     while(n--){
         v.clear();
         for(int i = 0 ; i < 8 ; i++){

@@ -12,7 +12,6 @@ int main(){
 	cin >> snake;
  
 	string s = snake.substr(0,2);
-  
  
 	if(s != ">^" && s != ">\'"){
 	    puts("NA");

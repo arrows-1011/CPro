@@ -32,7 +32,6 @@ int main(){
     int n;
  
     make();
- 
     while(cin >> n ,n){
 	int p,m,ans = 0;
 	for(int i = 0 ; i < n ; i++){

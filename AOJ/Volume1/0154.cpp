@@ -24,7 +24,6 @@ void check(int num, int pos){
  
 int main(){
     int g, num;
- 
     while(cin >> m ,m){
 	v.clear(); v.resize(m);
 	for(int i = 0 ; i < m ; i++){

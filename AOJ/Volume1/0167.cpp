@@ -35,7 +35,6 @@ int main(){
          
         int ans = 0;
         ans = bubble_sort(n,array);
-        
         cout << ans << endl;
     }
     return 0;

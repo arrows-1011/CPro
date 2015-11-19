@@ -35,7 +35,6 @@ void dijkstra(int s, int t){
 		v = u;
 	    }
 	}
- 
 	if(v == -1){
 	    break;
 	}else{

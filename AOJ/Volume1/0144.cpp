@@ -30,6 +30,7 @@ int main(){
 	    }
 	}
     }
+    
     int p,s,t,v;
     cin >> p;
     for(int i = 0 ; i < p ; i++){

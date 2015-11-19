@@ -3,7 +3,6 @@ using namespace std;
  
 int main(){
     int n;
- 
     while(cin >> n ,n){
 	int cnt = 0;
 	while(n != 1){

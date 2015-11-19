@@ -5,7 +5,6 @@ int main(){
     int la,ra,lb,rb,lc,rc,ld,rd;
      
     la = ra = lb = rb = lc = rc = ld = rd = 0;
-     
     while(scanf("%lf%lf" ,&left ,&right) != EOF){
         if(left >= 1.1) la++;
         else if(0.6 <= left && left < 1.1) lb++;

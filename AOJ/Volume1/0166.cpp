@@ -24,7 +24,6 @@ int main(){
 	    a2 += s(in);
 	}    
 	a2 += s(rem);
- 
 	if(S(a1) > S(a2)){
 	    puts("1");
 	}else if(S(a1) < S(a2)){

@@ -64,7 +64,6 @@ void bfs(int y, int x){
 	ans = min(ans, cost[0][i]);
 	ans = min(ans, cost[H-1][i]);
     }
- 
     cout << ans << endl;
 }
  

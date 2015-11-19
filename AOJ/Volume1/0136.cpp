@@ -17,7 +17,6 @@ int main(){
 	else if(a < 185) cnt[4]++;
 	else cnt[5]++;
     }
- 
     for(int i = 0 ; i < 6 ; i++){
 	cout << i+1 << ":";
 	for(int j = 0 ; j < cnt[i] ; j++){

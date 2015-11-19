@@ -27,7 +27,6 @@ double dist(int a,int b){
 double solve(int S,int prev,double b){
     if(N == __builtin_popcount(S)) return dp[S][prev] = 0.0;
     if(dp[S][prev] >= 0) return dp[S][prev];
-  
     double res = INF;
     for(int i = 0 ; i < N ; i++){
 	if(S >> i & 1) continue;

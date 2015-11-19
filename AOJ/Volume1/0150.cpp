@@ -23,7 +23,6 @@ int main(){
     make();
     while(cin >> n,n){
         int a,b;
-         
         for(int i = 0 ; i <= n ; i++){
             if(i >= 2 && !prime[i] && !prime[i-2]){
                 a = i-2;

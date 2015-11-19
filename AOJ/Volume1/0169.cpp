@@ -25,7 +25,6 @@ int main(){
 	if(sum <= 11 && flg){
 	    sum += 10;
 	} 
- 
 	if(sum > 21){
 	    cout << 0 << endl;
 	}else{
