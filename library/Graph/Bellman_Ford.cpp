@@ -11,50 +11,50 @@ using namespace std;
 #define INF 1e9
 
 struct edge{
-  int from,to,cost;
+    int from,to,cost;
 };
 
 int V,E,d[MAX_V];
 edge es[MAX_E];
 
 bool find_negative_loop(int s){
-  int cnt = 0;
-  for(int i = 0 ; i < V ; i++){
-    d[i] = INF;
-  }
-  d[s] = 0;
-  while(true){
-    bool update = false;
-    cnt++;
-    for(int i = 0 ; i < E ; i++){
-      edge e = es[i];
-      if(d[e.from] != INF && d[e.to] > d[e.from] + e.cost){
-        d[e.to] = d[e.from] + e.cost;
-        if(cnt == V){ return true; }
-        update = true;
-      }
+    int cnt = 0;
+    for(int i = 0 ; i < V ; i++){
+	d[i] = INF;
     }
-    if(!update){ break; }
-  }
-  return false;
+    d[s] = 0;
+    while(true){
+	bool update = false;
+	cnt++;
+	for(int i = 0 ; i < E ; i++){
+	    edge e = es[i];
+	    if(d[e.from] != INF && d[e.to] > d[e.from] + e.cost){
+		d[e.to] = d[e.from] + e.cost;
+		if(cnt == V){ return true; }
+		update = true;
+	    }
+	}
+	if(!update){ break; }
+    }
+    return false;
 }
 
 int main(){
-  int r;
-  cin >> V >> E >> r;
-  for(int i = 0 ; i < E ; i++){
-    cin >> es[i].from >> es[i].to >> es[i].cost;
-  }
-  if(find_negative_loop(r)){
-    cout << "NEGATIVE CYCLE" << endl;
-  }else{
-    for(int i = 0 ; i < V ; i++){
-      if(d[i] == INF){
-        cout << "INF" << endl;
-      }else{
-        cout << d[i] << endl;
-      }
+    int r;
+    cin >> V >> E >> r;
+    for(int i = 0 ; i < E ; i++){
+	cin >> es[i].from >> es[i].to >> es[i].cost;
     }
-  }
-  return 0;
+    if(find_negative_loop(r)){
+	cout << "NEGATIVE CYCLE" << endl;
+    }else{
+	for(int i = 0 ; i < V ; i++){
+	    if(d[i] == INF){
+		cout << "INF" << endl;
+	    }else{
+		cout << d[i] << endl;
+	    }
+	}
+    }
+    return 0;
 }

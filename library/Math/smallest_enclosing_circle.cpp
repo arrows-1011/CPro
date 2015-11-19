@@ -3,16 +3,16 @@
 using namespace std;
 
 struct Point{
-  double x,y;
+    double x,y;
 
-  Point(){}
-  Point(double x,double y) : x(x),y(y) {}
+    Point(){}
+    Point(double x,double y) : x(x),y(y) {}
 
-  Point operator + (const Point &p)const{ return Point(x+p.x,y+p.y); }
-  Point operator - (const Point &p)const{ return Point(x-p.x,y-p.y); }
-  Point operator * (const double &k)const{ return Point(x*k,y*k); }
-  Point operator / (const double &k)const{ return Point(x/k,y/k); }
-  bool operator < (const Point &p)const{ return x != p.x ? x < p.x : y < p.y; }
+    Point operator + (const Point &p)const{ return Point(x+p.x,y+p.y); }
+    Point operator - (const Point &p)const{ return Point(x-p.x,y-p.y); }
+    Point operator * (const double &k)const{ return Point(x*k,y*k); }
+    Point operator / (const double &k)const{ return Point(x/k,y/k); }
+    bool operator < (const Point &p)const{ return x != p.x ? x < p.x : y < p.y; }
 };
 
 double dot(const Point &a,const Point &b){ return a.x*b.x+a.y*b.y; }

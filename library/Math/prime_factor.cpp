@@ -1,7 +1,7 @@
 /*
   素因数分解する
   O(√n)
- */
+*/
 
 #include <bits/stdc++.h>
 

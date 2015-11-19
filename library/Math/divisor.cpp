@@ -1,7 +1,7 @@
 /*
   約数を列挙する.
   O(√n)
- */
+*/
 
 #include <bits/stdc++.h>
 

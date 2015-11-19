@@ -13,37 +13,37 @@ int V;                  //超点数
 /*
   O(V^2)
   Data setの最初にinitする。
- */
+*/
 
 void init(){
-  for(int i = 0 ; i < V ; i++){
-    mincost[i] = INF;
-    used[i] = false;
-    for(int j = 0 ; j < V ; j++){
-      cost[i][j] = INF;
+    for(int i = 0 ; i < V ; i++){
+	mincost[i] = INF;
+	used[i] = false;
+	for(int j = 0 ; j < V ; j++){
+	    cost[i][j] = INF;
+	}
     }
-  }
 }
 
 int prim(){
-  mincost[0] = 0;
-  int res = 0;
+    mincost[0] = 0;
+    int res = 0;
   
-  while(true){
-    int v = -1;
-    //Xに属さない頂点のうちXからの辺のコストが最小になる頂点を探す
-    for(int u = 0 ; u < V ; u++){
-      if(!used[u] && (v == -1 || mincost[u] < mincost[v])){
-	v = u;
-      }
-    }
-    if(v == -1){ break; }
-    used[v] = true;        //頂点Vを集合Xに追加
-    res += mincost[v];     //辺のコストを加える
+    while(true){
+	int v = -1;
+	//Xに属さない頂点のうちXからの辺のコストが最小になる頂点を探す
+	for(int u = 0 ; u < V ; u++){
+	    if(!used[u] && (v == -1 || mincost[u] < mincost[v])){
+		v = u;
+	    }
+	}
+	if(v == -1) break;
+	used[v] = true;        //頂点Vを集合Xに追加
+	res += mincost[v];     //辺のコストを加える
 
-    for(int u = 0 ; u < V ; u++){
-      mincost[u] = min(mincost[u],cost[v][u]);
+	for(int u = 0 ; u < V ; u++){
+	    mincost[u] = min(mincost[u],cost[v][u]);
+	}
     }
-  }
-  return res;
+    return res;
 }
