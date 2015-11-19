@@ -13,7 +13,6 @@ using namespace std;
 const int MAX_M = 1000;
 const int MAX_N = 1000;
 
-//入力
 int n,m;
 
 int dp[MAX_M+1][MAX_N+1]; //DPテーブル
