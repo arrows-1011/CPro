@@ -69,13 +69,13 @@ int ccw(Point p0,Point p1,Point p2){
     return ON_SEGMENT;
 }
 
-double getAngle(const Vector &a,const Vector &b){
-    return toAng(acos(dot(a,b)/abs(a)/abs(b)));
-}
-
+/* verified (AOJ 1033) */
 double getAngle(const Point &a,const Point &b,const Point &c){
     Vector v1 = b-a, v2 = c-b;
-    return getAngle(v1,v2);
+    double aa = atan2(v1.y,v1.x),ba = atan2(v2.y,v2.x);
+    if(aa > ba) swap(aa,ba);
+    double ang = toAng(ba - aa);
+    return min(ang,360-ang);
 }
 
 struct Segment{
@@ -218,6 +218,7 @@ double ellipse_area(double a,double b){
 
 /*
   ここから線分アレンジメント
+  verified (AOJ 1033)
 */
 struct Edge{
     int to;
