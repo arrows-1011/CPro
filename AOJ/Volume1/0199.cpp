@@ -19,7 +19,6 @@ void A(){
  
 void B(){
     int pos = -1;
-   
     for(int i = 1 ; i <= n ; i++){
 	if(chair[i] == 'A'){
 	    pos = i;
