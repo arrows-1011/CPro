@@ -11,7 +11,7 @@ int main(){
     for( int i = 0 ; i < n ;){
 	cin >> res;
      
-	if( res == "OUT" ){
+	if(res == "OUT"){
 	    cnt++;
 	    if( cnt == 3 ){
 		i++;
@@ -21,7 +21,7 @@ int main(){
 		cntH = 0;
 	    }
 	}
-	else if( res == "HIT" ){
+	else if(res == "HIT"){
 	    cntH++;
 	    if( cntH == 4 ){
 		point++; cntH--;

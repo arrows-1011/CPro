@@ -61,7 +61,8 @@ int main(){
     cin >> N;
     while(N--){
 	string s;
-	cin >> s; s.resize(s.size()-1);
+	cin >> s;
+	s.resize(s.size()-1);
 	Calc calc(s);
 	cout << calc.exp() << endl;
     }

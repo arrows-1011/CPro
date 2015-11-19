@@ -14,7 +14,8 @@ int main(){
         cin >> a >> b >> c;
         if(a == 0 && b == 0 && c == 0) break;
 
-        double e = min(min(sqrt(pow(a,2)+pow(b,2)),sqrt(pow(a,2)+pow(c,2))),sqrt(pow(b,2)+pow(c,2)));
+        double e = min(min(sqrt(pow(a,2)+pow(b,2)),
+			   sqrt(pow(a,2)+pow(c,2))),sqrt(pow(b,2)+pow(c,2)));
          
         cin >> n;
         for(int i = 0 ; i < n ; i++){

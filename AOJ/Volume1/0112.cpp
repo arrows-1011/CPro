@@ -7,7 +7,6 @@ typedef long long ll;
  
 int main(){
     int n;
- 
     while(cin >> n ,n){
 	ll a[n],ans = 0;
  

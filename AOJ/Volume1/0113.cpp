@@ -30,13 +30,12 @@ int main(){
 	    }
 	}
     end:
- 
 	if(flg){
 	    for(int i = 0 ; i <= t ; i++){
 		cout << Quo[i];
 	    }
 	    cout << endl;
-	} else {
+	}else{
 	    for(int i = 0 ; i < t ; i++){
 		cout << Quo[i];
 	    }

@@ -20,7 +20,6 @@ int main(){
 	    }
 	}
     }  
- 
     while(cin >> n , n){
 	n /= 100;
 	cout << dp[n] << endl;

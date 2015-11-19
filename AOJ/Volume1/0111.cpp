@@ -100,7 +100,6 @@ int main(){
 		}
 	    }
 	}
-     
 	cout << ans << endl;
     } 
     return 0;

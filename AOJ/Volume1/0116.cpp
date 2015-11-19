@@ -27,7 +27,6 @@ int main(){
 	}
  
 	int res = 0;
- 
 	rep(i,0,W){
 	    rep(j,0,H){
 		int width = 1e9;

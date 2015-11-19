@@ -13,7 +13,7 @@ int main(){
     getline(cin,str);
     while(n--){
         getline(cin,str);
-        for(int j = 0 ; j < str.length() ; j++){
+        for(int j = 0 ; j < (int)str.length() ; j++){
             string key = str.substr(j,7),repl;
             if(key == "Hoshino"){
                 repl = "Hoshina";

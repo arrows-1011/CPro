@@ -10,7 +10,7 @@
  
 void dfs(char mp[MAX][MAX],int i,int j){
     if(mp[i][j]==END){
-        printf("%d %d\n" ,j ,i);
+        printf("%d %d\n",j,i);
         return;
     }
     if(mp[i][j]==LOOP){

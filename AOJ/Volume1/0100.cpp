@@ -10,8 +10,8 @@ int main(){
         unsigned long long int s[4002]={0},gs[4002]={0};
          
         cin >> n;
-        if(!n) break;
-         
+        if(n == 0) break;
+
         int t,cost;
         int num;
         for(int i = 0 ; i < n ; i++){

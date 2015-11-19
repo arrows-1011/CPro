@@ -105,8 +105,9 @@ int main(){
 	    }
 	}
  
-	if(found) cout << ans << endl;
-	else cout << "NA" << endl;
+	if(found){
+	    cout << ans << endl;
+	}else cout << "NA" << endl;
     }
     return 0;
 }

@@ -16,7 +16,6 @@ int main(){
  
 	ll xx = 0,yy = 0,zz = 0;
 	ll x = 1,y = 1,z = 1;
- 
 	while(true){
 	    x = a1*x%m1;
 	    xx++;
