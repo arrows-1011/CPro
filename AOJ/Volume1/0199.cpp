@@ -128,7 +128,6 @@ int main(){
 		break;
 	    }
 	}
-  
 	for(int i = 1 ; i <= n ; i++){
 	    cout << chair[i];
 	}

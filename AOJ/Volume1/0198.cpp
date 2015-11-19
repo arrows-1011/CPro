@@ -74,7 +74,6 @@ int main(){
 		cin >> cube[i].d[j];
 	    }
 	}   
- 
 	int ans = 0;
 	bool used[N];
 	memset(used, false, sizeof(used));

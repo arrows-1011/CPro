@@ -13,7 +13,6 @@ bool check(int limit){
 	if(book[i] > limit){
 	    return false;
 	}
- 
 	sum += book[i];
 	if(sum == limit){
 	    sum = 0;

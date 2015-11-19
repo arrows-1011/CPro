@@ -22,9 +22,9 @@ int main(){
 		dp[i][j] = max(dp[i][j],dp[i-1][k]*nae[k][j]);
 	}
 	double ans = -1;
-	rep(j,n)
+	rep(j,n){
 	    ans = max(ans,dp[m-1][j]);
- 
+	}
 	printf("%.2f\n" , ans);
     }
     return 0;

@@ -30,7 +30,9 @@ int main(){
 	    v.push_back(PP(sum,P(f,ch))); 
 	}
 	sort(v.begin(),v.end(),compare);
-	for(int i = 0 ; i < n ; i++) cout << v[i].second.second << endl;
+	for(int i = 0 ; i < n ; i++){
+	    cout << v[i].second.second << endl;
+	}
     }
     return 0;
 }

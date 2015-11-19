@@ -57,7 +57,6 @@ int bfs(){
 	    }
 	}
     }
- 
     if(!found) return -1;
     return dist[ans];
 }

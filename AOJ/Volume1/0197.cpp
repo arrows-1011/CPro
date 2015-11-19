@@ -27,7 +27,6 @@ int main(){
 	cnt = 0;
 	scanf("%d %d" ,&x ,&y);
 	if( x == 0 && y == 0 ) break;
-     
 	ans = GCD(x,y);
 	printf("%d %d\n" ,ans,cnt);
     }

@@ -9,6 +9,5 @@ int main(){
     while(cin >> str >> b >> a){
 	cout << str << ' ' << b+a << ' ' << b*200+a*300 << endl;
     }
- 
     return 0;
 }

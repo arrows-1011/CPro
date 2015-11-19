@@ -76,7 +76,6 @@ int main(){
     while(true){
 	cin >> s[0].p1.x >> s[0].p1.y >> s[0].p2.x >> s[0].p2.y;
 	if(!s[0].p1.x && !s[0].p1.y && !s[0].p2.x && !s[0].p2.y) break;
- 
 	for(int i = 0 ; i < 2 ; i++){
 	    cin >> s[i+1].p1.x >> s[i+1].p1.y >> s[i+1].p2.x >> s[i+1].p2.y;
 	}

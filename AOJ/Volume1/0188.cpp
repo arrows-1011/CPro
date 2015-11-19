@@ -19,7 +19,6 @@ int main(){
 	    if(key == a[mid]){
 		break;
 	    }
- 
 	    if(key < a[mid]){
 		ub = mid - 1;
 	    }else{

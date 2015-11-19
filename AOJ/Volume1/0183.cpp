@@ -9,7 +9,6 @@ int main(){
 	for(int i = 1 ; i < 3 ; i++){
 	    cin >> s[i];
 	}   
- 
 	bool end = false;
 	for(int i = 0 ; i < 3 ; i++){
 	    char ch = s[i][0];

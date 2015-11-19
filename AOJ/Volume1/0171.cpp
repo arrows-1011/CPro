@@ -26,7 +26,7 @@ int diff(char a,char b){
  
 bool check(int idx){
     bool res = true;
-    if(idx == 0){ return res; }
+    if(idx == 0) return res;
     if(idx == 1){
 	return diff(e[0][0][0].x[1],e[1][0][0].x[4]);
     }

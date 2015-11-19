@@ -25,7 +25,6 @@ int main(){
 	double j = sin(c);
  
 	double dist = acos(e*h + f*i + g*j);  
- 
 	printf("%d\n" ,(int)(r*dist+0.5));
     }
     return 0;

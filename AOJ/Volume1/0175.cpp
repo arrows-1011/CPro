@@ -6,7 +6,6 @@ using namespace std;
 int main(){
     int n;
     string str;
- 
     while(cin >> n , n != -1){
 	str = "";
 	if(!n) cout << '0' << endl;

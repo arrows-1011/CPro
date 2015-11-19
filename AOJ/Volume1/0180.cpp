@@ -23,7 +23,6 @@ int prim(){
 		v = u;
 	    }
 	}
- 
 	if(v == -1) break;
 	used[v] = true;
 	res += mincost[v];

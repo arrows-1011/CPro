@@ -25,7 +25,6 @@ int main(){
 		}
 	    }
 	}
- 
 	int ans = INF,sum,num;
 	for(int i = 0 ; i < M ; i++){
 	    sum = 0;

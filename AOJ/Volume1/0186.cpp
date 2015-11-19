@@ -22,7 +22,6 @@ int main(){
 	    if(cnt1 + cnt2 >= q1 || cnt1 <= 0){    
 		break;  
 	    } 
- 
 	    cnt1--;
 	    b += c1;
  

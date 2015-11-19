@@ -13,17 +13,17 @@ int limit;
 vector<int> v;
  
 P getPos(int x){
-    if(x == 0){ return P(0,2); }
-    if(1 <= x && x <= 3){ return P(1,x); }
-    if(4 <= x && x <= 8){ return P(2,x-4); }
-    if(9 <= x && x <= 11){ return P(3,x-8); }
+    if(x == 0) return P(0,2);
+    if(1 <= x && x <= 3) return P(1,x);
+    if(4 <= x && x <= 8) return P(2,x-4);
+    if(9 <= x && x <= 11) return P(3,x-8);
     return P(4,2);
 }
  
 int getPos(P p){
     if(p.y == 0){
-	if(p.x == 2){ return 0; }
-	else{ return -1; }
+	if(p.x == 2) return 0;
+	else return -1;
     }
     if(p.y == 1){
 	if(1 <= p.x && p.x <= 3){
@@ -59,7 +59,7 @@ int getPos(P p){
 int getMD(){
     int sum = 0;
     for(int i = 0 ; i < 13 ; i++){
-	if(v[i] == 0){ continue; }
+	if(v[i] == 0) continue;
 	P np = getPos(i);
 	P tp = getPos(v[i]);
 	sum += abs(np.x-tp.x) + abs(np.y-tp.y);
@@ -72,7 +72,7 @@ const int dy[] = {0,-1,0,1};
  
 bool dfs(int sp1,int sp2,int step){
     int md = getMD();
-    if(md == 0){ return true; }
+    if(md == 0) return true;
     if(md + step > limit){
 	return false;
     }
@@ -83,7 +83,7 @@ bool dfs(int sp1,int sp2,int step){
 	    int nx = x + dx[j], ny = y + dy[j];
 	    P np(ny,nx);
 	    int next = getPos(np);
-	    if(next == -1){ continue; }
+	    if(next == -1) continue;
 	    if(i == 0){
 		swap(v[sp1],v[next]);
 		if(dfs(next,sp2,step+1)){

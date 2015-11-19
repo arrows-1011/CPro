@@ -49,7 +49,6 @@ int main(){
 	memset(field,0,sizeof(field));
 	for(int i = 0 ; i < N ; i++){
 	    cin >> d >> p >> q; q--;
- 
 	    if(d == 1){
 		int min = INF;
 		for(int j = q ; j < p+q ; j++){

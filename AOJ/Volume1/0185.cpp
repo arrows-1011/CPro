@@ -10,7 +10,6 @@ void make(){
     }
  
     prime[0] = prime[1] = false;
- 
     for(int i = 2 ; i*i < MAX ; i++){
 	if(prime[i]){
 	    for(int j = 2*i ; j < MAX ; j += i){

@@ -46,7 +46,7 @@ void solve(){
 	    }
 	}
 	for(int i = 0 ; i < N ; i++){
-	    if(i == v){ continue; }
+	    if(i == v) continue;
 	    if(swt[v] >> i & 1){
 		int nl = s.l;
 		if(s.l >> i & 1){
@@ -68,7 +68,7 @@ void solve(){
 	vector<State> vec;
 	vec.push_back(State(N-1,(1<<(N-1))));
 	while(true){
-	    if(v == 0 && l == light){ break; }
+	    if(v == 0 && l == light) break;
 	    State next = path[v][l];
 	    vec.push_back(next);
 	    v = next.v; l = next.l;
@@ -123,7 +123,7 @@ int main(){
 	light = 0;
 	for(int i = 0 ; i < N ; i++){
 	    cin >> x;
-	    if(x == 1){ light |= (1<<i); }
+	    if(x == 1) light |= (1<<i);
 	}
 	for(int i = 0 ; i < N ; i++){
 	    cin >> k;

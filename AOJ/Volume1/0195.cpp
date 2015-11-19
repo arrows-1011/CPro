@@ -17,6 +17,7 @@ int main(){
 		num = i + 1;
 	    }
 	}
+	
 	switch(num){
 	case 1:
 	    cout << 'A'; break;

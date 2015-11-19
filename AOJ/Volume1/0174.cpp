@@ -12,7 +12,7 @@ int main(){
 	cin >> str;
 	if(str == "0") break;
      
-	for(int i = 1 ; i < str.size() ; i++){
+	for(int i = 1 ; i < (int)str.size() ; i++){
 	    if(str[i] == 'A') cntA++;
 	    else cntB++;    
 	}

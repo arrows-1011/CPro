@@ -2,7 +2,9 @@
 #include <cmath>
  
 using namespace std;
- 
+
+#define INF (1<<29)
+
 string str;
 const string color[8] = {"black","blue","lime","aqua","red","fuchsia",
 			 "yellow","white"};
@@ -29,8 +31,6 @@ int d(string str1,string str2){
  
     return res;
 }
- 
-#define INF (1<<29)
  
 int main(){
     while(cin >> str , str != "0"){

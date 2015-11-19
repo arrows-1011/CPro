@@ -11,7 +11,7 @@ int main(){
 	cin >> n;
 	if(n == 0) break;
 	
-       int cnt[7] = {0};
+	int cnt[7] = {0};
 	for( int i = 0 ; i < n ; i++ ){
 	    cin >> age;
 	    cnt[judge(age)]++;
