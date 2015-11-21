@@ -87,6 +87,21 @@ struct Segment{
 typedef Segment Line;
 
 /*
+  垂直二等分線を求める.
+*/
+
+Line getPerpendicularBisector(const Point &a,const Point &b){
+    double cx = (a.x + b.x) / 2.0;
+    double cy = (a.y + b.y) / 2.0;
+    Point p = Point(cx + (a.y - b.y), cy + (b.x - a.x));
+    return Line(Point(cx,cy),p);
+}
+
+Line getPerpendicularBisector(const Line &l){
+    return getPerpendicularBisector(l.s,l.t);
+}
+
+/*
   線分上の点を列挙する。
   N分割する。
 */
