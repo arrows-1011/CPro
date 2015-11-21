@@ -1,3 +1,7 @@
+/*
+  シンプソンの公式
+ */
+
 #include <bits/stdc++.h>
 
 using namespace std;

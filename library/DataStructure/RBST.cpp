@@ -52,9 +52,7 @@ public:
 	}
     }
     
-    /*
-      [0,k) [k,n)
-     */
+    /* [0,k) [k,n) */
     pair<RBST*,RBST*> split(RBST *a,int k){
 	if(!a) return mp<RBST*,RBST*>(NULL,NULL);
 	a->push();

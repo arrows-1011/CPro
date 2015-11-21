@@ -6,7 +6,7 @@
 
 using namespace std;
 
-#define INF 1e9
+#define INF (1<<29)
 
 struct Edge{
     int src,dst,cost;

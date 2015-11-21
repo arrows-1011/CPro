@@ -85,6 +85,7 @@ bool sortY(Point p1,Point p2){
 
 struct Segment{
     Point s,t;
+    
     Segment(){}
     Segment(Point s,Point t) : s(s),t(t) {}
     bool operator == (Segment &seg)const{
