@@ -28,6 +28,7 @@ int Levenshtein_Distance(char *s,char *t,
     for(int i = 0 ; i <= M ; i++){
 	dp[0][i] = i*rmcost;
     }
+    
     for(int i = 1 ; i <= N ; i++){
 	for(int j = 1 ; j <= M ; j++){
 	    int rcost = (s[i-1] == t[j-1] ? 0 : recost);

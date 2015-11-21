@@ -25,10 +25,10 @@ int solve(){
 }
 
 int main(){
-    scanf("%d%d",&N,&W);
+    cin >> N >> W;
     for(int i = 0 ; i < N ; i++){
-	scanf("%d%d",&v[i],&w[i]);
+	cin >> v[i] >> w[i];
     }
-    printf("%d\n",solve());
+    cout << solve() << endl;
     return 0;
 }

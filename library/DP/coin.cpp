@@ -5,12 +5,6 @@ using namespace std;
 #define MAX 60010
 #define MAX_C 20
 #define INF 1e9
-#define all(p) (p).begin(),(p).end() 
-
-typedef unsigned int uint;
-typedef long long ll;
-typedef unsigned long long ull;
-typedef pair<int,int> pii;
 
 int N,M;
 int c[MAX_C];

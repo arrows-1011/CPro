@@ -34,5 +34,5 @@ void solve(){
 	    }
 	}
     }
-    printf("%d\n",dp[n][m]);
+    cout << dp[n][m] << endl;
 }

@@ -33,6 +33,11 @@ string getStr(string &L,string &R,int l,int r){
 	    }
 	}
     }
+    
+    // 最長共通部分列
+    // cout << dp[l][r] << endl;
+    
+    // ここから経路復元
     string res;
     for(int i = l, j = r ; i > 0 && j > 0 ; ){
 	if(!arr[i][j]){

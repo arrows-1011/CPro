@@ -11,7 +11,6 @@ using namespace std;
 //入力
 int n;
 int a[MAX_N];
-
 int dp[MAX_N]; //DPテーブル
 
 void solve(){
@@ -25,5 +24,5 @@ void solve(){
 	}
 	res = max(res,dp[i]);
     }
-    printf("%d\n",res);
+    cout << res << endl;
 }

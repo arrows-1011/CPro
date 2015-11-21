@@ -16,7 +16,7 @@ int H,W;
 int mat[MAX_H][MAX_W];
 
 int maximum_rectangle(){
-    int res = 0,h[MAX_W] = {0};
+    int res = 0, h[MAX_W] = {0};
     for(int i = 0 ; i < H ; i++){
 	for(int j = 0 ; j < W ; j++){
 	    h[j] = (mat[i][j] == 0 ? h[j] + 1 : 0);

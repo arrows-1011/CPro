@@ -18,8 +18,8 @@ int maximum_square(){
     for(int i = 0 ; i < N ; i++){
 	dp[0][i] = !(mat[0][i] == '*');
 	dp[i][0] = !(mat[i][0] == '*');
-	if(mat[0][i] == '.'){ res = 1; }
-	if(mat[i][0] == '.'){ res = 1; }
+	if(mat[0][i] == '.') res = 1;
+	if(mat[i][0] == '.') res = 1;
     }
     for(int i = 1 ; i < N ; i++){
 	for(int j = 1 ; j < N ; j++){

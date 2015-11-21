@@ -3,8 +3,9 @@
 using namespace std;
 
 #define MAX 100010
-const int MAX_N = 1<<17;
 typedef long long ll;
+
+const int MAX_N = 1<<17;
 
 class RMQ{
 public:

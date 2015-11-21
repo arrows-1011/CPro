@@ -46,5 +46,5 @@ void solve(){
             swap(crt,next);
         }
     }
-    printf("%d\n",crt[0]);
+    cout << crt[0] << endl;
 }

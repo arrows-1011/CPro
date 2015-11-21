@@ -7,7 +7,6 @@ const ll INF = 1e9;
   
 int main(){
     int n;
-  
     cin >> n;
     int a[n];
     for(int i = 0 ; i < n ; i++){
