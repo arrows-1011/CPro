@@ -64,9 +64,9 @@ int ccw(Point p0,Point p1,Point p2){
     Vector b = p2 - p0;
     if(cross(a,b) > EPS) return COUNTER_CLOCKWISE;
     if(cross(a,b) < -EPS) return CLOCKWISE;
-    if(dot(a,b) < -EPS) return ONLINE_BACK;
-    if(norm(a) < norm(b)) return ONLINE_FRONT;
-    return ON_SEGMENT;
+    if(dot(a,b) < -EPS) return ONLINE_BACK; // p2-p0-p1
+    if(norm(a) < norm(b)) return ONLINE_FRONT; // p0-p1-p2
+    return ON_SEGMENT; // p0-p2-p1
 }
 
 /* verified (AOJ 1033) */
@@ -144,16 +144,16 @@ bool isIntersectSP(const Segment &s,const Point &p){
 }
 
 bool isIntersectLL(const Line &a,const Line &b){
-    return (abs(cross(a.t-a.s,b.t-b.s)) > EPS
-	|| abs(cross(a.t-a.s,b.t-b.s)) < EPS);
+    return (abs(cross(a.t-a.s,b.t-b.s)) > EPS || // 傾きが異なる
+	    abs(cross(a.t-a.s,b.t-b.s)) < EPS);  // 同じ直線である
 }
 
 bool isIntersectLP(const Line &l,const Point &p){
-    return !equal(abs(ccw(l.s,l.t,p)),1);
+    return (abs(ccw(l.s,l.t,p)) != 1);
 }
 
 bool isIntersectLS(const Line &l,const Segment &s){
-    return cross(l.t-l.s,s.s-l.s)*cross(l.t-l.s,s.t-l.s) < EPS;
+    return (cross(l.t-l.s,s.s-l.s)*cross(l.t-l.s,s.t-l.s) < EPS);
 }
 
 //交点
@@ -178,37 +178,37 @@ double distanceLP(const Line &l,const Point &p){
 }
 
 double distanceLL(const Line &a,const Line &b){
-    if(isIntersectLL(a,b)){ return 0; }
+    if(isIntersectLL(a,b)) return 0;
     return distanceLP(a,b.s);
 }
 
 double distanceLS(const Line &l,const Segment &s){
-    if(isIntersectLS(l,s)){ return 0; }
+    if(isIntersectLS(l,s)) return 0;
     return min(distanceLP(l,s.s),distanceLP(l,s.t));
 }
 
 /* verified (AOJ Lib) */
 double distanceSP(const Segment &s,const Point &p){
     Point r = projection(s,p);
-    if(isIntersectSP(s,r)){ return abs(r-p); }
+    if(isIntersectSP(s,r)) return abs(r-p);
     return min(abs(s.s-p),abs(s.t-p));
 }
 
 /* verified (AOJ Lib) */
 double distanceSS(const Segment a,const Segment b){
-    if(isIntersectSS(a,b)){ return 0; }
+    if(isIntersectSS(a,b)) return 0;
     return min(min(distanceSP(a,b.s),distanceSP(a,b.t)),
 	       min(distanceSP(b,a.s),distanceSP(b,a.t)));
 }
 
-//垂直判定
+// 線分の垂直判定
 bool isOrthogonalSS(const Segment &s1,const Segment &s2){
     Vector a = s1.t-s1.s;
     Vector b = s2.t-s2.s;
     return equal(dot(a,b),0);
 }
 
-//平行判定
+// 線分の平行判定
 bool isParallelSS(const Segment &s1,const Segment &s2){
     Vector a = s1.t-s1.s;
     Vector b = s2.t-s2.s;
@@ -229,7 +229,6 @@ double getTriangleArea(Point a,Point b,Point c){
 double ellipse_area(double a,double b){
     return PI*a*b;
 }
-
 
 /*
   ここから線分アレンジメント

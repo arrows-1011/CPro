@@ -55,7 +55,14 @@ Point3D projection(const Line &l,const Point3D &p){
 }
 
 double distanceLP(const Line &l,const Point3D &p){
-    return abs(p-projection(l,p));
+    return abs(p - projection(l,p));
+}
+
+double distanceLL(const Line &a,const Line &b){
+    Point3D v = crossVec(a.t-a.s, b.t-b.s);
+    Point3D p = a.s - b.s;
+    if(abs(v) < EPS) return distanceLP(a,b.s);
+    return abs(dot(v,p))/abs(v);
 }
 
 /*

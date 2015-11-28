@@ -250,6 +250,18 @@ double getArea(const Polygon &p){
     return abs(res);
 }
 
+
+/*
+  単純多角形の面積を計算する
+ */
+double area(const Polygon &pg){
+    double res = 0;
+    for(int i = 0 ; i < (int)pg.size() ; i++){
+	res += cross(pg[i],next(pg,i));
+    }
+    return abs(res)/2.0;
+}
+
 Point crosspointLL(const Line &a,const Line &b){
     Vector va = a.t-a.s, vb = b.t-b.s;
     double d = cross(vb,va);

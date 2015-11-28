@@ -53,10 +53,10 @@ typedef Point Vector;
 int ccw(Point p0,Point p1,Point p2){
     Vector a = p1 - p0;
     Vector b = p2 - p0;
-    if(cross(a,b) > EPS){ return COUNTER_CLOCKWISE; }
-    if(cross(a,b) < -EPS){ return CLOCKWISE; }
-    if(dot(a,b) < -EPS){ return ONLINE_BACK; }
-    if(norm(a) < norm(b)){ return ONLINE_FRONT; }
+    if(cross(a,b) > EPS) return COUNTER_CLOCKWISE;
+    if(cross(a,b) < -EPS) return CLOCKWISE;
+    if(dot(a,b) < -EPS) return ONLINE_BACK;
+    if(norm(a) < norm(b)) return ONLINE_FRONT;
     return ON_SEGMENT;
 }
 
@@ -88,6 +88,10 @@ struct Circle{
     Circle(){}
     Circle(Point p,double r) : p(p),r(r) {}
 };
+
+bool isIntersectCP(const Circle &c,const Point &p){
+    return (abs(c.p-p) <= c.r + EPS);
+}
 
 bool isIntersectCC(const Circle &a,const Circle &b){
     double d = abs(a.p-b.p);
@@ -166,4 +170,33 @@ vector<Line> tangentCC(const Circle &a,const Circle &b){
 	res.push_back(Line(ps[i],qs[i]));
     }
     return res;
+}
+
+typedef vector<Point> Polygon;
+
+/* 最小包含円 */
+Circle smallestEnclosingCircle(const Polygon &pg){
+    Point p(0,0);
+    int N = pg.size();
+    double d = 0.5;
+    for(int i = 0 ; i < N ; i++){
+	p = p + pg[i];
+    }
+    while(d > EPS){
+	for(int i = 0 ; i < 150 ; i++){
+	    int s = 0;
+	    for(int j = 0 ; j < N ; j++){
+		if(abs(pg[j]-p) > abs(pg[s]-p)){
+		    s = i;
+		}
+	    }
+	    p = p + (pg[s] - p)*d;
+	}
+	d *= 0.5;
+    }
+    double r = 0;
+    for(int i = 0 ; i < N ; i++){
+	r = max(r, abs(pg[i] - p));
+    }
+    return Circle(p, r);
 }
