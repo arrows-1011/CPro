@@ -109,7 +109,7 @@ double distanceSS(const Segment &s1,const Segment &s2){
 /*
   極座標（半径,緯度,経度）から直交座標（x,y,z）を求める
   ラジアン注意
-  未確認、wikipediaより引用
+  未確認,wikipediaより引用
  */
 Point3D getP3(double r,double ido,double keido){
     Point3D res;

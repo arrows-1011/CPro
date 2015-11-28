@@ -174,7 +174,9 @@ vector<Line> tangentCC(const Circle &a,const Circle &b){
 
 typedef vector<Point> Polygon;
 
-/* 最小包含円 */
+/*
+  最小包含円
+*/
 Circle smallestEnclosingCircle(const Polygon &pg){
     Point p(0,0);
     int N = pg.size();

@@ -33,9 +33,9 @@ double toRad(double ang){ return ang*PI/180; }
 double toAng(double rad){ return rad*180/PI; }
 
 /*
-  これは、0°基準である。また、thはラジアン単位であることに注意が必要.
+  これは,0°基準である。また,thはラジアン単位であることに注意が必要.
 
-  ある点(x,y)を中心に回転する場合、
+  ある点(x,y)を中心に回転する場合,
   Point(cos(th)*(p.x-x)-sin(th)*(p.y-y)+x,sin(th)*(p.x-x)+cos(th)*(p.y-y)+y);
   とする。
 */
