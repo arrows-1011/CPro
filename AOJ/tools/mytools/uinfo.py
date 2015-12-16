@@ -23,25 +23,25 @@ class User(object):
         self.problems = []
 
     def setUserID(self, userID):
-        self.userID = userID
+        self.userID = str(userID)
 
     def getUserID(self):
         return self.userID
 
     def setUserName(self, userName):
-        self.userName = userName
+        self.userName = str(userName)
 
     def getUserName(self):
         return self.userName
 
     def setAffiliation(self, affiliation):
-        self.affiliation = affiliation
+        self.affiliation = str(affiliation)
 
     def getAffiliation(self):
         return self.affiliation
 
     def setProbNum(self, probNum):
-        self.probNum = probNum
+        self.probNum = str(probNum)
 
     def getProbNum(self):
         return self.probNum

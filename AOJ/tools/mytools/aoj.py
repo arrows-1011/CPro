@@ -1,87 +1,13 @@
 # -*- coding:utf-8 -*-
 
+import search as srh
 import sys
-import uinfo
 import urllib.request
 import xml.etree.ElementTree as ET
 
 
 class MyAPI(object):
-    # Check whether user name is valid or invalid
-    def isValidUser(self, name):
-        for i in range(len(name)):
-            if ('a' <= name[i] and name[i] <= 'z'):
-                continue
-            elif ('A' <= name[i] and name[i] <= 'Z'):
-                continue
-            elif ('0' <= name[i] and name[i] <= '9'):
-                continue
-            elif name[i] == '_':
-                continue
-            return False
-
-        return True
-
-    # Get the user information
-    def userSearch(self, ID):
-        # print("--In userSearch--")
-        if ID == "":
-            print("Please input your user ID")
-            ID = input()
-
-        # Check whether ID is valid or invalid
-        if self.isValidUser(ID) is False:
-            sys.exit("Invalid user name")
-
-        # Split url because they're long (over 80 words)
-        url = "http://judge.u-aizu.ac.jp/onlinejudge/webservice/user?id="\
-              + str(ID)
-
-        request = urllib.request.Request(url)
-        response = urllib.request.urlopen(request)
-
-        # Check status code
-        if response.getcode() != 200:
-            sys.exit("Invalid response")
-
-        # parse
-        tree = ET.parse(response)
-        root = tree.getroot()
-        found = 0
-        isProb = 0
-        user = uinfo.User()
-        problems = []
-        for e in root.getiterator():
-            if e.tag == "id" and found == 0:
-                found = 1
-                user.setUserID(e.text)
-            elif e.tag == "name":
-                user.setUserName(e.text)
-            elif e.tag == "affiliation":
-                user.setAffiliation(e.text)
-            elif e.tag == "solved":
-                user.setProbNum(e.text)
-            elif e.tag == "id" and isProb == 1:
-                problems.append(e.text)
-
-            if found == 1:
-                isProb = 1
-
-        user.setProblems(problems)
-
-        if self.doPrint():
-            # Display user information
-            print("ID: " + user.getUserID())
-            print("Name: " + user.getUserName())
-            print("Affiliation: " + user.getAffiliation())
-            print("The number of accepted: " + user.getProbNum())
-            print("\nList solved problems:")
-            print(' '.join(user.getProblems()))
-
-        return user
-
     def doPrint(self):
-        # return False
         print("Do you want to display the user information? (yes/no)")
 
         while True:
@@ -98,11 +24,26 @@ class MyAPI(object):
         else:
             return False
 
+    # Check whether user id is valid or invalid
+    def isValidUser(self, uid):
+        for i in range(len(uid)):
+            if ('a' <= uid[i] and uid[i] <= 'z'):
+                continue
+            elif ('A' <= uid[i] and uid[i] <= 'Z'):
+                continue
+            elif ('0' <= uid[i] and uid[i] <= '9'):
+                continue
+            elif uid[i] == '_':
+                continue
+            return False
+
+        return True
+
     # Get the difference between users
     def getUserDiff(self, u1, u2):
         # print("In getUserDiff")
-        user1 = self.userSearch(u1)
-        user2 = self.userSearch(u2)
+        user1 = srh.search(u1)
+        user2 = srh.search(u2)
         probOnlyUser1 = []
         probOnlyUser2 = []
         probBothUsers = []
@@ -183,12 +124,12 @@ class MyAPI(object):
     # Search problems that the user should solve
     def searchNextProblem(self):
         counter = {}  # counter[problem number] := the number of solved
-        myUser = self.userSearch("")
+        myUser = srh.search("")
 
         users = self.searchCloseUser(myUser.getProbNum(), 100)
         myList = myUser.getProblems()
         for u in users:
-            user = self.userSearch(u)
+            user = srh.search("")
             userList = user.getProblems()
             for p in userList:
                 if myList.count(p) == 0:
