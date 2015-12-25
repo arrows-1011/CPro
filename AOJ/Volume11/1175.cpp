@@ -34,14 +34,15 @@ int main(){
             if(dp[i] == 0) continue;
             if(N%2 == 0 && __builtin_popcount(i) % 2 == 1) continue;
             if(N%2 == 1 && __builtin_popcount(i) % 2 == 0) continue;
+	    int n = __builtin_popcount(i);
             for(int j = 0 ; j < N ; j++){
-		if(__builtin_popcount(i&bit[j]) > 0) continue;
+                if((i&bit[j]) > 0) continue;
                 for(int k = j+1 ; k < N ; k++){
                     if(c[j] != c[k]) continue;
-                    if(__builtin_popcount(i&bit[k]) > 0) continue;
+                    if((i&bit[k]) > 0) continue;
                     int S = i & ~((1<<j) | (1<<k));
                     dp[S] = 1;
-                    res = max(res,N-__builtin_popcount(i));
+                    res = max(res,N-n);
                 }
             }
         }
