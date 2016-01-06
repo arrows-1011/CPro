@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 
 import sys
-import uinfo
 import urllib.request
+import usr
 import xml.etree.ElementTree as ET
 
 
@@ -75,7 +75,7 @@ def getUsers(url):
     root = tree.getroot()
     found = 0
     isProb = 0
-    user = uinfo.User()
+    user = usr.User()
     problems = []
 
     for e in root.getiterator():
