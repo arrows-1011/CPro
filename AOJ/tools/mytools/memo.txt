@@ -1,0 +1,62 @@
+# ベンチャー体験工房
+
+## main.py
+- main
+
+## search.py
+- doPrint()
+> Check whether display an user or not.
+
+- isValidUser(uid)
+> Check whether an user id is valid or invalid.
+
+- search(info)
+> Find an user by the user id.
+
+- searchUserId(uid)
+> Search by an user id.
+
+- getUsers(url)
+> Get users.
+
+- displayUser(user)
+> Display user information.
+
+## usr.py
+- Class User(userID, userName, affiliation, probNum, problems[])
+- init
+- setter, getter
+
+## usrs.py
+- Class Users(users[])
+  - init
+  - isUser(user)
+  > Check whether an user or not.
+  - append(user)
+  > Append an user in list.
+  - remove(user)
+  > Remove an user in list.
+  - printUsers()
+  > Display users.
+  - searchUser(user)
+  > Search an user.
+  - sort(base)
+  > Sort users based on ID or the number of solved.
+  - mergeUsers(users)
+  > Merge two lists.
+
+## aoj.py
+- Class MyAPI
+  - doPrint()
+  > Check whether display an user information or not.
+
+  - isValidUser(uid)
+  > Check whether a valid user or not.
+  - getUserDiff(u1, u2)
+  > Get the difference two users.
+  - searchCloseUser(num, diff)
+  > Search close users.
+  - searchNextProblem()
+  > Search problems you should solve.
+  - getSimilarUser(user, offset)
+  > Get similar user.
