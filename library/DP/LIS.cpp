@@ -2,7 +2,8 @@
   O(n^2)
 */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -13,16 +14,17 @@ int n;
 int a[MAX_N];
 int dp[MAX_N]; //DPテーブル
 
-void solve(){
+void solve()
+{
     int res = 0;
-    for(int i = 0 ; i < n ; i++){
+    for (int i = 0; i < n; i++) {
 	dp[i] = 1;
-	for(int j = 0 ; j < i ; j++){
-	    if(a[j] < a[i]){
-		dp[i] = max(dp[i],dp[j]+1);
+	for (int j = 0; j < i; j++) {
+	    if (a[j] < a[i]) {
+		dp[i] = max(dp[i], dp[j]+1);
 	    }
 	}
-	res = max(res,dp[i]);
+	res = max(res, dp[i]);
     }
     cout << res << endl;
 }

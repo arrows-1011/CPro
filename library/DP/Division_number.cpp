@@ -5,7 +5,7 @@
   O(nm)
 */
 
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
@@ -13,17 +13,18 @@ using namespace std;
 const int MAX_M = 1000;
 const int MAX_N = 1000;
 
-int n,m;
+int n, m;
 
 int dp[MAX_M+1][MAX_N+1]; //DPテーブル
 
-void solve(){
+void solve()
+{
     dp[0][0] = 1;
-    for(int i = 1 ; i <= m ; i++){
-	for(int j = 0 ; j <= n ; j++){
-	    if(j - i >= 0){
+    for (int i = 1; i <= m; i++) {
+	for (int j = 0; j <= n; j++) {
+	    if (j - i >= 0) {
 		dp[i][j] = (dp[i-1][j] + dp[i][j-1]) % M;
-	    }else{
+	    } else {
 		dp[i][j] = dp[i-1][j];
 	    }
 	}
