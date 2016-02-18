@@ -7,7 +7,8 @@
   O(V + E)
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -16,52 +17,55 @@ using namespace std;
 typedef vector<int> Vec;
 typedef pair<int,int> pii;
 
-int low[MAX_V],ord[MAX_V];
-int V,E;
+int low[MAX_V], ord[MAX_V];
+int V, E;
 Vec G[MAX_V];
 vector<pii> bridge;
 
-void dfs(int v,int prev,int &k){
+void dfs(int v, int prev, int &k)
+{
     ord[v] = low[v] = k++;
-    for(int i = 0 ; i < (int)G[v].size() ; i++){
+    for (int i = 0; i < (int)G[v].size(); i++) {
         int to = G[v][i];
-        if(to == prev) continue;
-        if(ord[to] == -1){
+        if (to == prev) continue;
+        if (ord[to] == -1) {
             dfs(to, v, k);
             low[v] = min(low[v], low[to]);
-            if(ord[v] < low[to]){
+            if (ord[v] < low[to]) {
                 int a = min(v, to),b = max(v, to);
-                bridge.push_back(pii(a,b));
+                bridge.push_back(pii(a, b));
             }
         }
         low[v] = min(low[v], ord[to]);
     }
 }
 
-void init(){
+void init()
+{
     bridge.clear();
-    for(int i = 0 ; i < V ; i++){
+    for (int i = 0; i < V; i++) {
         G[i].clear();
         ord[i] = -1; low[i] = INF;
     }
 }
 
-int main(){
-    int s,t;
+int main()
+{
+    int s, t;
     cin >> V >> E; init();
-    for(int i = 0 ; i < E ; i++){
+    for (int i = 0; i < E; i++) {
         cin >> s >> t;
         G[s].push_back(t);
         G[t].push_back(s);
     }
     int k = 0;
-    for(int i = 0 ; i < V ; i++){
-        if(ord[i] == -1){
+    for (int i = 0; i < V; i++) {
+        if (ord[i] == -1) {
             dfs(i, -1, k);
         }
     }
-    sort(bridge.begin(),bridge.end());
-    for(int i = 0 ; i < (int)bridge.size() ; i++){
+    sort(bridge.begin(), bridge.end());
+    for (int i = 0; i < (int)bridge.size(); i++) {
         cout << bridge[i].first << " " << bridge[i].second << endl;
     }
     return 0;

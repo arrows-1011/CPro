@@ -5,7 +5,8 @@
   O(VE)
 */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -18,13 +19,14 @@ int V;                 //頂点数
 int color[MAX_V];      //頂点iの色(1 or -1)
 
 //頂点を1と-1で塗っていく
-bool dfs(int v,int c){
+bool dfs(int v, int c)
+{
     color[v] = c;   //頂点vをcで塗る
-    for(int i = 0 ; i < (int)G[v].size() ; i++){
+    for (int i = 0; i < (int)G[v].size(); i++) {
 	//隣接している頂点が同じ色ならfalse
-	if(color[G[v][i]] == c) return false;
+	if (color[G[v][i]] == c) return false;
 	//隣接している頂点がまだ塗られていないなら-cで塗る
-	if(color[G[v][i]] == 0 && !dfs(G[v][i],-c)){
+	if (color[G[v][i]] == 0 && !dfs(G[v][i], -c)) {
 	    return false;
 	}
     }
@@ -32,11 +34,12 @@ bool dfs(int v,int c){
     return true;
 }
 
-void solve(){
-    for(int i = 0 ; i < V ; i++){
-	if(color[i] == 0){
+void solve()
+{
+    for (int i = 0; i < V; i++) {
+	if (color[i] == 0) {
 	    //まだ頂点iが塗られていないなら1で塗る
-	    if(!dfs(i,1)){
+	    if (!dfs(i, 1)) {
 		puts("No");
 		return;
 	    }
