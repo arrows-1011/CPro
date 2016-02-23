@@ -11,12 +11,13 @@
   6: 土曜日
 */
 
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
-int zeller(int Y,int M,int D){
-    if(M < 3){
+int zeller(int Y, int M, int D)
+{
+    if (M < 3) {
 	Y--;
 	M += 12;
     }

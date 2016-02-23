@@ -1,27 +1,28 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
-using namespace std;
-
-int main(){
-    vector<int> vec;
+int main()
+{
+    std::vector<int> vec;
 
     // 降順ソート
-    sort(vec.begin(),vec.end(),greater<int>());
+    std::sort(vec.begin(), vec.end(), std::greater<int>());
 
     // 重複を取り除く
-    sort(vec.begin(),vec.end());
-    vec.erase(unique(vec.begin(),vec.end()),vec.end());
+    std::sort(vec.begin(), vec.end());
+    vec.erase(unique(vec.begin(), vec.end()), vec.end());
 
     // mergeし結果はc
-    vector<int> a = {1,2,3,4}, b = {5,6,8,2}, c;
-    merge(a.begin(),a.end(),b.begin(),b.end(),back_inserter(c));
+    std::vector<int> a = {1, 2, 3, 4}, b = {5, 6, 8, 2}, c;
+    merge(a.begin(), a.end(), b.begin(), b.end(), back_inserter(c));
 
     // 連結
-    vector<int> d = {1,2,3}, e = {4,5,6};
+    std::vector<int> d = {1, 2, 3}, e = {4, 5, 6};
     // dの後ろにeを連結する
-    d.insert(d.end(),e.begin(),e.end());
+    d.insert(d.end(), e.begin(), e.end());
     // eの後ろにdを連結する
-    d.insert(d.begin(),e.begin(),e.end());
+    d.insert(d.begin(), e.begin(), e.end());
     
     return 0;
 }
