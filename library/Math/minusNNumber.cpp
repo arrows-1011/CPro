@@ -1,22 +1,23 @@
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
 typedef long long ll;
 
-string solve(ll x,ll N){
+string solve(ll x, ll N)
+{
     string res;
-    if(x == 0LL) return "0";
-    ll a,b;
+    if (x == 0LL) return "0";
+    ll a, b;
     int t = 0;
-    for(; x ; t++){
+    for (; x; t++) {
 	t = t & 1;
 	a = x / N;
 	b = x - a * N;
-	if(b < 0 && t == 0){
+	if (b < 0 && t == 0) {
 	    a--;
 	    b += N;
-	}else if(b > 0 && t == 1){
+	} else if(b > 0 && t == 1) {
 	    a++;
 	    b -= N;
 	}
@@ -28,10 +29,11 @@ string solve(ll x,ll N){
     return res;
 }
 
-int main(){
+int main()
+{
     ll x;
-    while(cin >> x, x){
-	cout << solve(x,10) << endl;
+    while (cin >> x, x) {
+	cout << solve(x, 10) << endl;
     }
     return 0;
 }

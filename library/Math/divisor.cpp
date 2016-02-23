@@ -3,16 +3,18 @@
   O(√n)
 */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-vector<int> divisor(int n){
+vector<int> divisor(int n)
+{
     vector<int> res;
-    for(int i = 1 ; i*i <= n ; i++){
-	if(n % i == 0){
+    for (int i = 1; i*i <= n; i++) {
+	if (n % i == 0) {
 	    res.push_back(i);
-	    if(i != n/i) res.push_back(n/i);
+	    if (i != n/i) res.push_back(n/i);
 	}
     }
     return res;
