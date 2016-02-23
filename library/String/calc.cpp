@@ -1,27 +1,27 @@
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
-class calc{
+class calc {
     string s;
     string::iterator it;
  
-public:
+  public:
     calc(const string &str){
 	s = str;
 	it = s.begin();
     }
  
-    int fact(){
-	if(*it == '('){
+    int fact()
+    {
+	if (*it == '(') {
 	    ++it;
 	    int ret = exp();
 	    ++it;
 	    return ret;
-	}
-	else{
+	} else {
 	    int ret = 0;
-	    while('0' <= *it && *it <= '9'){
+	    while ('0' <= *it && *it <= '9') {
 		ret *= 10;
 		ret += *it - '0';
 		++it;
@@ -30,14 +30,14 @@ public:
 	}
     }
  
-    int term(){
+    int term()
+    {
 	int ret = fact();
-	while(*it == '*' || *it == '/'){
-	    if(*it == '*'){
+	while (*it == '*' || *it == '/') {
+	    if (*it == '*') {
 		++it;
 		ret *= fact();
-	    }
-	    else if(*it == '/'){
+	    } else if(*it == '/') {
 		++it;
 		ret /= fact();
 	    }
@@ -45,15 +45,15 @@ public:
 	return ret;
     }
    
-    int exp(){
+    int exp()
+    {
 	int ret = term();
  
-	while(*it == '+' || *it == '-'){
-	    if(*it == '+'){
+	while (*it == '+' || *it == '-') {
+	    if (*it == '+') {
 		++it;
 		ret += term();
-	    }
-	    else if(*it == '-'){
+	    } else if(*it == '-') {
 		++it;
 		ret -= term();
 	    }
