@@ -1,17 +1,17 @@
 # Library for Competitive Programming
-# BigInteger
+## BigInteger
 - BigInteger (JAVA)
 
-# Data Structure
+## Data Structure
 - BIT
 - RBST
 - RMQ
 - Union Find
 
-# Dice
+## Dice
 - Dice
 
-# DP
+## DP
 - Coin
 - Division number
 - Duplicate combination
@@ -25,7 +25,7 @@
 - One line DP
 - Traveling Salesman Problem
 
-# Geometry
+## Geometry
 - 2D elements
 - 3D elements
 - Circle
@@ -35,7 +35,7 @@
 - Tetrahedra Volume
 - Voronoi diagram
 
-# Graph
+## Graph
 - Articulation Points
 - Bellman Ford
 - Binary Graph
@@ -53,15 +53,15 @@
 - Topological Sort
 - Warshall Floyd
 
-# Greedy
+## Greedy
 - Interval Scheduling
 
-# Heuristic Search
+## Heuristic Search
 - 8 Puzzle
 - 15 Puzzle
 - 8 Queen Problem
 
-# Math
+## Math
 - Area
 - Divisor
 - Euler Phi
@@ -80,25 +80,25 @@
 - Simpson
 - Stern Brocot Tree
 
-# Other
+## Other
 - Fairfield
 - Leap
 - Verbal Arithmetic
 - Watch
 - Zeller
 
-# Sort
+## Sort
 - Bubble Sort
 - Merge Sort
 - Quick Sort
 - Selection Sort
 - The number of inversions
 
-# STL
+## STL
 - algorithm
 - vector
 
-# String
+## String
 - Aho Corasick
 - Calculator
 - KMP
@@ -108,7 +108,7 @@
 - Suffix Array
 - Trie
 
-# Tree
+## Tree
 - The diameter of Tree
 - The height of Tree
 - Kruskal
