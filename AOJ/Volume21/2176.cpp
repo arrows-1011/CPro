@@ -52,15 +52,6 @@ int main()
             }
             
             sum[p] += cap[p][cur[p]++];
-            int min_p = INF, max_p = -INF;
-            for (int i = 0; i < n; i++) {
-                min_p = min(min_p, sum[i]);
-                max_p = max(max_p, sum[i]);
-            }
-            if (max_p - min_p > d) {
-                possible = 0;
-                break;
-            }
         }
         cout << (possible ? "Yes" : "No") << endl;
     }
