@@ -8,10 +8,10 @@ using namespace std;
 #define INF (1<<29)
 
 struct State {
-    int d, v, c;
+    int d, v;
     
-    State(int d, int v, int c) 
-        : d(d), v(v), c(c) {}
+    State(int d, int v) 
+        : d(d), v(v) {}
     
     bool operator < (const State &s) const {
         return d > s.d;
@@ -35,25 +35,25 @@ int get_cost(int c, int d)
 
 int dijkstra(int src, int dst)
 {
-    int d[MAX_N][MAX_C];
-    fill(d[0], d[0] + MAX_N*MAX_C, INF);    
-    d[src][0] = 0;
+    int d[MAX_N];
+    fill(d, d + MAX_N, INF);    
+    d[src] = 0;
     
     priority_queue<State> Q;
-    Q.push(State(0, src, 0));
+    Q.push(State(0, src));
     
     while (!Q.empty()) {
         State s = Q.top(); Q.pop();
-        int dd = s.d, v = s.v, c = s.c;
+        int dd = s.d, v = s.v;
         if (v == dst) return dd;
         for (int i = 0; i < N; i++) {
             if (v == i) continue;
             for (int j = 0; j < C; j++) {
                 if (dist[v][i][j] == INF) continue;
-                int ncost = get_cost(j, dist[v][i][j]) + d[v][c];
-                if (ncost < d[i][j]) {
-                    d[i][j] = ncost;
-                    Q.push(State(d[i][j], i, j));                    
+                int ncost = get_cost(j, dist[v][i][j]) + d[v];
+                if (ncost < d[i]) {
+                    d[i] = ncost;
+                    Q.push(State(d[i], i));                    
                 }
             }
         }
