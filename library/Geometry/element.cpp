@@ -17,21 +17,22 @@ struct Point {
     Point(){}
     Point(double x, double y) : x(x), y(y) {}
  
-    Point operator + (const Point &p)const{ return Point(x+p.x, y+p.y); }
-    Point operator - (const Point &p)const{ return Point(x-p.x, y-p.y); }
-    Point operator * (const double &k)const{ return Point(x*k, y*k); }
-    Point operator / (const double &k)const{ return Point(x/k, y/k); }
-    bool operator < (const Point &p)const{ return x != p.x ? x < p.x : y < p.y; }
+    Point operator + (const Point &p) const {  return Point(x + p.x, y + p.y); }
+    Point operator - (const Point &p) const {  return Point(x - p.x, y - p.y); }
+    Point operator * (const double &k) const { return Point(x * k, y * k); }
+    Point operator / (const double &k) const { return Point(x / k, y / k); }
+    bool operator < (const Point &p) const {   return x != p.x ? x < p.x : y < p.y; }
+    bool operator == (const Point &p) const {  return (x == p.x && y == p.y); }
 };
 
 double dot(const Point &a, const Point &b)
 {
-    return a.x*b.x+a.y*b.y;
+    return a.x * b.x + a.y * b.y;
 }
 
 double cross(const Point &a, const Point &b)
 {
-    return a.x*b.y - b.x*a.y;
+    return a.x * b.y - b.x * a.y;
 }
 
 double norm(const Point &p){
@@ -45,17 +46,17 @@ double abs(const Point &p)
 
 double dist(const Point &a, const Point &b)
 {
-    return sqrt(pow(a.x-b.x,2) + pow(a.y-b.y,2));
+    return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
 }
 
 double toRad(double ang)
 {
-    return ang*PI/180;
+    return ang * PI / 180;
 }
 
 double toAng(double rad)
 {
-    return rad*180/PI;
+    return rad * 180 / PI;
 }
 
 /*
@@ -67,7 +68,7 @@ double toAng(double rad)
 */
 Point rotate(const Point &p, double th)
 {
-    return Point(cos(th)*p.x-sin(th)*p.y, sin(th)*p.x+cos(th)*p.y);
+    return Point(cos(th) * p.x - sin(th) * p.y, sin(th) * p.x + cos(th) * p.y);
 }
 Point rotate90(const Point &p)
 {
@@ -326,9 +327,10 @@ typedef vector<vector<Edge> > Graph;
 /*
   線分アレンジメント
   重なる線分がないこと前提(
-  equal(cross(a,b),0)　(ベクトル同士のなす角が0°か180°)により取り除く.
+  equal(cross(a,b),0) (ベクトル同士のなす角が0°か180°)により取り除く.
   )
   各線分の端点と線分同士の交点を頂点とする.
+  bool operator == (const Point &p)const{ return (x == p.x && y == p.y); } を書かないとエラーでる
 */
 
 Graph segmentArrangement(vector<Segment> &segs, vector<Point> &ps)
