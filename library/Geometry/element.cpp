@@ -137,8 +137,8 @@ vector<Line> translation(const Line &l, double d)
 {
     vector<Vector> nlv = normal_line_vector(l);
     vector<Line> nl;
-    nl.push_back(Line(l.s + nlv[0]*d, l.t + nlv[0]*d));
-    nl.push_back(Line(l.s + nlv[1]*d, l.t + nlv[1]*d));
+    nl.push_back(Line(l.s + nlv[0] * d, l.t + nlv[0] * d));
+    nl.push_back(Line(l.s + nlv[1] * d, l.t + nlv[1] * d));
     return nl;
 }
 
@@ -169,8 +169,8 @@ vector<Point> getPointOnSegment(const Segment &s)
     vector<Point> res;
     const int N = 10;
     for (int i = 0; i <= N; i++) {
-	double x = p1.x + i*(p2.x-p1.x) / N;
-	double y = p1.y + i*(p2.y-p1.y) / N;
+	double x = p1.x + i * (p2.x - p1.x) / N;
+	double y = p1.y + i * (p2.y - p1.y) / N;
 	Point np(x, y);
 	res.push_back(np);
     }
@@ -195,7 +195,7 @@ Point reflection(const Segment &s, const Point &p)
 /* verified (AOJ Lib) */
 bool isIntersectSS(const Segment &a, const Segment &b)
 {
-    Point s[2] = {a.s,a.t}, t[2] = {b.s,b.t};
+    Point s[2] = {a.s, a.t}, t[2] = {b.s, b.t};
     return (ccw(s[0], s[1], t[0])*ccw(s[0], s[1], t[1]) <= 0 &&
 	    ccw(t[0], t[1], s[0])*ccw(t[0], t[1], s[1]) <= 0);
 }
@@ -208,8 +208,8 @@ bool isIntersectSP(const Segment &s, const Point &p)
 
 bool isIntersectLL(const Line &a, const Line &b)
 {
-    return (abs(cross(a.t-a.s, b.t-b.s)) > EPS || // 傾きが異なる
-	    abs(cross(a.t-a.s, b.t-b.s)) < EPS);  // 同じ直線である
+    return (abs(cross(a.t - a.s, b.t - b.s)) > EPS || // 傾きが異なる
+	    abs(cross(a.t - a.s, b.t - b.s)) < EPS);  // 同じ直線である
 }
 
 bool isIntersectLP(const Line &l, const Point &p)
@@ -219,25 +219,25 @@ bool isIntersectLP(const Line &l, const Point &p)
 
 bool isIntersectLS(const Line &l, const Segment &s)
 {
-    return (cross(l.t-l.s, s.s-l.s)*cross(l.t-l.s, s.t-l.s) < EPS);
+    return (cross(l.t - l.s, s.s - l.s) * cross(l.t - l.s, s.t - l.s) < EPS);
 }
 
 //交点
 /* verified (AOJ Lib) */
 Point crosspointSS(const Segment &a, const Segment &b)
 {
-    Vector va = a.t-a.s, vb = b.t-b.s;
+    Vector va = a.t - a.s, vb = b.t - b.s;
     double d = cross(vb, va);
-    return a.s + va*cross(vb, b.t-a.s)*(1.0/d);
+    return a.s + va * cross(vb, b.t - a.s) * (1.0 / d);
 }
 
 /* verified (AOJ Lib) */
 Point crosspointLL(const Line &a, const Line &b)
 {
-    Vector va = a.t-a.s, vb = b.t-b.s;
+    Vector va = a.t - a.s, vb = b.t - b.s;
     double d = cross(vb, va);
     if (abs(d) < EPS) return b.s;
-    return a.s+va*cross(vb, b.t-a.s)*(1.0/d);
+    return a.s+va*cross(vb, b.t - a.s) * (1.0 / d);
 }
 
 //距離
