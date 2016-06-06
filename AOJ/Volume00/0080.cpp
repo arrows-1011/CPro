@@ -1,20 +1,19 @@
-#include <iostream>
-#include <cmath>
-#include <cstdio>
+#include <bits/stdc++.h>
 
 using namespace std;
  
-int main(){
+int main()
+{
     double q;
      
-    while(cin >> q, q != -1){
+    while (cin >> q, q != -1) {
         double x = q/2;
          
-        while(true){
-            x -= (pow(x,3)-q)/(3*pow(x,2));
-            if(abs(pow(x,3)-q) < 0.00001*q) break;
+        while (1) {
+            x -= (pow(x, 3) - q) / (3 * pow(x, 2));
+            if(abs(pow(x, 3) - q) < 0.00001 * q) break;
         }
-        printf("%.6f\n" ,x);
+        printf("%.6f\n", x);
     }
     return 0;
 }

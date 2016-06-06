@@ -1,32 +1,33 @@
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
 
 using namespace std;
  
-int main(){
+int main()
+{
     string str;
      
-    getline(cin,str);
+    getline(cin, str);
      
     int cnt = 0, flg = 0;
     string key = "";
-    for(int i = 0 ; i < str.size() ; i++){
+    for (int i = 0; i < (int)str.size(); i++) {
         cnt++;
          
-        if(str[i] == ' '|| str[i] == ',' || str[i] == '.'){
-            if(3 <= cnt-1 && cnt-1 <= 6){
-                if(!flg){
+        if (str[i] == ' '|| str[i] == ',' || str[i] == '.') {
+            if (3 <= cnt-1 && cnt-1 <= 6) {
+                if (!flg) {
                     cout << key;
                     flg = 1;
+                } else {
+                    cout << ' ' << key;
                 }
-                else cout << ' ' << key;
             }
             cnt = 0;
             key = "";
+        } else {
+            key += str[i];
         }
-        else key += str[i];
     }
-    cout << endl;
-     
+    cout << endl;     
     return 0;
 }

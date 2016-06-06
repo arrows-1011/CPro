@@ -1,22 +1,19 @@
-#include <iostream>
-#include <complex>
-#include <cmath>
-#include <cstdio>
+#include <bits/stdc++.h>
 
 using namespace std;
  
-int main(){
-    int n;
+int main()
+{
+    int N;
  
-    while(cin >> n ,n != -1){
-	complex<double> pos(1,0);
-	double r;
-	for(int i = 0 ; i < n-1 ; i++){
-	    r = arg(pos);
-	    pos.real() -= sin(r);
-	    pos.imag() += cos(r);
+    while (cin >> N, N != -1) {
+        double x = 1, y = 0, r;
+	for (int i = 0; i < N-1; i++) {
+            r = atan2(y, x);
+	    x -= sin(r);
+	    y += cos(r);
 	}
-	printf("%.5f\n%.5f\n" ,pos.real(),pos.imag());
+	printf("%.5f\n%.5f\n", x, y);
     }
     return 0;
 }
