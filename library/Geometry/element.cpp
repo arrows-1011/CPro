@@ -275,6 +275,7 @@ double distanceSS(const Segment a, const Segment b)
 }
 
 // 線分の垂直判定
+// verify(AOJ 0058)
 bool isOrthogonalSS(const Segment &s1, const Segment &s2)
 {
     Vector a = s1.t - s1.s;
@@ -283,6 +284,7 @@ bool isOrthogonalSS(const Segment &s1, const Segment &s2)
 }
 
 // 線分の平行判定
+// verify(AOJ 0021)
 bool isParallelSS(const Segment &s1, const Segment &s2)
 {
     Vector a = s1.t - s1.s;
