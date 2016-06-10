@@ -1,34 +1,29 @@
-#include <stdio.h>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int cnt;
  
-int cnt=0;
- 
-int GCD( int x , int y ){
-    int tmp;
-    if(!(x >= y )){
-	tmp = x;
-	x = y;
-	y = tmp;
-    }
-    while(1){
-	if( y == 0 ) break;
+int GCD(int x, int y)
+{
+    if (x < y) swap(x, y);
+    
+    while (y != 0) {
 	x %= y;
-	tmp = x;
-	x = y;
-	y = tmp;
+        swap(x, y);
 	cnt++;
     }
     return x;
 }
  
-int main(){
-    int x,y,ans;
+int main()
+{
+    int x, y, ans;
    
-    while(1){
+    while (cin >> x >> y, (x | y)) {
 	cnt = 0;
-	scanf("%d %d" ,&x ,&y);
-	if( x == 0 && y == 0 ) break;
-	ans = GCD(x,y);
-	printf("%d %d\n" ,ans,cnt);
+	ans = GCD(x, y);
+	printf("%d %d\n", ans, cnt);
     }
     return 0;
 }

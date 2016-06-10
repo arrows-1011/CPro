@@ -1,16 +1,17 @@
-#include <iostream>
+#include <bits/stdc++.h>
+
 using namespace std;
  
-int main(){
+int main()
+{
     int n;
-    while(cin >> n ,n){
+    while (cin >> n, n) {
 	int cnt = 0;
-	while(n != 1){
+	while (n != 1) {
 	    cnt++;
-	    if(n %2 == 0){
+	    if (n % 2 == 0) {
 		n /= 2;
-	    }
-	    else{
+	    } else {
 		n *= 3;
 		n++;
 	    }

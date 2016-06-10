@@ -4,19 +4,20 @@ using namespace std;
  
 typedef long long ll;
  
-string solve(ll x){
+string solve(ll x)
+{
     string res;
-    if(x == 0LL){ return "0"; }
+    if (x == 0LL) return "0";
     ll a,b;
     int t = 0;
-    for(; x ; t++){
+    for (; x; t++) {
 	t = t & 1;
 	a = x / 10;
 	b = x - a * 10;
-	if(b < 0 && t == 0){
+	if (b < 0 && t == 0) {
 	    a--;
 	    b += 10;
-	}else if(b > 0 && t == 1){
+	} else if (b > 0 && t == 1) {
 	    a++;
 	    b -= 10;
 	}
@@ -28,9 +29,10 @@ string solve(ll x){
     return res;
 }
  
-int main(){
+int main()
+{
     ll x;
-    while(cin >> x, x){
+    while (cin >> x, x) {
 	cout << solve(x) << endl;
     }
     return 0;

@@ -1,36 +1,27 @@
-#include <iostream>
-#include <queue>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-typedef pair<int,int> P;
-const int MAX = 1e6;
- 
-class Point{
-public:
-    int x,y;
-    Point(int x = 0,int y = 0): x(x),y(y){}
-};
- 
-int main(){
-    int n,q,a[MAX+1]={0};
-    priority_queue<P> Q;
-    Point x,y;
- 
-    cin >> n >> q;
-    while(q--){
-	cin >> x.x >> x.y;
-	a[x.x] += x.y;
-	Q.push(P(a[x.x],-x.x));
-	while(true){
-	    y.x = -Q.top().second;
-	    y.y = Q.top().first;
-	    if(a[y.x] == y.y){
-		cout << y.x << " " << y.y << endl;
-		break;
-	    }
-	    Q.pop();
-	}
+typedef pair<int, int> pii;
+
+int main()
+{
+    int N, q, a, v;
+    cin >> N >> q;
+    vector<int> p(N+1, 0);
+    priority_queue<pii> Q;
+    while (q--) {
+        cin >> a >> v;
+        p[a] += v;
+        Q.push(pii(p[a], -a));
+        while (1) {
+            pii mp = Q.top();
+            if (p[-mp.second] == mp.first) {
+                cout << -mp.second << " " << mp.first << endl;
+                break;                
+            }
+            Q.pop();
+        }
     }
     return 0;
 }

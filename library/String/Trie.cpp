@@ -1,5 +1,4 @@
-#include <iostream>
-#include <cctype>
+#include <bits/stdc++.h>
   
 using namespace std;
   
@@ -26,13 +25,27 @@ struct Trie {
 	for (int i = 0; i < (int)strlen(s); i++) {
 	    int v = c(s[i]);
 	    if (!t->next[v]) {
-		t->next[v] = new Trie;
+		t->next[v] = new Trie();
 	    }
 	    t = t->next[v];
 	}
 	t->l = true;
     }
-  
+
+    void insert(Trie *t, char *s, int idx)
+    {
+        if (idx == (int)strlen(s)) {
+            t->l = 1;
+            return;
+        }
+            
+        int v = c(s[idx]);
+        if (t->next[v] == NULL) {
+            t->next[v] = new Trie();
+        }
+        insert(t->next[v], s, idx + 1);
+    }
+    
     bool find(char *s)
     {
 	Trie *t = this;

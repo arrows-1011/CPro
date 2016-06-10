@@ -1,63 +1,67 @@
-#include <cstdio>
+#include <bits/stdc++.h>
+
+using namespace std;
  
 #define MAX 150
  
 char sp[MAX][MAX];
 //u r d l
-const int dx[] = {0,1,0,-1};
-const int dy[] = {-1,0,1,0};
+const int dx[] = {0, 1, 0, -1};
+const int dy[] = {-1, 0, 1, 0};
  
-bool range(int x,int y,int n){
-    if(0 > x || x >= n || 0 > y || y >= n){
-	return false;
+bool range(int x, int y, int n)
+{
+    if (0 > x || x >= n || 0 > y || y >= n) {
+	return 0;
     }
-    return true;
+    return 1;
 }
  
-void make(int n){
-    int x = 0 , y = n-1 ,dir = 0;
+void make(int n)
+{
+    int x = 0, y = n-1, dir = 0;
  
-    for(int i = 0 ; i < n ; i++){
-	for(int j = 0 ; j < n ; j++){
+    for (int i = 0; i < n; i++) {
+	for (int j = 0; j < n; j++) {
 	    sp[i][j] = '.';
 	}
     }
     int end = 0;
     sp[y][x] = '#';
-    while(true){
+    while (1) {
 	int nx = x + dx[dir];
 	int ny = y + dy[dir];  
  
-	bool flg = true;
-	if(!range(nx,ny,n)){
-	    flg = false;
+	bool flg = 1;
+	if (!range(nx, ny, n)) {
+	    flg = 0;
 	}
  
-	for(int i = 0 ; i < 4 ; i++){
+	for (int i = 0; i < 4; i++) {
 	    int nnx = nx + dx[i];
 	    int nny = ny + dy[i];
  
-	    if((x == nnx && y == nny) 
-	       || !range(nnx,nny,n)){
+	    if ((x == nnx && y == nny) 
+	       || !range(nnx, nny, n)) {
 		continue;
 	    }
  
-	    if(sp[nny][nnx] == '#'){
-		flg = false;
+	    if (sp[nny][nnx] == '#') {
+		flg = 0;
 		break;
 	    }
 	}
  
-	if(!flg){
+	if (!flg) {
 	    dir++;
 	    dir = dir % 4;
 	    end++;
-	    if(end == 4) return;
-	}else{
+	    if (end == 4) return;
+	} else {
 	    end = 0;
 	}
  
-	if(flg){
+	if (flg) {
 	    sp[ny][nx] = '#';
 	    x = nx;
 	    y = ny;
@@ -65,25 +69,26 @@ void make(int n){
     }
 }
  
-int main(){
-    int d,n;
-    bool ok = false;
+int main()
+{
+    int d, n;
+    bool ok = 0;
  
-    scanf("%d" ,&d);
-    while(d--){
-	scanf("%d" ,&n);
+    scanf("%d", &d);
+    while (d--) {
+	scanf("%d", &n);
  
-	if(ok){
+	if (ok) {
 	    puts("");
 	}
-	ok = true;
+	ok = 1;
 	make(n);
-	for(int i = 0 ; i < n ; i++){
-	    for(int j = 0 ; j < n ; j++){
-		if(sp[i][j] == '.'){
+	for (int i = 0; i < n; i++) {
+	    for (int j = 0; j < n; j++) {
+		if (sp[i][j] == '.') {
 		    printf(" ");
-		}else{
-		    printf("%c" ,sp[i][j]);
+		} else {
+		    printf("%c", sp[i][j]);
 		}
 	    }
 	    puts("");

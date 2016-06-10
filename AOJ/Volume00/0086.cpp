@@ -1,32 +1,29 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 #define MAX 100
  
-int main(){
-    int a,b,array[MAX+1];
+int main()
+{
+    int a, b, arr[MAX+1];
  
-    while(cin >> a >> b){
-	fill(array,array+MAX,0);
-	array[--a]++;
-	array[--b]++;
+    while (cin >> a >> b) {
+        memset(arr, 0, sizeof(arr));
+	arr[--a]++;
+	arr[--b]++;
  
-	while(true){
-	    cin >> a >> b;
-	    if(!a&&!b) break;
-	    array[--a]++;
-	    array[--b]++;
+	while (cin >> a >> b, (a | b)) {
+	    arr[--a]++;
+	    arr[--b]++;
 	}
  
-	bool flg = false;
-	if((array[0]%2==1)&&(array[1]%2==1)) flg = true;
-	for(int i = 2 ; i < MAX ; i++){
-	    if(array[i]%2==1) flg = false;
+	bool flg = 0;
+	if ((arr[0] % 2 == 1) && (arr[1] % 2==1)) flg = 1;
+	for (int i = 2; i < MAX; i++) {
+	    if(arr[i] % 2 == 1) flg = 0;
 	}
- 
-	if(!flg) cout << "NG" << endl;
-	else cout << "OK" << endl;
+        cout << (flg ? "OK" : "NG") << endl;
     }
     return 0;
 }

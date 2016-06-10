@@ -1,31 +1,41 @@
-#include <iostream>
-#include <algorithm>
-#include <cstdio>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-#define rep(i,n) for(int i = 0 ; i < n ; i++)
-#define Rep(i,n) for(int i = 1 ; i < n ; i++)
-#define MAX 101
- 
-int main(){
-    double dp[MAX][MAX],nae[MAX][MAX];
-    int n,m;
-   
-    while(cin >> n >> m, n+m){
-	fill(dp[0],dp[MAX-1],0);
-	rep(i,n) rep(j,n) cin >> nae[i][j]; 
-    
-	rep(i,n) dp[0][i] = 1.0;
-	Rep(i,m) rep(j,n){ dp[i][j] = -1;
-	    rep(k,n)
-		dp[i][j] = max(dp[i][j],dp[i-1][k]*nae[k][j]);
-	}
-	double ans = -1;
-	rep(j,n){
-	    ans = max(ans,dp[m-1][j]);
-	}
-	printf("%.2f\n" , ans);
+#define MAX 150
+
+int main()
+{
+    int N, M;
+    while (cin >> N >> M, N) {
+        double g[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                cin >> g[i][j];
+            }
+        }
+        
+        double dp[MAX][MAX];
+        for (int i = 0; i < MAX; i++) {            
+            for (int j = 0; j < MAX; j++) {
+                dp[i][j] = (j == 0 ? 1 : 0);
+            }
+        }
+
+        for (int i = 0; i < M-1; i++) {
+            for (int j = 0; j < N; j++) {                
+                for (int k = 0; k < N; k++) {
+                    dp[k][i+1] = max(dp[k][i+1],
+                                       dp[j][i] * g[j][k]);
+                }
+            }
+        }
+        
+        double res = 0;
+        for (int i = 0; i < N; i++) {
+            res = max(res, dp[i][M-1]);
+        }
+        printf("%.2f\n", res);
     }
     return 0;
 }

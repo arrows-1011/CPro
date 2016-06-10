@@ -1,11 +1,11 @@
-#include <iostream>
-#include <map>
+#include <bits/stdc++.h>
 
 using namespace std;
  
-map<string,int> m;
+map<string, int> m;
  
-void change(){
+void change()
+{
     m["11"] = 'a'; m["12"] = 'b'; m["13"] = 'c'; m["14"] = 'd'; m["15"] = 'e';
     m["21"] = 'f'; m["22"] = 'g'; m["23"] = 'h'; m["24"] = 'i'; m["25"] = 'j';
     m["31"] = 'k'; m["32"] = 'l'; m["33"] = 'm'; m["34"] = 'n'; m["35"] = 'o';
@@ -14,28 +14,30 @@ void change(){
     m["61"] = 'z'; m["62"] = '.'; m["63"] = '?'; m["64"] = '!'; m["65"] = ' ';
 }
  
-bool judge(string s){
-    if(s.size()%2==1) return false;
+bool judge(string s)
+{
+    if (s.size()%2==1) return 0;
      
-    for(int i = 0 ; i < (int)s.size(); i++){
-        if(i%2==1 && !('1' <= s[i] && s[i] <='5')) return false;
-        if(i%2==0 && !('1' <= s[i] && s[i] <= '6')) return false;
+    for (int i = 0; i < (int)s.size(); i++) {
+        if (i % 2 == 1 && !('1' <= s[i] && s[i] <='5')) return 0;
+        if (i % 2 == 0 && !('1' <= s[i] && s[i] <= '6')) return 0;
     }
-    return true;
+    return 1;
 }
  
-int main(){
+int main()
+{
     string str;
      
-    change();
-     
-    while(cin >> str){
-        if(!judge(str)) cout << "NA" << endl;
-        else{
+    change();     
+    while (cin >> str) {
+        if (!judge(str)) {
+            cout << "NA" << endl;
+        } else {
             string ans = "";
-            for(int i = 0 ; i < (int)str.size() ; i++){
-                string k = str.substr(i,2);
-                if(i%2==0){
+            for (int i = 0; i < (int)str.size(); i++) {
+                string k = str.substr(i, 2);
+                if(i % 2 == 0) {
                     ans += m[k];
                 }
             }

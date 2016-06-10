@@ -1,82 +1,43 @@
-#include <iostream>
- 
+#include <bits/stdc++.h>
+
 using namespace std;
- 
-int main(){
-    string s[3];
- 
-    while(cin >> s[0], s[0] != "0"){
-	for(int i = 1 ; i < 3 ; i++){
-	    cin >> s[i];
-	}   
-	bool end = false;
-	for(int i = 0 ; i < 3 ; i++){
-	    char ch = s[i][0];
-	    bool ok = true;
-	    for(int j = 1 ; j < 3 ; j++){
-		if(s[i][j] != ch || s[i][j] == '+'){
-		    ok = false;
-		    break;
-		}
-	    }
-	    if(ok){
-		cout << ch << endl;
-		end = true;
-		break;
-	    }
-	}
- 
-	if(end){
-	    continue;
-	}  
- 
-	for(int i = 0 ; i < 3 ; i++){
-	    char ch = s[0][i];
-	    bool ok = true;
-	    for(int j = 1 ; j < 3 ; j++){
-		if(s[j][i] != ch || s[j][i] == '+'){
-		    ok = false;
-		    break;
-		}
-	    }
-	    if(ok){
-		cout << ch << endl;
-		end = true;
-		break;
-	    }
-	}
-	if(end){
-	    continue;
-	}
- 
-	char ch = s[0][0];
-	bool ok = true;
-	for(int i = 1 ; i < 3 ; i++){
-	    if(ch != s[i][i] || ch == '+'){
-		ok = false;
-		break;
-	    }
-	}
- 
-	if(ok){
-	    cout << ch << endl;
-	    continue;
-	}
- 
-	ch = s[0][2];
-	ok = true;
-	for(int i = 1 ; i < 3 ; i++){
-	    if(ch != s[i][2-i] || ch == '+'){
-		ok = false;
-		break;
-	    }
-	}
- 
-	if(ok){
-	    cout << ch << endl;
-	    continue;
-	}
-	cout << "NA" << endl;
-    } 
+
+int main()
+{
+    char c;
+    while (cin >> c, c != '0') {
+        char b[3][3]; b[0][0] = c;
+        for (int i = 1; i < 9; i++) {
+            cin >> b[i/3][i%3];
+        }
+        
+        auto win = [&](char c) -> bool {
+            for (int i = 0; i < 3; i++) {
+                if (b[i][0] == c && b[i][1] == c && b[i][2] == c) {
+                    return true;
+                }
+                if (b[0][i] == c && b[1][i] == c && b[2][i] == c) {
+                    return true;
+                }
+            }
+
+            if (b[0][0] == c && b[1][1] == c && b[2][2] == c) {
+                return true;
+            }
+            if (b[0][2] == c && b[1][1] == c && b[2][0] == c) {
+                return true;
+            }
+            
+            return false;
+        };
+
+        if (win('b')) {
+            cout << 'b' << endl;
+        } else if (win('w')) {
+            cout << 'w' << endl;
+        } else {
+            cout << "NA" << endl;
+        }
+    }
     return 0;
 }

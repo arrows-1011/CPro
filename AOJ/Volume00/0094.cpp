@@ -1,17 +1,18 @@
-#include <iostream>
-#include <cstdio>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 #define tubo 3.305785
  
-double ans(int a,int b){
-    return (a*b)/tubo; 
+double ans(int a, int b)
+{
+    return (a * b) / tubo; 
 }
  
-int main(){
-    int a,b;
+int main()
+{
+    int a, b;
     cin >> a >> b;
-    printf("%.6f\n" ,ans(a,b));
+    printf("%.6f\n", ans(a, b));
     return 0;
 }

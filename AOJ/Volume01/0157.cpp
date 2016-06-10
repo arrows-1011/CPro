@@ -1,34 +1,33 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
  
-typedef pair<int,int> P;
+typedef pair<int, int> P;
 const int MAX = 201;
  
-int main(){
+int main()
+{
     int n;
  
-    while(cin >> n ,n){
+    while (cin >> n, n) {
 	vector<P> v;
  
-	int x,y;
-	for(int i = 0 ; i < n ; i++){
+	int x, y;
+	for (int i = 0; i < n; i++) {
 	    cin >> x >> y;
-	    v.push_back(P(x,y));
+	    v.push_back(P(x, y));
 	}
 	int m;
 	cin >> m;
-	for(int i = 0 ; i < m ; i++){
+	for (int i = 0; i < m; i++) {
 	    cin >> x >> y;
-	    v.push_back(P(x,y));
+	    v.push_back(P(x, y));
 	}
-	sort(v.begin(),v.end());
+	sort(v.begin(), v.end());
 	int dp[MAX] = {0};
 	int ans = 0;
  
-	for(int i = 0 ; i < n+m ; i++){
+	for (int i = 0; i < n+m; i++) {
 	    dp[i] = 1;
 	    for(int j = 0 ; j < i ; j++){
 		if(v[j].first < v[i].first && v[j].second < v[i].second){

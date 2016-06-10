@@ -1,33 +1,31 @@
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
 
 using namespace std;
  
-int main(){
+int main()
+{
     string res;
-    int n,cnt = 0,cntH = 0,point = 0;
+    int n, cnt = 0, cntH = 0, point = 0;
  
     cin >> n;
-    for( int i = 0 ; i < n ;){
+    for (int i = 0; i < n;) {
 	cin >> res;
      
-	if(res == "OUT"){
+	if (res == "OUT") {
 	    cnt++;
-	    if( cnt == 3 ){
+	    if (cnt == 3) {
 		i++;
 		cnt = 0;
 		cout << point << endl;
 		point = 0;
 		cntH = 0;
 	    }
-	}
-	else if(res == "HIT"){
+	} else if (res == "HIT") {
 	    cntH++;
-	    if( cntH == 4 ){
+	    if (cntH == 4) {
 		point++; cntH--;
 	    }
-	}
-	else{
+	} else {
 	    point += cntH+1;
 	    cntH = 0;
 	}

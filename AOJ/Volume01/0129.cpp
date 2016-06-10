@@ -1,101 +1,122 @@
-#include <iostream>
-#include <cmath>
+#include <bits/stdc++.h>
  
 using namespace std;
  
 #define EPS 1e-7
  
-class Point{
-public:
-    double x,y;
-    Point(double x = 0.0,double y = 0.0) : x(x),y(y) {}
-    Point operator + (Point p){ return Point(x+p.x, y+p.y); }
-    Point operator - (Point p){ return Point(x-p.x, y-p.y); }
-    Point operator * (double a){ return Point(x*a, y*a); }
-    Point operator / (double a){ return Point(x/a, y/a); }
-    double abs(){ return sqrt(norm()); }
-    double norm(){ return x*x + y*y; }
+class Point {
+  public:
+    double x, y;
+    Point (double x = 0.0, double y = 0.0) : x(x),y(y) {}
+    Point operator + (Point p) {
+        return Point(x + p.x, y + p.y);
+    }
+    
+    Point operator - (Point p) {
+        return Point(x - p.x, y - p.y);
+    }
+    
+    Point operator * (double a) {
+        return Point(x * a, y * a);
+    }
+    
+    Point operator / (double a) {
+        return Point(x / a, y / a);
+    }
+    double abs() {
+        return sqrt(norm());
+    }
+    double norm() {
+        return x * x + y * y;
+    }
 };
- 
-typedef Point Vector;
-double dot(Vector a,Vector b){
-    return a.x*b.x + a.y*b.y;
+
+double dot(Point a, Point b)
+{
+    return a.x * b.x + a.y * b.y;
 }
-double cross(Vector a,Vector b){
-    return a.x*b.y - a.y*b.x;
+
+double cross(Point a, Point b)
+{
+    return a.x * b.y - a.y * b.x;
 }
  
-class Segment{
-public:
-    Vector t,s;
-    Segment(Vector t,Vector s) : t(t),s(s) {}
-    Point projection(Point &p){
-	Vector b = s - t;
+class Segment {
+  public:
+    Point t, s;
+    Segment(Point t, Point s) : t(t), s(s) {}
+    Point projection(Point &p) {
+	Point b = s - t;
 	double d = dot(p-t,b) / b.norm();
 	return t + b*d;
     }
 };
  
-class Circle{
-public:
-    double x,y,r;
-    Circle(double x = 0.0,double y = 0.0,double r = 0.0) : x(x),y(y),r(r) {}
+class Circle {
+  public:
+    double x, y, r;
+    Circle(double x = 0.0, double y = 0.0, double r = 0.0) :
+        x(x), y(y), r(r) {}
 };
  
 int N;
-Point t,s;
+Point t, s;
 Circle ci[300];
  
-bool check(Point p0,Point p1,Point p2){
-    Vector a = p1 - p0;
-    Vector b = p2 - p0;
-    if(cross(a,b) > EPS) return false;
-    if(cross(a,b) < -EPS) return false;
-    if(dot(a,b) < -EPS) return false;
-    if(a.norm() < b.norm()) return false;
-    return true;
+bool check(Point p0, Point p1, Point p2)
+{
+    Point a = p1 - p0;
+    Point b = p2 - p0;
+    if (cross(a,b) > EPS) return 0;
+    if (cross(a,b) < -EPS) return 0;
+    if (dot(a,b) < -EPS) return 0;
+    if (a.norm() < b.norm()) return 0;
+    return 1;
 }
  
-bool getStateCS(Circle c,Segment seg){
-    Point cp = Point(c.x,c.y);
+bool getStateCS(Circle c, Segment seg)
+{
+    Point cp = Point(c.x, c.y);
     Point p = seg.projection(cp);
     Point pp = p - cp;
  
  
-    Vector a = seg.t - cp;
-    Vector b = seg.s - cp;
+    Point a = seg.t - cp;
+    Point b = seg.s - cp;
      
     if((a.abs() > c.r && b.abs() < c.r) ||
-       (a.abs() < c.r && b.abs() > c.r) ) return true;
+       (a.abs() < c.r && b.abs() > c.r) ) return 1;
     if(a.abs() > c.r && b.abs() > c.r){
-	if(pp.abs()-EPS < c.r && check(seg.t,seg.s,p)){
-	    return true;
+	if(pp.abs()-EPS < c.r && check(seg.t, seg.s,p)){
+	    return 1;
 	}
     }
-    return false;
+    return 0;
 }
  
-bool judge(){
-    Segment seg = Segment(t,s);
+bool judge()
+{
+    Segment seg = Segment(t, s);
  
-    for(int i = 0 ; i < N ; i++){
-	if(getStateCS(ci[i],seg)) return true;
+    for (int i = 0; i < N; i++) {
+	if (getStateCS(ci[i], seg)) return 1;
     }
-    return false;
+    return 0;
 }
  
-int main(){
+int main()
+{
     int M;
-    while(cin >> N,N){
-	for(int i = 0 ; i < N ; i++){
+    while (cin >> N, N) {
+	for (int i = 0; i < N; i++) {
 	    cin >> ci[i].x >> ci[i].y >> ci[i].r;
 	}
 	cin >> M;
-	for(int i = 0 ; i < M ; i++){
+	for (int i = 0; i < M; i++) {
 	    cin >> t.x >> t.y >> s.x >> s.y; 
-	    if(judge()){
+	    if (judge()) {
 		cout << "Safe" << endl;
-	    }else{
+	    } else {
 		cout << "Danger" << endl;
 	    }
 	}

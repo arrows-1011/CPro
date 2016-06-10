@@ -8,15 +8,16 @@ using namespace std;
 bool used[MAX_V];
 int cost[MAX_V][MAX_V], mincost[MAX_V], V;
  
-int prim(){
-    for(int i = 0 ; i < V ; i++){
+int prim()
+{
+    for (int i = 0; i < V; i++) {
 	mincost[i] = INF;
 	used[i] = false;
     }
     mincost[0] = 0;
     int res = 0;
  
-    while(true){
+    while (true) {
 	int v = -1;
 	for(int u = 0 ; u < V ; u++){
 	    if(!used[u] && (v == -1 || mincost[u] < mincost[v])){
@@ -34,12 +35,13 @@ int prim(){
     return res;
 }
  
-int main(){
+int main()
+{
     int E, a, b, c;
  
-    while(cin >> V >> E, (V|E)){
-	fill(cost[0],cost[MAX_V],INF);
-	for(int i = 0 ; i < E ; i++){
+    while (cin >> V >> E, (V|E)) {
+	fill(cost[0], cost[MAX_V], INF);
+	for (int i = 0; i < E; i++) {
 	    cin >> a >> b >> c;
 	    cost[a][b] = cost[b][a] = c;
 	}

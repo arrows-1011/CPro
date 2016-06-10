@@ -7,7 +7,7 @@ using namespace std;
 int H, W, sx, sy, gx, gy;
 int color, dir, field[MAX][MAX];
  
-struct P{
+struct P {
     int x, y;
     P(int x, int y) : x(x), y(y) {}
 };
@@ -15,30 +15,33 @@ struct P{
 const int dx[] = {-1, 0, 0, 1};
 const int dy[] = {0, -1, 1, 0};
  
-bool check(int y, int x){
-    if(0 <= y && y < H && 0 <= x && x < W){
+bool check(int y, int x)
+{
+    if (0 <= y && y < H && 0 <= x && x < W) {
 	return true;
     }
     return false;
 }
  
-void paint(int y, int x){
-    if(!dir){
-	for(int i = 0 ; i < 2 ; i++){
-	    for(int j = 0 ; j < 4 ; j++){
+void paint(int y, int x)
+{
+    if (!dir) {
+	for (int i = 0; i < 2; i++) {
+	    for (int j = 0; j < 4; j++) {
 		field[y+i][x+j] = color;
 	    }
 	}
-    }else{
-	for(int i = 0 ; i < 4 ; i++){
-	    for(int j = 0 ; j < 2 ; j++){
+    } else {
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 2; j++) {
 		field[y+i][x+j] = color;
 	    }
 	}
     }
 }
  
-bool bfs(){
+bool bfs()
+{
     bool used[MAX][MAX];
     memset(used, false, sizeof(used));
     used[sy][sx] = true;
@@ -46,16 +49,16 @@ bool bfs(){
     queue<P> Q;
     Q.push(P(sx, sy));
  
-    while(!Q.empty()){
+    while (!Q.empty()) {
 	P p = Q.front(); Q.pop();
  
-	if(field[p.y][p.x] == -1) continue;
+	if (field[p.y][p.x] == -1) continue;
  
-	for(int i = 0 ; i < 4 ; i++){
+	for (int i = 0; i < 4; i++) {
 	    int nx = p.x + dx[i];
 	    int ny = p.y + dy[i];
  
-	    if(!check(ny, nx) || used[ny][nx] || 
+	    if (!check(ny, nx) || used[ny][nx] || 
 	       field[p.y][p.x] != field[ny][nx]) continue;
  
 	    used[ny][nx] = true;
@@ -65,15 +68,16 @@ bool bfs(){
     return used[gy][gx];
 }
  
-int main(){
+int main()
+{
     int n, x, y;
-    while(cin >> W >> H, (W | H)){
+    while (cin >> W >> H, (W | H)) {
 	memset(field, -1, sizeof(field));
  
 	cin >> sx >> sy >> gx >> gy >> n;
 	sy--, sx--, gy--, gx--;
  
-	for(int i = 0 ; i < n ; i++){
+	for (int i = 0; i < n; i++) {
 	    cin >> color >> dir >> x >> y;
 	    y--, x--;
 	    paint(y, x);

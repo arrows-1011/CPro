@@ -1,12 +1,12 @@
-#include <iostream>
-#include <map>
+#include <bits/stdc++.h>
  
 using namespace std;
  
-map<string,char> n;
-map<char,string> m;
+map<string, char> n;
+map<char, string> m;
  
-void init1(){
+void init1()
+{
     n["101"] = ' ';
     n["000000"] = '\'';
     n["000011"] = ',';
@@ -41,7 +41,8 @@ void init1(){
     n["10010000"] = 'Z';
 }
  
-void init2(){
+void init2()
+{
     m['A'] = "00000";
     m['B'] = "00001";
     m['C'] = "00010";
@@ -76,23 +77,24 @@ void init2(){
     m['?'] = "11111";
 }
  
-int main(){
+int main()
+{
     string str;
  
     init1();
     init2();
  
-    while(getline(cin,str)){
+    while (getline(cin, str)) {
 	string s = "";
-	for(int i = 0 ; i < (int)str.size() ; i++){
+	for (int i = 0; i < (int)str.size(); i++) {
 	    s += m[str[i]];
 	}
      
 	string ans = "";
-	for(int i = 0 ; i < (int)s.size() ; i++){
-	    for(int j = 3 ; j <= 8 ; j++){
-		string ss = s.substr(i,j);
-		if(n[ss]){
+	for (int i = 0; i < (int)s.size(); i++) {
+	    for (int j = 3; j <= 8; j++) {
+		string ss = s.substr(i, j);
+		if (n[ss]) {
 		    ans += n[ss];
 		    i += j;
 		    i--;

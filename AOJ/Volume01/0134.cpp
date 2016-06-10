@@ -1,16 +1,16 @@
-#include <iostream>
-#include <cmath>
+#include <bits/stdc++.h>
 
 using namespace std;
  
-int main(){
-    int n,c;
+int main()
+{
+    int n, c;
     long long ave = 0;
     cin >> n;
-    for(int i = 0 ; i < n ; i++){
+    for (int i = 0; i < n; i++) {
         cin >> c;
         ave += c;
     }
-    cout << (int)(ave/n) << endl;
+    cout << (int)(ave / n) << endl;
     return 0;
 }

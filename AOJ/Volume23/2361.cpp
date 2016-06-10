@@ -16,6 +16,16 @@ struct State {
     }
 };
 
+ll get_val(Vec &v)
+{
+    ll res = 0LL, N = v.size();
+    for (auto &x: v) {
+        res *= N;
+        res += x;
+    }
+    return res;
+}
+
 int main()
 {
     int N;
@@ -32,8 +42,8 @@ int main()
     priority_queue<State> Q;
     Q.push(State(0, start));
 
-    map<Vec, ll> min_cost;
-    min_cost[start] = 0;
+    unordered_map<ll, ll> min_cost;
+    min_cost[get_val(start)] = 0;    
     
     while (!Q.empty()) {
         State s = Q.top(); Q.pop();
@@ -42,10 +52,11 @@ int main()
         for (int i = 0; i < N; i++) {
             for (int j = i+1; j < N; j++) {
                 swap(v[i], v[j]);
-                if (min_cost.count(v) == 0 ||
-                    s.cost + c[i][j] < min_cost[v]) {
-                    min_cost[v] = s.cost + c[i][j];
-                    Q.push(State(min_cost[v], v));
+                ll vv = get_val(v);
+                if (min_cost.count(vv) == 0 ||
+                    s.cost + c[i][j] < min_cost[vv]) {
+                    min_cost[vv] = s.cost + c[i][j];
+                    Q.push(State(min_cost[vv], v));
                 }                    
                 swap(v[i], v[j]);
             }
@@ -55,8 +66,7 @@ int main()
     ll res = 0;
     for (auto &x: min_cost) {
         res = max(res, x.second);
-    }
-    
+    }    
     cout << res << endl;    
     return 0;
 }

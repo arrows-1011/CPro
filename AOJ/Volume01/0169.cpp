@@ -1,33 +1,33 @@
-#include <iostream>
-#include <sstream>
+#include <bits/stdc++.h>
  
 using namespace std;
  
-int main(){
+int main()
+{
     string in;  
  
-    while(getline(cin,in) ,in != "0"){
+    while (getline(cin, in), in != "0") {
 	stringstream s(in);
-	int sum = 0,n;
+	int sum = 0, n;
 	bool flg = false;
  
-	while(s >> n){
-	    if(2 <= n && n <= 9){
+	while (s >> n) {
+	    if (2 <= n && n <= 9) {
 		sum += n;
-	    }else if(n >= 10){
+	    } else if (n >= 10) {
 		sum += 10;
-	    }else{
+	    } else {
 		sum++;
 		flg = true;
 	    }
 	}
  
-	if(sum <= 11 && flg){
+	if (sum <= 11 && flg) {
 	    sum += 10;
 	} 
-	if(sum > 21){
+	if (sum > 21) {
 	    cout << 0 << endl;
-	}else{
+	} else {
 	    cout << sum << endl;
 	}
     }

@@ -1,21 +1,20 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
- 
+#include <bits/stdc++.h>
+
 using namespace std;
  
-int main(){
+int main()
+{
     int n;
  
-    while(cin >> n ,n){
+    while (cin >> n, n) {
 	vector<int> v(n);
  
-	for(int i = 0 ; i < n ; i++){
+	for (int i = 0; i < n; i++) {
 	    cin >> v[i];
 	}
  
 	int cnt = 0;
-	while(true){
+	while (1) {
 	    vector<int> next(n);
 	    for(int i = 0 ; i < n ; i++){
 		next[i] = count(v.begin(),v.end(),v[i]);

@@ -1,8 +1,8 @@
-#include <iostream>
+#include <bits/stdc++.h>
  
 using namespace std;
  
-string str[10],in;
+string str[10], in;
  
 void init(){
     str[0] = "* = ****";
@@ -17,39 +17,42 @@ void init(){
     str[9] = " *=**** ";
 }
  
-void solve(string s,int count){
-    if(count) cout << endl;
+void solve(string s, int count)
+{
+    if (count) cout << endl;
  
     int len = (int)s.size();
     string ans[5];  
  
-    if(len == 5){
-	for(int i = 0 ; i < len ; i++)
+    if (len == 5) {
+	for (int i = 0; i < len; i++) {
 	    ans[i] = str[s[i]-'0'];
-    }
-    else{
-	for(int i = 0 ; i < 5-len ; i++){
+        }
+    } else {
+	for (int i = 0; i < 5-len; i++) {
 	    ans[i] = str[0];
 	}
    
 	int t = 0;
-	for(int i = 5-len ; i < 5 ; i++)
+	for (int i = 5-len; i < 5; i++) {
 	    ans[i] = str[s[t++]-'0'];
+        }
     }
  
-    for(int i = 0 ; i < 8 ; i++){
-	for(int j = 0 ; j < 5 ; j++){
+    for (int i = 0; i < 8; i++) {
+	for (int j = 0; j < 5; j++) {
 	    cout << ans[j][i];
 	}
 	cout << endl;
     }
 }
  
-int main(){
+int main()
+{
     init();
     int count = 0;
-    while(cin >> in){
-	solve(in,count);
+    while (cin >> in) {
+	solve(in, count);
 	count++;
     }
     return 0;

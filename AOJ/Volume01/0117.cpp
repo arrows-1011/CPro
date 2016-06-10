@@ -1,34 +1,41 @@
-#include <iostream>
-#include <cstdio>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-#define MAX 21
-#define INF 9999999
- 
-int main(){
-    int mm[MAX][MAX],n,m,a,b,c,d,x1,x2,y1,y2;
-     
-    cin >> n >> m;
-    for(int i = 1 ; i <= n ; i++){
-        for(int j = 1 ; j <= n ; j++){
-            mm[i][j] = INF;
-	}
-    }
-     
-    while(m--){
-        scanf("%d,%d,%d,%d" ,&a ,&b , &c ,&d);
-        mm[a][b] = c;
-        mm[b][a] = d;
-    }
-    for(int k = 1 ; k <= n ; k++){
-        for(int i = 1 ; i <= n ; i++){
-            for(int j = 1 ; j <= n ; j++){
-                mm[i][j] = min(mm[i][j],mm[i][k]+mm[k][j]);
-	    }
-	}
-    }
-    scanf("%d,%d,%d,%d" ,&x1 ,&x2 ,&y1 ,&y2);
-    cout << y1 - y2 - mm[x1][x2] - mm[x2][x1] << endl;
+#define MAX_N 20
+#define INF (1<<29)
+
+int main()
+{
+    int N, M;
+    while (cin >> N) {
+        cin >> M;
+        int d[MAX_N][MAX_N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                d[i][j] = INF;
+            }
+            d[i][i] = 0;
+        }
+        int a, b, c1, c2;
+        for (int i = 0; i < M; i++) {
+            scanf("%d,%d,%d,%d", &a, &b, &c1, &c2);
+            a--; b--;
+            d[a][b] = c1;
+            d[b][a] = c2;
+        }
+        scanf("%d,%d,%d,%d", &a, &b, &c1, &c2);
+        a--; b--;
+
+        for (int k = 0; k < N; k++) {
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+                }
+            }
+        }
+
+        cout << c1 - c2 - d[a][b] - d[b][a] << endl;
+    }           
     return 0;
 }

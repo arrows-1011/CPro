@@ -2,46 +2,39 @@
 
 using namespace std;
  
-int main(){
+int main()
+{
     int w;
   
-    while(1){
-	cin >> w;
-	if(w == -1) break;
-     
+    while (cin >> w, w != -1) {
 	int ans = 3130;
 	w -= 10;
  
-	if(10 <= w){
+	if (w >= 10) {
 	    ans -= 10*125;
 	    w -= 10;
-	}
-	else if(0 < w){
+	} else if (w > 0) {
 	    ans -= w*125;
 	    w = 0;
-	}
-	else{
+	} else {
 	    cout << ans << endl;
 	    continue;
 	}
  
-	if(10 <= w){
+	if (w >= 10) {
 	    ans -= 10*140;
 	    w -= 10;
-	}
-	else if(0 < w){
+	} else if (w > 0) {
 	    ans -= w*140;
 	    w = 0;
-	}
-	else{
+	} else {
 	    cout << ans << endl;
 	    continue;
 	}
      
-	if(0 < w){
+	if (w > 0) {
 	    ans -= w*160;
-	}
-	else{
+	} else {
 	    cout << ans << endl;
 	    continue;
 	} 

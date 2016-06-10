@@ -1,52 +1,44 @@
-#include <iostream>
- 
+#include <bits/stdc++.h>
+
 using namespace std;
- 
-#define MAX 100
- 
-int book[MAX],m,n;
- 
-bool check(int limit){
+
+bool c(int x, int M, vector<int> &a)
+{
+    int N = a.size();
     int cnt = 0, sum = 0;
- 
-    for(int i = 0 ; i < n ; i++){
-	if(book[i] > limit){
-	    return false;
-	}
-	sum += book[i];
-	if(sum == limit){
-	    sum = 0;
-	    cnt++;
-	}else if(sum > limit){
-	    sum = book[i];
-	    cnt++;
-	}
+    for (int i = 0; i < N; ) {
+        if (a[i] > x) return 0;
+
+        while (i < N && sum < x) {
+            sum += a[i++];            
+        }
+        if (sum > x) {
+            i--;
+        }                 
+        cnt++;
+        sum = 0;
     }
- 
-    if(sum > 0){
-	cnt++;
-    }
- 
-    return cnt <= m;
+    return (cnt <= M);
 }
- 
-int main(){
-    while(cin >> m >> n, (m|n)){
-	for(int i = 0 ; i < n ; i++){
-	    cin >> book[i];
-	}
- 
-	int lb = 0, ub = 1500000;
-	while(ub - lb > 0){
-	    int mid = (lb + ub) / 2;
- 
-	    if(check(mid)){
-		ub = mid;
-	    }else{
-		lb = mid + 1;
-	    }
-	}
-	cout << ub << endl;
+
+int main()
+{
+    int M, N;
+    while (cin >> M >> N, M) {
+        vector<int> a(N);
+        for (int i = 0; i < N; i++) {
+            cin >> a[i];
+        }
+        int l = 0, r = 1e9;
+        while (r - l > 1) {
+            int mid = (l + r) / 2;
+            if (c(mid, M, a)) {
+                r = mid;
+            } else {
+                l = mid;
+            }
+        }
+        cout << r << endl;
     }
     return 0;
 }

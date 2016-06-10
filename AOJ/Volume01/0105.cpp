@@ -1,36 +1,34 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <cstdio>
+#include <bits/stdc++.h>
 
 using namespace std;
  
-typedef pair<string,int> P;
+typedef pair<string, int> P;
  
-int main(){
+int main()
+{
     string str;
-    int page,cnt=0;
+    int page, cnt = 0;
     vector<P> v;
  
-    while(cin >> str >> page){
-	v.push_back(P(str,page));
+    while (cin >> str >> page) {
+	v.push_back(P(str, page));
 	cnt++;
     }
  
-    sort(v.begin(),v.end());
-    for(int i = 0 ; i < cnt; i++){
-	if(i == 0){
+    sort(v.begin(), v.end());
+    for (int i = 0; i < cnt; i++) {
+	if (i == 0) {
 	    cout << v[i].first << endl;
 	    cout << v[i].second;
 	    continue;
 	}
  
-	if(v[i].first == v[i-1].first && v[i].second!=v[i-1].second){
+	if (v[i].first == v[i-1].first && v[i].second!=v[i-1].second) {
 	    cout << ' ' << v[i].second;
 	    continue;
-	}
-	else cout << endl;
- 
+	} else {
+            cout << endl;
+        }
 	cout << v[i].first << endl;
 	cout << v[i].second;
     }

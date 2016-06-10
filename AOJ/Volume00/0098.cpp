@@ -1,30 +1,29 @@
-#include <cstdio>
-#include <algorithm>
+#include <bits/stdc++.h>
  
 using namespace std;
  
 #define INF 1e9
-#define FOR(i,a,b) for(int i = a ; i < b ; i++)
  
-int main(){
-    int N,a[100][100];
+int main()
+{
+    int N, a[100][100];
     int ans = -INF;
  
     scanf("%d" ,&N);
-    FOR(i,0,N){
-	FOR(j,0,N){
-	    scanf("%d" ,&a[i][j]);
-	    ans = max(ans,a[i][j]);
+    for (int i = 0; i < N; i++) {
+	for (int j = 0; j < N; j++) {
+	    scanf("%d", &a[i][j]);
+	    ans = max(ans, a[i][j]);
 	}
     }
-    FOR(i,0,N){
+    for (int i = 0; i < N; i++) {
 	int b[100] = {0};
-	FOR(j,i,N){
+	for (int j = i; j < N; j++) {
 	    int sum = 0;
-	    FOR(k,0,N){
+	    for (int k = 0; k < N; k++) {
 		b[k] += a[j][k];
-		sum = max(sum + b[k] ,0);
-		if(sum) ans = max(ans,sum);
+		sum = max(sum + b[k], 0);
+		if(sum > 0) ans = max(ans, sum);
 	    }
 	}
     }

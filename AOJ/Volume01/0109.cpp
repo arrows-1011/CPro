@@ -11,14 +11,15 @@ public:
 	it = s.begin();
     }
    
-    int fact(){
+    int fact()
+    {
 	int res = 0;
-	if(*it == '('){
+	if (*it == '(') {
 	    ++it;
 	    res = exp();
 	    ++it;
-	}else{
-	    while(isdigit(*it)){
+	} else {
+	    while (isdigit(*it)) {
 		res *= 10;
 		res += (*it-'0');
 		++it;
@@ -27,13 +28,14 @@ public:
 	return res;
     }
    
-    int term(){
+    int term()
+    {
 	int res = fact();
-	while(*it == '*' || *it == '/'){
-	    if(*it == '*'){
+	while (*it == '*' || *it == '/') {
+	    if (*it == '*') {
 		++it;
 		res *= fact();
-	    }else{
+	    } else {
 		++it;
 		res /= fact();
 	    }
@@ -41,13 +43,14 @@ public:
 	return res;
     }
  
-    int exp(){
+    int exp()
+    {
 	int res = term();
-	while(*it == '+' || *it == '-'){
-	    if(*it == '+'){
+	while (*it == '+' || *it == '-') {
+	    if (*it == '+') {
 		++it;
 		res += term();
-	    }else{
+	    } else {
 		++it;
 		res -= term();
 	    }
@@ -56,10 +59,11 @@ public:
     }
 };
  
-int main(){
+int main()
+{
     int N;
     cin >> N;
-    while(N--){
+    while (N--) {
 	string s;
 	cin >> s;
 	s.resize(s.size()-1);

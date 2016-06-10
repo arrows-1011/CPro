@@ -3,12 +3,13 @@
  
 #define r 6378.1
  
-int main(){
-    double a,b,c,d;
+int main()
+{
+    double a, b, c, d;
  
-    while(true){
+    while (true) {
 	scanf("%lf %lf %lf %lf" ,&a ,&b ,&c ,&d);
-	if(a == -1 && b == -1 && c == -1 && d == -1){
+	if (a == -1 && b == -1 && c == -1 && d == -1) {
 	    break;
 	}
  
@@ -25,7 +26,7 @@ int main(){
 	double j = sin(c);
  
 	double dist = acos(e*h + f*i + g*j);  
-	printf("%d\n" ,(int)(r*dist+0.5));
+	printf("%d\n", (int)(r*dist+0.5));
     }
     return 0;
 }
