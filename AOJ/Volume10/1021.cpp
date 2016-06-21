@@ -16,15 +16,15 @@ struct Emacs{
     void order(char command){
 	editText();
 	switch(command){
-	case 'a': funcA(); break;
-	case 'e': funcE(); break;
-	case 'p': funcP(); break;
-	case 'n': funcN(); break;
-	case 'f': funcF(); break;
-	case 'b': funcB(); break;
-	case 'd': funcD(); break;
-	case 'k': funcK(); break;
-	case 'y': funcY(); break;
+            case 'a': funcA(); break;
+            case 'e': funcE(); break;
+            case 'p': funcP(); break;
+            case 'n': funcN(); break;
+            case 'f': funcF(); break;
+            case 'b': funcB(); break;
+            case 'd': funcD(); break;
+            case 'k': funcK(); break;
+            case 'y': funcY(); break;
 	}
     }
  
