@@ -1,46 +1,43 @@
 #include <bits/stdc++.h>
-
+ 
 using namespace std;
-
-#define MAX 5050
+ 
 typedef long long ll;
 const ll MOD = ((1e9) + 7);
-
-int dp[MAX][MAX];
-
+ 
+int dp[2][5050];
+ 
 int main()
 {
     int N, L;
-    cin >> N >> L;
+    scanf("%d %d", &N, &L);
     vector<int> x(N), a(N);
     for (int i = 0; i < N; i++) {
-        cin >> x[i]; 
+        scanf("%d", &x[i]);
     }
     for (int i = 0; i < N; i++) {
-        cin >> a[i];
+        scanf("%d", &a[i]);
     }
-
-    for (int i = 0; i < L; i++) {
-        dp[0][i] = 1;
-    }
-
-    for (int i = 0; i < N; i++) {        
+ 
+    fill(dp[0], dp[0] + L, 1);    
+    for (int i = 0; i < N; i++) {
+        int curr = i & 1, next = !curr;
         for (int j = x[i]; j < L; j += a[i]) {
             if (j > 0) {
-                dp[i+1][j] += dp[i][j-1];
+                dp[next][j] += dp[curr][j-1];
             } else {
-                dp[i+1][j] = dp[i][j];
+                dp[next][j] = dp[curr][j];
             }
-            dp[i+1][j] %= MOD;
+            dp[next][j] %= MOD;
             if (a[i] == 0) break;
         }
-        
+         
         for (int j = x[i]; j < L; j++) {
-            dp[i+1][j+1] += dp[i+1][j];
-            dp[i+1][j+1] %= MOD;
-        }      
+            dp[next][j+1] += dp[next][j];
+            dp[next][j+1] %= MOD;
+        }
+        fill(dp[curr], dp[curr] + L, 0);
     }
-    
-    cout << dp[N][L-1] << endl;
+    printf("%d\n", dp[N&1][L-1]);
     return 0;
 }
