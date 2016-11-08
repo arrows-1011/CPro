@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define MAX_V 5000
+constexpr int MAX_V = 5000;
 
 int V, E, res;
 vector<int> G[MAX_V];
@@ -16,9 +16,9 @@ void dfs(int v, int c)
     for (int i = 0; i < (int)G[v].size(); i++) {
 	int to = G[v][i];
 	if (visited[to] == -1) {
-	    dfs(to, c+1);
+	    dfs(to, c + 1);
 	} else if(visited[to] == 0) {
-	    res = max(res, num[v]-num[to]+1);
+	    res = max(res, num[v] - num[to] + 1);
 	}
     }
     visited[v] = 1;

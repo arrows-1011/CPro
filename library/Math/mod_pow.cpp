@@ -2,7 +2,7 @@
 
 using namespace std;
 
-typedef long long ll;
+using ll = long long;
 
 ll mod_pow(ll x, ll n, ll mod)
 {

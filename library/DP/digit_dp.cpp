@@ -4,15 +4,14 @@
  */
 
 
-#include <bits/stdc++.h>
+#include <iostream>
  
 using namespace std;
- 
-#define MAX_N 10010
-#define MAX_D 101
-typedef long long ll;
- 
-const ll MOD = 1000000007LL;
+
+using ll = long long;
+constexpr int MAX_N = 10010;
+constexpr int MAX_D = 101;
+constexpr ll MOD = 1000000007LL;
  
 string N;
 int D;
@@ -24,7 +23,7 @@ ll dfs(int idx, int d, bool lt)
         return (d == 0);
     }
  
-    ll &res = dp[idx][d][lt];
+    ll& res = dp[idx][d][lt];
     if (res != -1) return res;
     
     res = 0;

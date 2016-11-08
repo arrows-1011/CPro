@@ -18,13 +18,13 @@
 
 using namespace std;
 
-#define MAX_V 10010
-typedef vector<int> Vec;
+using Vec = vector<int>;
+constexpr int MAX_V = 10010;
 
 int V, E;
 Vec G[MAX_V];
 
-bool visit(int v, Vec &order, Vec &color)
+bool visit(int v, Vec& order, Vec& color)
 {
     color[v] = 1;
     for (int i = 0; i < (int)G[v].size(); i++) {
@@ -33,12 +33,12 @@ bool visit(int v, Vec &order, Vec &color)
         if (color[to] == 1) return false;
         if (!visit(to, order, color)) return false;
     }
-    order.push_back(v);
+    order.emplace_back(v);
     color[v] = 2;
     return true;
 }
 
-bool topologicalSort(Vec &order)
+bool topologicalSort(Vec& order)
 {
     Vec color(V, 0);
     for (int i = 0; i < V; i++) {
@@ -56,7 +56,7 @@ int main()
     cin >> V >> E;
     for (int i = 0; i < E; i++) {
         cin >> s >> t;
-        G[s].push_back(t);
+        G[s].emplace_back(t);
     }
     Vec order;
     if (topologicalSort(order)) {

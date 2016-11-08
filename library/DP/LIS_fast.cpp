@@ -1,10 +1,11 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
  
-typedef long long ll;
-const ll INF = 1e9;
+using ll = long long;
+constexpr ll INF = (1LL << 55);
   
 int main()
 {
@@ -14,11 +15,10 @@ int main()
     for (int i = 0; i < n; i++) {
 	cin >> a[i];
     }
-    ll dp[n];
-    fill(dp, dp+n, INF);
+    vector<ll> dp(n, INF);
     for (int i = 0; i < n; i++) {
-	*lower_bound(dp, dp+n, a[i]) = a[i];
+	*lower_bound(dp.begin(), dp.end(), a[i]) = a[i];
     }
-    cout << lower_bound(dp, dp+n, INF) - dp << endl;
+    cout << lower_bound(dp.begin(), dp.end(), INF) - dp.begin() << endl;
     return 0;
 }

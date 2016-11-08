@@ -9,11 +9,11 @@
 
 using namespace std;
  
-#define INF 1e9
- 
+constexpr int INF = (1 << 29);
+
 struct P {
     int x, y;
-    P(int x, int y) : x(x), y(y) {}
+    P(int x, int y) : x{x}, y{y} {}
 };
  
 vector<int> v;
@@ -21,7 +21,7 @@ vector<int> v;
 P getPos(int x)
 {
     x--;
-    return P(x%4, x/4);
+    return {x % 4, x / 4};
 }
  
 int getMD()
@@ -30,16 +30,16 @@ int getMD()
     for (int i = 0; i < 16; i++) {
 	if (v[i] == 0) continue; 
 	P tp = getPos(v[i]);
-	res += abs(i%4-tp.x) + abs(i/4-tp.y);
+	res += abs(i % 4 - tp.x) + abs(i / 4 - tp.y);
     }
     return res;
 }
  
 int LIMIT;
-const int dx[] = {-1, 0, 1, 0};
-const int dy[] = {0, -1, 0, 1};
+constexpr int dx[] = {-1, +0, +1, +0};
+constexpr int dy[] = {+0, -1, +0, +1};
  
-bool inField(int x, int y)
+bool in_field(int x, int y)
 {
     return (0 <= x && x < 4 && 0 <= y && y < 4);
 }
@@ -51,14 +51,14 @@ bool solve(int sp, int step, int prev)
     if (md + step > LIMIT) {
 	return false;
     }
-    int x = sp%4, y = sp/4;
+    int x = sp % 4, y = sp / 4;
     for (int i = 0; i < 4; i++) {
 	int nx = x + dx[i], ny = y + dy[i];
-	if (abs(i-prev) == 2) continue;
-	if (!inField(nx, ny)) continue;
-	int nsp = ny*4 + nx;
+	if (abs(i - prev) == 2) continue;
+	if (!in_field(nx, ny)) continue;
+	int nsp = ny * 4 + nx;
 	swap(v[sp], v[nsp]);
-	if (solve(nsp, step+1, i)) {
+	if (solve(nsp, step + 1, i)) {
 	    return true;
 	}
 	swap(v[sp], v[nsp]);

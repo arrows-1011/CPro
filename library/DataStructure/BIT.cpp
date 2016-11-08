@@ -2,15 +2,16 @@
 
 using namespace std;
 
-#define MAX_N (1<<17)
+constexpr int MAX_N = (1 << 17);
 
 class BIT {
-public:
-    int bit[MAX_N+1], n;
+  public:
+    int bit[MAX_N + 1], n;
   
     BIT()
     {
-	for (int i = 0; i < MAX_N; i++) {
+        n = MAX_N + 1;
+	for (int i = 0; i < n; i++) {
 	    bit[i] = 0;
 	}
     }
@@ -25,7 +26,7 @@ public:
 	return s;
     }
   
-    void add(int i,int x)
+    void add(int i, int x)
     {
 	while (i <= n) {
 	    bit[i] += x;

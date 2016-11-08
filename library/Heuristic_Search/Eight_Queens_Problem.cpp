@@ -15,22 +15,22 @@ void init(char field[8][8], bool can[8][8])
     }
 }
   
-bool inField(int y, int x)
+bool in_field(int y, int x)
 {
-    return 0 <= y && y < 8 && 0 <= x && x < 8;
+    return (0 <= y && y < 8 && 0 <= x && x < 8);
 }
   
 void putQ(int r, int c, bool can[8][8])
 {
-    const int dx[4] = {-1, +1, +1, -1};
-    const int dy[4] = {-1, -1, +1, +1};
+    constexpr int dx[4] = {-1, +1, +1, -1};
+    constexpr int dy[4] = {-1, -1, +1, +1};
     
     for (int i = 0; i < 8; i++) {
 	can[r][i] = can[i][c] = false;
     }
     for (int i = 0; i < 4; i++) {
 	int x = c, y = r;
-	while (inField(y, x)) {
+	while (in_field(y, x)) {
 	    can[y][x] = false;
 	    x += dx[i]; y += dy[i];
 	}
@@ -64,7 +64,7 @@ void solve(int now, int S, bool can[8][8], char field[8][8])
 	return;
     }
     if ((S >> now) & 1) {
-	solve(now+1, S, can, field);
+	solve(now + 1, S, can, field);
     } else {
 	bool tmp[8][8];
 	for (int i = 0; i < 8; i++) {
@@ -72,7 +72,7 @@ void solve(int now, int S, bool can[8][8], char field[8][8])
 		copy(tmp, can);
 		field[now][i] = 'Q';
 		putQ(now, i, can);
-		solve(now+1, S, can, field);
+		solve(now + 1, S, can, field);
 		if (flg) return;
 		copy(can, tmp);
 		field[now][i] = '.';
@@ -92,7 +92,7 @@ int main()
     cin >> N;
     for (int i = 0; i < N; i++) {
 	cin >> r >> c;
-	S |= 1<<r;
+	S |= 1 << r;
 	field[r][c] = 'Q';
 	putQ(r, c, can);
     }

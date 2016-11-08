@@ -1,36 +1,41 @@
+/*
+  Not verify
+ */
+
 #include <iostream>
 #include <algorithm>
 
 using namespace std;
 
-#define INF (1<<29)
 #define mp make_pair
+constexpr int INF = (1 << 29);
 
 class RBST {
-public:
+  public:
     int cnt, val, mini, add, rev;
-    RBST *l, *r;
+    RBST* l;
+    RBST* r;
     RBST (int val = 0) :
-	cnt(1), val(val), mini(val), add(0), l(NULL), r(NULL) {}
+	cnt(1), val(val), mini(val), add(0), l(nullptr), r(nullptr) {}
 
-    int size(RBST *x)
+    int size(RBST* x)
     {
 	return (x ? x->cnt : 0);
     }
     
-    int get_min(RBST *x)
+    int get_min(RBST* x)
     {
 	return (x ? x->mini + x->add : INF);
     }
     
-    RBST *push()
+    RBST* push()
     {
 	if (l) l->add += add;
 	if (r) r->add += add;
 	val += add;
 	add = 0;
 	if (rev) {
-	    swap(l,r);
+	    swap(l, r);
 	    if (l) l->rev ^= 1;
 	    if (r) r->rev ^= 1;
 	    rev = false;
@@ -38,14 +43,14 @@ public:
 	return update();
     }
 
-    RBST *update()
+    RBST* update()
     {
 	cnt = size(l) + size(r) + 1;
-	mini = min(min(get_min(l), get_min(r)),val);
+	mini = min(min(get_min(l), get_min(r)), val);
 	return this;
     }
     
-    RBST *merge(RBST *a, RBST *b)
+    RBST* merge(RBST* a, RBST* b)
     {
 	if (!a || !b) return (a ? a->push() : b->push());
 	a->push(); b->push();
@@ -59,16 +64,16 @@ public:
     }
     
     /* [0,k) [k,n) */
-    pair<RBST*, RBST*> split(RBST *a, int k)
+    pair<RBST*, RBST*> split(RBST* a, int k)
     {
-	if (!a) return mp<RBST*, RBST*>(NULL, NULL);
+	if (!a) return mp<RBST*, RBST*>(nullptr, nullptr);
 	a->push();
 	if (k <= size(a->l)) {
 	    pair<RBST*, RBST*> t = split(a->l, k);
 	    a->l = t.second;
 	    return mp(t.first, a->update());
 	} else {
-	    pair<RBST*, RBST*> t = split(a->r, k-size(a->l)-1);
+	    pair<RBST*, RBST*> t = split(a->r, k-size(a->l) - 1);
 	    a->r = t.first;
 	    return mp(a->update(), t.second);
 	}

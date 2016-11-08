@@ -5,15 +5,16 @@
   空間計算量 O(n 2^t)．
  */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-#define INF (1<<29)
-typedef vector<int> Vec;
-typedef vector<Vec> Graph;
+constexpr int INF = (1 << 29);
+using Vec = vector<int>;
+using Graph = vector<Vec>;
 
-int minimum_steiner_tree(Graph &d, Vec &subT)
+int minimum_steiner_tree(Graph& d, Vec& subT)
 {
     int N = d.size(), T = subT.size();
     if (T <= 1) return T;
@@ -26,8 +27,8 @@ int minimum_steiner_tree(Graph &d, Vec &subT)
         }
     }
     
-    int dp[1<<T][N];
-    for (int i = 0; i < (1<<T); i++) {
+    int dp[1 << T][N];
+    for (int i = 0; i < (1 << T); i++) {
         for (int j = 0; j < N; j++) {
             dp[i][j] = INF;
         }
@@ -35,16 +36,16 @@ int minimum_steiner_tree(Graph &d, Vec &subT)
 
     for (int i = 0; i < T; i++) {
         for (int j = 0; j < N; j++) {
-            dp[1<<i][j] = d[subT[i]][j];
+            dp[1 << i][j] = d[subT[i]][j];
         }
     }
 
-    for (int i = 1; i < (1<<T); i++) {
+    for (int i = 1; i < (1 << T); i++) {
         if (!(i & (i - 1))) continue;
         for (int j = 0; j < N; j++) {
             for (int k = 0; k < i; k++) {
                 if ((i | k) == i) {
-                    dp[i][j] = min(dp[i][j], dp[k][j] + dp[i-k][j]);
+                    dp[i][j] = min(dp[i][j], dp[k][j] + dp[i - k][j]);
                 }
             }
         }
@@ -55,9 +56,9 @@ int minimum_steiner_tree(Graph &d, Vec &subT)
         }
     }
     int res = INF;
-    for (int i = 0; i < (1<<T); i++) {
+    for (int i = 0; i < (1 << T); i++) {
         for (int j = 0; j < N; j++) {
-            res = min(res, dp[i][j] + dp[((1<<T)-1)-i][j]);
+            res = min(res, dp[i][j] + dp[((1 << T) - 1) - i][j]);
         }
     }
     return res;
@@ -82,17 +83,17 @@ int main()
             }
         }
 
-        Graph G(H*W, Vec(H*W));
+        Graph G(H * W, Vec(H * W));
         for (int i = 0; i < H; i++) {
             for (int j = 0; j < W; j++) {
                 for (int k = 0; k < H; k++) {
                     for (int l = 0; l < W; l++) {
-                        G[i*W+j][k*W+l] = get_dist(i, j, k, l);
+                        G[i * W + j][k * W + l] = get_dist(i, j, k, l);
                     }
                 }
             }
         }
-        cout << H*W - minimum_steiner_tree(G, subT) << endl;
+        cout << H * W - minimum_steiner_tree(G, subT) << endl;
     }
     return 0;
 }

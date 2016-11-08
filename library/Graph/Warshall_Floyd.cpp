@@ -7,8 +7,8 @@
 
 using namespace std;
 
-#define MAX_V 100
-#define INF 1e9
+constexpr int MAX_V = 100;
+constexpr int INF = (1 << 29);
 
 int d[MAX_V][MAX_V]; //d[u][v]は辺e=(u,v)のコスト(存在しない場合INF,d[i][i]=0)
 int V;               //頂点数
@@ -18,7 +18,7 @@ void warshall_floyd()
     for (int k = 0; k < V; k++) {
 	for (int i = 0; i < V; i++) {
 	    for (int j = 0; j < V; j++) {
-		d[i][j] = min(d[i][j], d[i][k]+d[k][j]);
+		d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
 	    }
 	}
     }
@@ -28,7 +28,7 @@ void warshall_floyd()
   負の閉路判定 ver
 */
 
-bool checkNegativeCycle()
+bool check_negative_cycle()
 {
     for (int i = 0; i < V; i++) {
 	if (d[i][i] < 0) {
@@ -44,12 +44,12 @@ void warshall_floyd2()
 	for (int i = 0; i < V; i++) {
 	    for (int j = 0; j < V; j++) {
 		if (d[i][k] != INF && d[k][j] != INF) {
-		    d[i][j] = min(d[i][j], d[i][k]+d[k][j]);
+		    d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
 		}
 	    }
 	}
     }
-    if (checkNegativeCycle()) {
+    if (check_negative_cycle()) {
 	cout << "NEGATIVE CYCLE" << endl;
     } else {
 	for (int i = 0; i < V; i++) {

@@ -10,9 +10,9 @@
  
 using namespace std;
  
-#define MAX 1000
-#define MAX_T 10
-typedef unsigned long long ull;
+constexpr int MAX = 1000;
+constexpr int MAX_T = 10;
+using ull = unsigned long long;
  
 int N, M, P, Q;
 char field[MAX][MAX], pattern[MAX][MAX];
@@ -21,8 +21,8 @@ ull _hash[MAX][MAX], tmp[MAX][MAX];
  
 void compute_hash(char a[MAX][MAX], int n, int m)
 {
-    const ull B1 = 9973;
-    const ull B2 = 100000007;
+    constexpr ull B1 = 9973;
+    constexpr ull B2 = 100000007;
    
     ull t1 = 1;
     for (int j = 0; j < Q; j++) t1 *= B1;
@@ -32,7 +32,7 @@ void compute_hash(char a[MAX][MAX], int n, int m)
         for (int j = 0; j < Q; j++) e = e * B1 + a[i][j];
         for (int j = 0; j + Q <= m; j++) {
             tmp[i][j] = e;
-            if (j + Q < m) e = e * B1 - t1 * a[i][j] + a[i][j+Q]; 
+            if (j + Q < m) e = e * B1 - t1 * a[i][j] + a[i][j + Q]; 
         }
     }
    
@@ -45,7 +45,7 @@ void compute_hash(char a[MAX][MAX], int n, int m)
      
         for (int i = 0; i + P <= n; i++) {
             _hash[i][j] = e;
-            if (i + P < n) e = e * B2 - t2 * tmp[i][j] + tmp[i+P][j];
+            if (i + P < n) e = e * B2 - t2 * tmp[i][j] + tmp[i + P][j];
         }
     }
 }

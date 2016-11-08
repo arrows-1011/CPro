@@ -2,7 +2,7 @@
  
 using namespace std;
 
-typedef long long ll;
+using ll = long long;
 
 class Fraction {
   public:
@@ -19,12 +19,12 @@ class Fraction {
 
     ll gcd(ll a, ll b)
     {
-	return (b == 0 ? a : gcd(b, a%b));
+	return (b == 0 ? a : gcd(b, a % b));
     }
  
     ll lcm(ll a, ll b)
     {
-	return a*b/gcd(a, b);
+	return a / gcd(a, b) * b;
     }
  
     Fraction operator - (Fraction g)
@@ -46,8 +46,8 @@ class Fraction {
     Fraction operator * (Fraction f)
     {
 	Fraction res;
-	res.numerator = numerator*f.numerator;
-	res.denominator = denominator*f.denominator;
+	res.numerator = numerator * f.numerator;
+	res.denominator = denominator * f.denominator;
 	res.reduce_n();
 	return res;
     }
@@ -55,13 +55,13 @@ class Fraction {
     Fraction operator / (Fraction f)
     {
 	Fraction res;
-	res.numerator = numerator*f.denominator;
-	res.denominator = denominator*f.numerator;
+	res.numerator = numerator * f.denominator;
+	res.denominator = denominator * f.numerator;
 	res.reduce_n();
 	return res;
     }
 
-    bool operator == (const Fraction &f)
+    bool operator == (const Fraction& f)
     {
 	return (numerator == f.numerator &&
 		denominator == f.denominator);
@@ -74,7 +74,7 @@ class Fraction {
 	denominator /= x;
     }
   
-    void reduce_d(Fraction &f)
+    void reduce_d(Fraction& f)
     {
 	reduce_n(); f.reduce_n();
 	ll nd = lcm(denominator, f.denominator);
@@ -84,7 +84,7 @@ class Fraction {
     }
 };
 
-ostream &operator << (ostream &os, Fraction f)
+ostream& operator << (ostream& os, Fraction f)
 {
     f.reduce_n();
   

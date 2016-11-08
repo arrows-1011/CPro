@@ -3,7 +3,7 @@
 
 using namespace std;
 
-typedef long long ll;
+using ll = long long;
 
 ll gcd(ll a, ll b)
 {

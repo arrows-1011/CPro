@@ -6,13 +6,13 @@
 
 using namespace std;
 
-#define MAX_V 100
-#define INF 1e9
+constexpr int MAX_V = 100;
+constexpr int INF = (1 << 29);
 
-struct edge{
-    int to,cap,rev;
+struct edge {
+    int to, cap, rev;
     edge(int to, int cap, int rev) :
-        to(to), cap(cap), rev(rev) {}
+        to{to}, cap{cap}, rev{rev} {}
 };
 
 vector<edge> G[MAX_V];
@@ -21,7 +21,7 @@ int level[MAX_V], iter[MAX_V];
 void add_edge(int from, int to, int cap)
 {
     G[from].push_back(edge(to, cap, G[to].size()));
-    G[to].push_back(edge(from, 0, G[from].size()-1));
+    G[to].push_back(edge(from, 0, G[from].size() - 1));
 }
 
 void bfs(int s)
@@ -33,7 +33,7 @@ void bfs(int s)
     while (!Q.empty()) {
 	int v = Q.front(); Q.pop();
 	for (int i = 0; i < (int)G[v].size(); i++) {
-	    edge &e = G[v][i];
+	    edge& e = G[v][i];
 	    if (e.cap > 0 && level[e.to] < 0) {
 		level[e.to] = level[v] + 1;
 		Q.push(e.to);
@@ -45,8 +45,8 @@ void bfs(int s)
 int dfs(int v, int t, int f)
 {
     if (v == t) return f;
-    for (int &i = iter[v]; i < (int)G[v].size(); i++) {
-	edge &e = G[v][i];
+    for (int& i = iter[v]; i < (int)G[v].size(); i++) {
+	edge& e = G[v][i];
 	if (e.cap > 0 && level[v] < level[e.to]) {
 	    int d = dfs(e.to, t, min(f, e.cap));
 	    if (d > 0) {

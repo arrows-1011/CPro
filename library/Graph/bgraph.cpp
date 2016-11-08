@@ -10,7 +10,7 @@
 
 using namespace std;
 
-#define MAX_V 1000
+constexpr int MAX_V = 1000;
 
 //入力
 vector<int> G[MAX_V];  //グラフ

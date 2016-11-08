@@ -2,17 +2,18 @@
 
 using namespace std;
 
-#define MAX_N 1000
-typedef long long ll;
+constexpr int MAX_N = 1000;
+using ll = long long;
 
 int n;
 
 class BIT {
   public:
-    int a[MAX_N+1], n;
+    int a[MAX_N + 1], n;
   
     BIT() {
-	for (int i = 0; i < MAX_N; i++) {
+        n = MAX_N + 1;
+	for (int i = 0; i < n; i++) {
 	    a[i] = 0;
 	}
     }

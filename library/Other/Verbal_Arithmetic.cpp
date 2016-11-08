@@ -12,7 +12,7 @@
 
 using namespace std;
 
-typedef vector<int> Vec;
+using Vec = vector<int>;
 
 int N, maxi;
 vector<string> v;
@@ -27,8 +27,8 @@ int solve(int k, int idx, int sum, int S, int p)
         return 1;
     }
     int res = 0;
-    if (idx == N-1) {
-        int val = (int)(v[idx][k]-'A');
+    if (idx == N - 1) {
+        int val = (int)(v[idx][k] - 'A');
         int ns = (sum + p) % 10;
         int np = (sum + p) / 10;
         if (num[val] != -1) {
@@ -36,34 +36,34 @@ int solve(int k, int idx, int sum, int S, int p)
                 return 0;
             }
             if (ns == num[val]) {
-                res = solve(k+1, 0, 0, S, np);
+                res = solve(k + 1, 0, 0, S, np);
             }
         } else {
             for (int i = 0; i < 10; i++) {
                 if (S >> i & 1) continue;
                 num[val] = i;
                 if (ns == i && !(l[idx] > 0 && k == l[idx] && i == 0)) {
-                    res += solve(k+1, 0, 0, S|(1<<i), np);
+                    res += solve(k + 1, 0, 0, S | (1 << i), np);
                 }
                 num[val] = -1;
             }
         }
     } else {
         if (v[idx][k] == '*') {
-            res = solve(k, idx+1, sum, S, p);
+            res = solve(k, idx + 1, sum, S, p);
         } else {
-            int val = (int)(v[idx][k]-'A');
+            int val = (int)(v[idx][k] - 'A');
             if (num[val] != -1) {
                 if (l[idx] > 0 && k == l[idx] && num[val] == 0) {
                     return 0;
                 }
-                res += solve(k, idx+1, sum+num[val], S, p);
+                res += solve(k, idx + 1, sum + num[val], S, p);
             } else {
                 for (int i = 0; i < 10; i++) {
                     if (S >> i & 1) continue;
                     num[val] = i;
                     if (!(l[idx] > 0 && k == l[idx] && i == 0)) {
-                        res += solve(k, idx+1, sum+i, S|(1<<i), p);
+                        res += solve(k, idx + 1, sum + i, S | (1 << i), p);
                     }
                     num[val] = -1;
                 }
@@ -86,7 +86,7 @@ int main()
             maxi = max(maxi, len[i]);
             reverse(v[i].begin(), v[i].end());
         }
-        if (len[N-1] < maxi) {
+        if (len[N - 1] < maxi) {
             cout << 0 << endl;
             continue;
         }

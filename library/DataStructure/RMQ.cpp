@@ -3,11 +3,11 @@
 
 using namespace std;
 
-const int MAX_N = 1<<17;
+constexpr int MAX_N = (1 << 17);
 
 class RMQ {
 public:
-    int n, dat[2*MAX_N-1];
+    int n, dat[2 * MAX_N - 1];
   
     void init(int n_)
     {
@@ -15,7 +15,7 @@ public:
 	while (n < n_) {
             n *= 2;
         }
-	for (int i = 0; i < 2*n-1; i++) {
+	for (int i = 0; i < 2 * n - 1; i++) {
 	    dat[i] = INT_MAX;
 	}
     }
@@ -26,7 +26,7 @@ public:
 	dat[k] = a;
 	while (k > 0) {
 	    k = (k - 1) / 2;
-	    dat[k] = min(dat[k*2+1], dat[k*2+2]);
+	    dat[k] = min(dat[k * 2 + 1], dat[k * 2 + 2]);
 	}
     }
 
@@ -38,8 +38,8 @@ public:
 	if (a <= l && r <= b) {
 	    return dat[k];
 	} else {
-	    int vl = query(a, b, k*2+1, l, (l+r)/2);
-	    int vr = query(a, b, k*2+2, (l+r)/2, r);
+	    int vl = query(a, b, k * 2 + 1, l, (l + r) / 2);
+	    int vr = query(a, b, k * 2 + 2, (l + r) / 2, r);
 	    return min(vl, vr);
 	}
     }

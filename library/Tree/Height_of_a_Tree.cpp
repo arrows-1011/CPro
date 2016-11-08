@@ -7,14 +7,14 @@ using namespace std;
 struct Edge {
     int to, weight;
     Edge(int to, int weight) :
-	to(to), weight(weight) {}
+	to{to}, weight{weight} {}
 };
 
-typedef vector<int> Vec;
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
+using Vec = vector<int>;
+using Edges = vector<Edge>;
+using Graph = vector<Edges>;
 
-int visit(const Graph &g, Graph &T, int u, int v)
+int visit(const Graph& g, Graph& T, int u, int v)
 {
     if (T[u][v].weight >= 0) {
 	return T[u][v].weight;
@@ -23,12 +23,12 @@ int visit(const Graph &g, Graph &T, int u, int v)
     int w = T[u][v].to;
     for (int i = 0; i < (int)T[w].size(); i++) {
 	if (T[w][i].to == u) continue;
-	T[u][v].weight = max(T[u][v].weight, visit(g,T,w,i)+g[u][v].weight);
+	T[u][v].weight = max(T[u][v].weight, visit(g, T, w, i) + g[u][v].weight);
     }
     return T[u][v].weight;
 }
 
-Vec solve(const Graph &g)
+Vec solve(const Graph& g)
 {
     int N = g.size();
     Graph T(g);
@@ -62,8 +62,8 @@ int main()
     Graph g(N);
     for (int i = 0; i < N-1; i++) {
 	cin >> a >> b >> c;
-	g[a].push_back(Edge(b, c));
-	g[b].push_back(Edge(a, c));
+	g[a].emplace_back(b, c);
+	g[b].emplace_back(a, c);
     }
     Vec v = solve(g);
     for (int i = 0; i < N; i++) {

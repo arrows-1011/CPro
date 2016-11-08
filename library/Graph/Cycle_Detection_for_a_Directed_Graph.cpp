@@ -9,7 +9,7 @@
 
 using namespace std;
 
-#define MAX_V 100
+constexpr int MAX_V = 100;
 
 int V, E;
 bool found;
@@ -49,7 +49,7 @@ int main()
     cin >> V >> E;
     for (int i = 0; i < E; i++) {
 	cin >> s >> t;
-	G[s].push_back(t);
+	G[s].emplace_back(t);
     }
     solve();
     return 0;

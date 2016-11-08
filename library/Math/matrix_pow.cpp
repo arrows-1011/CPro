@@ -3,19 +3,19 @@
 
 using namespace std;
 
-typedef vector<int> vec;
-typedef vector<vec> mat;
-typedef long long ll;
+using vec = vector<int>;
+using mat = vector<vec>;
+using ll = long long;
 
-const int M = 10000;
+constexpr int M = 10000;
 
-mat mul(mat &A, mat &B)
+mat mul(mat& A, mat& B)
 {
     mat C(A.size(), vec(B[0].size()));
     for (int i = 0; i < (int)A.size(); i++) {
 	for (int k = 0; k < (int)B.size(); k++) {
 	    for (int j = 0; j < (int)B[0].size(); j++) {
-		C[i][j] = (C[i][j] + A[i][k]*B[k][j]) % M;
+		C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % M;
 	    }
 	}
     }

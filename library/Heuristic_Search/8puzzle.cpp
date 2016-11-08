@@ -8,15 +8,15 @@
 
 using namespace std;
  
-#define INF 1e9
-typedef long long ll;
+constexpr int INF = (1 << 29);
+using ll = long long;
  
 struct P {
     int x, y;
-    P(int x, int y) : x(x), y(y) {}
+    P(int x, int y) : x{x}, y{y} {}
 };
  
-ll getValue(vector<int> &v)
+ll getValue(vector<int>& v)
 {
     ll res = 0LL;
     for (auto x : v) {
@@ -41,7 +41,7 @@ vector<int> getState(ll x)
 P getPos(int x)
 {
     x--;
-    return P(x%3, x/3);
+    return {x % 3, x / 3};
 }
  
 int getMD(ll x)
@@ -51,16 +51,16 @@ int getMD(ll x)
     for (int i = 0; i < 9; i++) {
 	if (v[i] == 0) continue;
 	P tp = getPos(v[i]);
-	res += abs(i%3-tp.x) + abs(i/3-tp.y);
+	res += abs(i % 3 - tp.x) + abs(i / 3 - tp.y);
     }
     return res;
 }
  
 int LIMIT;
-const int dx[] = {-1, 0, 1, 0};
-const int dy[] = {0, -1, 0, 1};
+constexpr int dx[] = {-1, +0, +1, +0};
+constexpr int dy[] = {+0, -1, +0, +1};
 
-bool inField(int x, int y)
+bool in_field(int x, int y)
 {
     return (0 <= x && x < 3 && 0 <= y && y < 3);
 }
@@ -72,15 +72,15 @@ bool solve(int sp, ll st, int step, int prev)
     if (md + step > LIMIT) {
 	return false;
     }
-    int x = sp%3, y = sp/3;
+    int x = sp % 3, y = sp / 3;
     for (int i = 0; i < 4; i++) { 
 	int nx = x + dx[i], ny = y + dy[i];
-	if (abs(i-prev) == 2) continue;
-	if (!inField(nx, ny)) continue;
+	if (abs(i - prev) == 2) continue;
+	if (!in_field(nx, ny)) continue;
 	vector<int> v = getState(st);
-	int nsp = ny*3 + nx;
+	int nsp = ny * 3 + nx;
 	swap(v[sp], v[nsp]);
-	if (solve(nsp, getValue(v), step+1, i)) {
+	if (solve(nsp, getValue(v), step + 1, i)) {
 	    return true;
 	}
     }

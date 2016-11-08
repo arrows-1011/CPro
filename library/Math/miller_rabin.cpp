@@ -2,7 +2,7 @@
 
 using namespace std;
 
-typedef long long ll;
+using ll = long long;
 
 ll mod_pow(ll x, ll n, ll mod)
 {
@@ -27,7 +27,7 @@ bool miller_rabin(ll N)
 	return false;
     }
     int a[] = {2, 3, 5, 7, 11, 13, 17, -1};
-    ll s = 0, d = N-1;
+    ll s = 0, d = N - 1;
     while (d % 2 == 0) {
 	s++;
 	d >>= 1;
@@ -37,7 +37,7 @@ bool miller_rabin(ll N)
 	if (x != 1) {
 	    int j;
 	    for (j = 0; j < s; j++) {
-		if (x == N-1) break;
+		if (x == N - 1) break;
 		x = mod_mul(x, x, N);
 	    }
 	    if (j == s) return false;

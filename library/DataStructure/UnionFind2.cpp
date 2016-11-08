@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define MAX 1000
+constexpr int MAX = 100000;
 
 class Union_Find {
   public:

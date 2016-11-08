@@ -15,9 +15,9 @@
 
 using namespace std;
 
-#define MAX_V 100010
-#define INF 1e9
-typedef vector<int> Vec;
+constexpr int MAX_V = 100010;
+constexpr int INF = (1 << 29);
+using Vec = vector<int>;
 
 Vec G[MAX_V], ap;
 int V, E;
@@ -31,7 +31,7 @@ void init()
     }
 }
 
-void dfs(int v, int prev, int &k)
+void dfs(int v, int prev, int& k)
 {
     ord[v] = low[v] = k++;
     int cnt = 0;
@@ -50,7 +50,7 @@ void dfs(int v, int prev, int &k)
         low[v] = min(low[v], ord[to]);
     }
     if (prev == -1 && cnt >= 2) isAri = true;
-    if (isAri) ap.push_back(v);
+    if (isAri) ap.emplace_back(v);
 }
 
 int main()
@@ -59,8 +59,8 @@ int main()
     cin >> V >> E; init();
     for (int i = 0; i < E; i++) {
         cin >> s >> t;
-        G[s].push_back(t);
-        G[t].push_back(s);
+        G[s].emplace_back(t);
+        G[t].emplace_back(s);
     }
     int k = 0;
     for (int i = 0; i < V; i++) {

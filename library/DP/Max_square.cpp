@@ -8,7 +8,7 @@
 
 using namespace std;
 
-#define MAX 1010
+constexpr int MAX = 1010;
 
 int N;
 char mat[MAX][MAX];
@@ -27,8 +27,8 @@ int maximum_square()
 	    if (mat[i][j] == '*') {
 		dp[i][j] = 0;
 	    } else {
-		dp[i][j] = min(dp[i-1][j-1],
-			       min(dp[i-1][j], dp[i][j-1])) + 1;
+		dp[i][j] = min(dp[i - 1][j - 1],
+			       min(dp[i - 1][j], dp[i][j - 1])) + 1;
 		res = max(dp[i][j], res);
 	    }
 	}

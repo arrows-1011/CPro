@@ -2,18 +2,18 @@
 
 using namespace std;
 
-#define MAX 100
+constexpr int MAX = 100;
 
 void BubbleSort(int N, int array[])
 {
     int tmp;
 
-    for (int i = N-1; i > 0; i--) {
+    for (int i = N - 1; i > 0; i--) {
 	for (int j = 0; j < i; j++) {
-	    if (array[j+1] < array[j]) {
+	    if (array[j + 1] < array[j]) {
 		tmp = array[j];
-		array[j] = array[j+1];
-		array[j+1] = tmp;
+		array[j] = array[j + 1];
+		array[j + 1] = tmp;
 	    }
 	}
     }

@@ -12,17 +12,17 @@
 
 using namespace std;
 
-#define MAX_V 100010
-#define INF 1e9
-typedef vector<int> Vec;
-typedef pair<int,int> pii;
+constexpr int MAX_V = 100010;
+constexpr int INF = (1 << 29);
+using Vec = vector<int>;
+using pii = pair<int, int>;
 
 int low[MAX_V], ord[MAX_V];
 int V, E;
 Vec G[MAX_V];
 vector<pii> bridge;
 
-void dfs(int v, int prev, int &k)
+void dfs(int v, int prev, int& k)
 {
     ord[v] = low[v] = k++;
     for (int i = 0; i < (int)G[v].size(); i++) {
@@ -33,7 +33,7 @@ void dfs(int v, int prev, int &k)
             low[v] = min(low[v], low[to]);
             if (ord[v] < low[to]) {
                 int a = min(v, to),b = max(v, to);
-                bridge.push_back(pii(a, b));
+                bridge.emplace_back(a, b);
             }
         }
         low[v] = min(low[v], ord[to]);
@@ -55,8 +55,8 @@ int main()
     cin >> V >> E; init();
     for (int i = 0; i < E; i++) {
         cin >> s >> t;
-        G[s].push_back(t);
-        G[t].push_back(s);
+        G[s].emplace_back(t);
+        G[t].emplace_back(s);
     }
     int k = 0;
     for (int i = 0; i < V; i++) {

@@ -2,15 +2,15 @@
 
 using namespace std;
 
-#define MAX 100
+constexpr int MAX = 100;
 
 void selectionSort(int N, int array[])
 {
     int minIndex,tmp;
 
-    for (int i = 0; i < N-1; i++) {
+    for (int i = 0; i < N - 1; i++) {
 	minIndex = i;
-	for (int j = i+1; j < N; j++) {
+	for (int j = i + 1; j < N; j++) {
 	    if (array[j] < array[minIndex]) {
 		minIndex = j;
 	    }

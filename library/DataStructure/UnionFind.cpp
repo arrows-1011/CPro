@@ -2,15 +2,15 @@
 
 using namespace std;
 
-#define MAX 100000
+constexpr int MAX = 100000;
 
-int par[MAX], rank_[MAX];
+int par[MAX], rnk[MAX];
 
 void init(int N)
 {
     for (int i = 0; i < N; i++) {
 	par[i] = i;
-	rank_[i] = 0;
+	rnk[i] = 0;
     }
 }
 
@@ -29,12 +29,12 @@ void unite(int x, int y)
 
     if (x == y) return;
 
-    if (rank_[x] < rank_[y]) {
+    if (rnk[x] < rnk[y]) {
 	par[x] = y;
     } else {
 	par[y] = x;
-	if (rank_[x] == rank_[y]) {
-	    rank_[x]++;
+	if (rnk[x] == rnk[y]) {
+	    rnk[x]++;
 	}
     }
 }

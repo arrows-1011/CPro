@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define MAX 301
+constexpr int MAX = 1000;
  
 int dp[MAX][MAX];
 int arr[MAX][MAX]; // 経路復元用
@@ -17,20 +17,20 @@ void init(int N, int M)
     }
 }
 
-string getStr(string &L, string &R, int l, int r)
+string get_str(string& L, string& R, int l, int r)
 {
     for (int i = 0; i < l; i++) {
 	for (int j = 0; j < r; j++) {
 	    if (L[i] == R[j]) {
-		dp[i+1][j+1] = dp[i][j]+1;
-		arr[i+1][j+1] = 0;
+		dp[i + 1][j + 1] = dp[i][j] + 1;
+		arr[i + 1][j + 1] = 0;
 	    } else {
-		if (dp[i][j+1] < dp[i+1][j]) {
-		    dp[i+1][j+1] = dp[i+1][j];
-		    arr[i+1][j+1] = -1;
+		if (dp[i][j + 1] < dp[i + 1][j]) {
+		    dp[i + 1][j + 1] = dp[i + 1][j];
+		    arr[i + 1][j + 1] = -1;
 		} else {
-		    dp[i+1][j+1] = dp[i][j+1];
-		    arr[i+1][j+1] = 1;
+		    dp[i + 1][j + 1] = dp[i][j + 1];
+		    arr[i + 1][j + 1] = 1;
 		}
 	    }
 	}
@@ -43,7 +43,7 @@ string getStr(string &L, string &R, int l, int r)
     string res;
     for (int i = l, j = r; i > 0 && j > 0; ) {
 	if (!arr[i][j]) {
-	    res += L[i-1];
+	    res += L[i - 1];
 	    i--; j--;
 	} else if (arr[i][j] == 1) {
 	    i--;

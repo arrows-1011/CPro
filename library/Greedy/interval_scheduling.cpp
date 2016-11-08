@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const int MAX_N = 100000;
+constexpr int MAX_N = 100000;
 
 int N, S[MAX_N], T[MAX_N];
 
@@ -18,7 +18,7 @@ void solve()
 	itv[i].first = T[i];
 	itv[i].second = S[i];
     }
-    sort(itv, itv+N);
+    sort(itv, itv + N);
   
     // tは最後に選んだ仕事の終了時間
     int ans = 0, t = 0;

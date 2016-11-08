@@ -21,5 +21,5 @@ int zeller(int Y, int M, int D)
 	Y--;
 	M += 12;
     }
-    return (Y+Y/4-Y/100+Y/400+(13*M+8)/5+D)%7;
+    return (Y + Y / 4 - Y / 100 + Y / 400 + (13 * M + 8) / 5 + D) % 7;
 }

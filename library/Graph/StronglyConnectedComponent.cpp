@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define MAX_V 1000
+constexpr int MAX_V = 1000;
 
 int V, cmp[MAX_V];
 bool used[MAX_V];
@@ -12,8 +12,8 @@ vector<int> G[MAX_V], rG[MAX_V], vs;
 
 void add_edge(int from, int to)
 {
-    G[from].push_back(to);
-    rG[to].push_back(from);
+    G[from].emplace_back(to);
+    rG[to].emplace_back(from);
 }
 
 void dfs(int v)
@@ -24,7 +24,7 @@ void dfs(int v)
             dfs(G[v][i]);
         }
     }
-    vs.push_back(v);
+    vs.emplace_back(v);
 }
 
 void rdfs(int v, int k)

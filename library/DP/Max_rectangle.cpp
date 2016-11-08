@@ -9,10 +9,10 @@
 
 using namespace std;
 
-typedef pair<int,int> pii;
+using pii = pair<int, int>;
 
-#define MAX_H 1510
-#define MAX_W 1510
+constexpr int MAX_H = 1510;
+constexpr int MAX_W = 1510;
 
 int H, W;
 int mat[MAX_H][MAX_W];
@@ -30,7 +30,7 @@ int maximum_rectangle()
 	    int k = j;
 	    while (h[j] < st.top().first) {
 		k = st.top().second;
-		res = max(res, st.top().first*(j-k));
+		res = max(res, st.top().first * (j - k));
 		st.pop();
 	    }
 	    if (st.top().first < h[j]) {

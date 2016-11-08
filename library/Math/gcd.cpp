@@ -22,13 +22,13 @@ int gcd(int a, int b)
 }
 
 //拡張ユークリッドの互除法
-int extgcd(int a, int b, int &x, int &y)
+int extgcd(int a, int b, int& x, int& y)
 {
     int g = a;
     x = 1; y = 0;
 
     if (b != 0) {
-	g = extgcd(b, a % b, y ,x);
+	g = extgcd(b, a % b, y, x);
 	y -= (a / b) * x;
     }
     return g;

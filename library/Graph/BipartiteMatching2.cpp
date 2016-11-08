@@ -1,10 +1,16 @@
+/*
+  注意:
+  - V の初期化
+  - 複数テストケースの場合、vector<int> G[MAX_V]の初期化
+ */
+
 #include <iostream>
 #include <vector>
 #include <cstring>
 
 using namespace std;
 
-#define MAX_V 1010
+constexpr int MAX_V = 1010;
 
 int V;
 vector<int> G[MAX_V];

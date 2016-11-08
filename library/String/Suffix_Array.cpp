@@ -3,8 +3,8 @@
  
 using namespace std;
  
-#define MAX_N 100000
- 
+constexpr int MAX_N = 100000;
+
 int n, k, sa[MAX_N];
 int _rank[MAX_N], tmp[MAX_N];
  
@@ -19,7 +19,7 @@ bool compare_sa(int i, int j)
     }
 }
  
-void construct_sa(string &S, int *sa)
+void construct_sa(string& S, int* sa)
 {
     n = S.length();
    
@@ -29,11 +29,11 @@ void construct_sa(string &S, int *sa)
     }
  
     for (k = 1; k <= n; k *= 2) {
-	sort(sa, sa+n+1, compare_sa);
+	sort(sa, sa + n + 1, compare_sa);
      
 	tmp[sa[0]] = 0;
 	for (int i = 1; i <= n; i++) {
-	    tmp[sa[i]] = tmp[sa[i-1]] + (compare_sa(sa[i-1], sa[i]) ? 1 : 0);
+	    tmp[sa[i]] = tmp[sa[i - 1]] + (compare_sa(sa[i - 1], sa[i]) ? 1 : 0);
 	}
 	for (int i = 0; i <= n; i++) {
 	    _rank[i] = tmp[i];
@@ -41,12 +41,12 @@ void construct_sa(string &S, int *sa)
     }
 }
  
-bool contain(string &S, int *sa, string &T)
+bool contain(string& S, int* sa, string& T)
 {
     int a = 0, b = S.length();
     while (b - a > 1) {
 	int c = (a + b)/ 2;
-	if (S.compare(sa[c],T.length(),T) < 0) {
+	if (S.compare(sa[c], T.length(), T) < 0) {
             a = c;
 	} else {
             b = c;

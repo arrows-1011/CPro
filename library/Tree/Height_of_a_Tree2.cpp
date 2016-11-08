@@ -11,18 +11,18 @@
 
 using namespace std;
 
-#define INF 1e9
-typedef vector<int> Vec;
-typedef pair<int, int> pii;
+constexpr int INF = (1 << 29);
+using Vec = vector<int>;
+using pii = pair<int, int>;
 
 struct Edge {
     int to, cost;
     Edge(int to, int cost) :
-	to(to), cost(cost) {}
+	to{to}, cost{cost} {}
 };
 
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
+using Edges = vector<Edge>;
+using Graph = vector<Edges>;
 
 int N;
 Graph G;
@@ -31,19 +31,19 @@ Vec dijkstra(int s)
 {
     Vec dist(N, INF);
     dist[s] = 0;
-    priority_queue<pii, vector<pii>, greater<pii> > Q;
-    Q.push(pii(0, s));
-    while (!Q.empty()) {
-	pii p = Q.top(); Q.pop();
+    priority_queue<pii, vector<pii>, greater<pii>> pq;
+    pq.push(pii(0, s));
+    while (!pq.empty()) {
+	pii p = pq.top(); pq.pop();
 	int v = p.second;
 	if (dist[v] < p.first) {
 	    continue;
 	}
 	for (int i = 0; i < (int)G[v].size(); i++) {
-	    Edge &e = G[v][i];
+	    Edge& e = G[v][i];
 	    if (dist[v] + e.cost < dist[e.to]) {
 		dist[e.to] = dist[v] + e.cost;
-		Q.push(pii(dist[e.to], e.to));
+		pq.push(pii(dist[e.to], e.to));
 	    }
 	}
     }
@@ -82,8 +82,8 @@ int main()
     G.resize(N);
     for (int i = 0; i < N-1; i++) {
 	cin >> a >> b >> c;
-	G[a].push_back(Edge(b, c));
-	G[b].push_back(Edge(a, c));
+	G[a].emplace_back(b, c);
+	G[b].emplace_back(a, c);
     }
     Vec height = getTreeHeight();
     for (int i = 0; i < N; i++) {

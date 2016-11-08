@@ -6,9 +6,9 @@
 
 using namespace std;
 
-#define MAX_V 1000
-#define MAX_E 2000
-#define INF 1e9
+constexpr int MAX_V = 1000;
+constexpr int MAX_E = 2000;
+constexpr int INF = (1 << 29);
 
 struct edge {
     int from, to, cost;

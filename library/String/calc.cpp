@@ -7,7 +7,7 @@ class calc {
     string::iterator it;
  
   public:
-    calc(const string &str){
+    calc(const string& str){
 	s = str;
 	it = s.begin();
     }

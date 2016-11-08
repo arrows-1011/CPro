@@ -4,46 +4,46 @@
 
 using namespace std;
 
-typedef vector<int> Vec;
+using Vec = vector<int>;
 
 struct PMA {
-    PMA *next[256];
+    PMA* next[256];
     Vec matched;
     PMA() {
-        fill(next, next+256, (PMA*)0);
+        fill(next, next + 256, nullptr);
     }
 };
 
-Vec set_union(const Vec &a, const Vec &b)
+Vec set_union(const Vec& a, const Vec& b)
 {
     int i = 0, j = 0, A = a.size(), B = b.size();
     Vec res;
     while (i < A && j < B) {
 	if (a[i] == b[j]) {
-	    res.push_back(a[i]);
+	    res.emplace_back(a[i]);
 	    i++; j++;
 	} else if(a[i] > b[j]) {
-	    res.push_back(b[j++]);
+	    res.emplace_back(b[j++]);
 	} else {
-	    res.push_back(a[i++]);
+	    res.emplace_back(a[i++]);
 	}
     }
-    for ( ; i < A ; i++) res.push_back(a[i]);
-    for ( ; j < B ; j++) res.push_back(b[j]);
+    for ( ; i < A ; i++) res.emplace_back(a[i]);
+    for ( ; j < B ; j++) res.emplace_back(b[j]);
     return res;
 }
 
-PMA *buildPMA(char *pattern[], int size)
+PMA* buildPMA(char* pattern[], int size)
 {
-    PMA *root = new PMA;
+    PMA* root = new PMA;
     for (int i = 0; i < size; i++) {
-	PMA *t = root;
+	PMA* t = root;
 	for (int j = 0; pattern[i][j] != '\0'; j++) {
 	    char c = pattern[i][j];
-	    if (t->next[c] == NULL) t->next[c] = new PMA;
+	    if (t->next[c] == nullptr) t->next[c] = new PMA;
 	    t = t->next[c];
 	}
-	t->matched.push_back(i);
+	t->matched.emplace_back(i);
     }
     queue<PMA*> Q;
     for (int i = 'a'; i <= 'z'; i++) {
@@ -55,10 +55,10 @@ PMA *buildPMA(char *pattern[], int size)
 	}
     }
     while (!Q.empty()) {
-	PMA *t = Q.front(); Q.pop();
+	PMA* t = Q.front(); Q.pop();
 	for (int i = 'a'; i <= 'z'; i++) {
 	    if (t->next[i]) {
-		PMA *next = t->next[0];
+		PMA* next = t->next[0];
 		while (!next->next[i]) next = next->next[0];
 		
                 t->next[i]->next[0] = next->next[i];
@@ -73,7 +73,7 @@ PMA *buildPMA(char *pattern[], int size)
     return root;
 }
 
-void match(PMA *pma, const char *s, Vec &res)
+void match(PMA* pma, const char* s, Vec& res)
 {
     for (int i = 0; s[i] != '\0'; i++) {
 	int c = s[i];

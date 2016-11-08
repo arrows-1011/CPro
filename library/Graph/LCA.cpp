@@ -7,8 +7,8 @@
 
 using namespace std;
 
-#define MAX_V 100000
-#define MAX_LOG_V 100
+constexpr int MAX_V = 100000;
+constexpr int MAX_LOG_V = 100;
 
 vector<int> G[MAX_V];
 int root;
@@ -23,7 +23,7 @@ void dfs(int v, int p, int d)
     depth[v] = d;
     for (int i = 0; i < (int)G[v].size(); i++) { 
 	if(G[v][i] != p) {
-	    dfs(G[v][i], v, d+1);
+	    dfs(G[v][i], v, d + 1);
 	}
     }
 }
@@ -66,7 +66,7 @@ int lca(int u, int v)
     if (u == v) {
         return u;
     }
-    for (int k = MAX_LOG_V-1; k >= 0; k--) {
+    for (int k = MAX_LOG_V - 1; k >= 0; k--) {
 	if (parent[k][u] != parent[k][v]) {
 	    u = parent[k][u];
 	    v = parent[k][v];
@@ -83,7 +83,7 @@ int main()
 	cin >> K;
 	for (int j = 0; j < K; j++) {
 	    cin >> x;
-	    G[i].push_back(x);
+	    G[i].emplace_back(x);
 	}
     }
     init(N);

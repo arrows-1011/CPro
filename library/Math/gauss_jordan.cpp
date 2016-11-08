@@ -9,14 +9,14 @@
 
 using namespace std;
  
-const double EPS = 1e-8;
-typedef vector<double> vec;
-typedef vector<vec> mat;
+constexpr double EPS = 1e-8;
+using vec = vector<double>;
+using mat = vector<vec>;
 
-vec gauss_jordan(const mat &A, const vec &b)
+vec gauss_jordan(const mat& A, const vec& b)
 {
     int n = A.size();
-    mat B(n, vec(n+1));
+    mat B(n, vec(n + 1));
     for (int i = 0; i < n; i++) {
 	for (int j = 0; j < n; j++) {
 	    B[i][j] = A[i][j];
@@ -39,8 +39,8 @@ vec gauss_jordan(const mat &A, const vec &b)
 	}
 	for (int j = 0; j < n; j++) {
 	    if (i != j) {
-		for (int k = i+1; k <= n; k++) {
-		    B[j][k] -= B[j][i]*B[i][k];
+		for (int k = i + 1; k <= n; k++) {
+		    B[j][k] -= B[j][i] * B[i][k];
 		}
 	    }
 	}

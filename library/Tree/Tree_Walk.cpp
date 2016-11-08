@@ -44,10 +44,10 @@ void solve(int pre[], int in[], int N)
     }
  
     if (p != 0) {
-	solve(pre+1, in, p);
+	solve(pre + 1, in, p);
     }
     if (p != N-1) {
-	solve(pre+p+1, in+p+1, N-p-1);
+	solve(pre + p + 1, in + p + 1, N - p - 1);
     }
     post[idx++] = pre[0]; 
 }

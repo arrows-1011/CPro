@@ -2,7 +2,7 @@
 
 using namespace std;
 
-typedef long long ll;
+using ll = long long;
 
 string solve(ll x, ll N)
 {

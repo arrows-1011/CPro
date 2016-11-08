@@ -7,8 +7,8 @@
 
 using namespace std;
 
-#define INF 1e9
-#define MAX_V 1000
+constexpr int INF = (1 << 29);
+constexpr int MAX_V = 1000;
 
 int cost[MAX_V][MAX_V];  //cost[u][v]は辺e=(u,v)のコスト(存在しない場合はINF)
 int d[MAX_V];            //頂点sからの最短距離
@@ -51,7 +51,7 @@ vector<int> get_path(int t)
 {
     vector<int> path;
     for (; t != -1 ; t = prevv[t]) {
-	path.push_back(t);
+	path.emplace_back(t);
     }
     reverse(path.begin(), path.end());
     return path;

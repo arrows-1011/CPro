@@ -8,7 +8,7 @@
 using namespace std;
 
 template<class T>
-void MergeSort(vector<T> &A)
+void MergeSort(vector<T>& A)
 {
     int n = (int)A.size();
  

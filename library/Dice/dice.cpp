@@ -16,11 +16,11 @@ private:
     }
 public:
     T x[6];
-    void roll_N(){ roll(0,1,4,5); }
-    void roll_E(){ roll(0,3,2,5); }
-    void roll_S(){ roll(0,4,1,5); }
-    void roll_W(){ roll(0,2,3,5); }
-    void rotation(){ roll(1,2,3,4); }
+    void roll_N() { roll(0, 1, 4, 5); }
+    void roll_E() { roll(0, 3, 2, 5); }
+    void roll_S() { roll(0, 4, 1, 5); }
+    void roll_W() { roll(0, 2, 3, 5); }
+    void rotation() { roll(1, 2, 3, 4); }
     
     void roll(int top, int front)
     {
@@ -42,7 +42,7 @@ public:
 	}
     }
     
-    bool operator == (Dice &d)
+    bool operator == (Dice& d)
     {
 	for (int i = 0; i < 4; i++) {
 	    for (int j = 0; j < 4; j++) {
@@ -76,7 +76,7 @@ public:
 	return false;
     }
     
-    bool operator < (const Dice &d) const
+    bool operator < (const Dice& d) const
     {
 	for (int i = 0; i < 6; i++) {
 	    if (x[i] != d.x[i]) {

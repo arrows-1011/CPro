@@ -8,7 +8,7 @@ struct Trie {
   
     Trie() {
 	l = false;
-	fill(next, next + 26, (Trie *)0);
+	fill(next, next + 26, (Trie*)0);
     }
   
     int c(char ch)

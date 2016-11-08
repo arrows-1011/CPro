@@ -9,15 +9,15 @@
 
 using namespace std;
 
-const int MAX_M = 1000;
-const int MAX_N = 1000;
-const int M = 10000;
+constexpr int MAX_M = 1000;
+constexpr int MAX_N = 1000;
+constexpr int M = 10000;
 
 //入力
 int n, m;
 int a[MAX_N];
 
-int dp[MAX_N+1][MAX_M+1]; //DPテーブル
+int dp[MAX_N + 1][MAX_M + 1]; //DPテーブル
 
 void solve()
 {
@@ -27,11 +27,11 @@ void solve()
     }
     for (int i = 0; i < n; i++) {
 	for (int j = 1; j <= m; j++) {
-	    if (j-1-a[i] >= 0) {
+	    if (j - 1 - a[i] >= 0) {
 		//引き算が含まれる場合には負の数にならないよう注意する
-		dp[i+1][j] = (dp[i+1][j-1]+dp[i][j]-dp[i][j-1-a[i]] + M) % M;
+		dp[i + 1][j] = (dp[i + 1][j - 1] + dp[i][j] - dp[i][j - 1 - a[i]] + M) % M;
 	    } else {
-		dp[i+1][j] = (dp[i+1][j-1] + dp[i][j]) % M;
+		dp[i + 1][j] = (dp[i + 1][j - 1] + dp[i][j]) % M;
 	    }
 	}
     }

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-typedef pair<int, int> pii;
+using pii = pair<int, int>;
 vector<pii> v;
 
 void stern_brocot(int N, int pl = 0, int ql = 1, int pr = 1, int qr = 0)

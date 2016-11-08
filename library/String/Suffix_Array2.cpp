@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -8,8 +9,8 @@ struct Suffix_Array {
     int N, k;
     vector<int> sa;
     
-    Suffix_Array (const string &S) : N(S.size()), sa(N+1) {
-        vector<int> rank(N+1), tmp(N+1);
+    Suffix_Array (const string& S) : N(S.size()), sa(N + 1) {
+        vector<int> rank(N + 1), tmp(N + 1);
         for (int i = 0; i <= N; i++) {
             sa[i] = i;
             rank[i] = (i < N ? S[i] : -1);
@@ -39,7 +40,7 @@ struct Suffix_Array {
         } 
     }
     
-    int lower_bound(const string &S, const string &T)
+    int lower_bound(const string& S, const string& T)
     {
         int l = 0, r = N;
         while (r - l > 1) {
@@ -53,9 +54,9 @@ struct Suffix_Array {
         return (S.compare(sa[r], T.size(), T) == 0 ? r : -1);
     }
 
-    int upper_bound(const string &S, const string &T)
+    int upper_bound(const string& S, const string& T)
     {
-        int l = 1, r = N+1;
+        int l = 1, r = N + 1;
         while (r - l > 1) {
             int mid = (l + r) / 2;
             if (S.compare(sa[mid], T.size(), T) <= 0) {
@@ -67,7 +68,7 @@ struct Suffix_Array {
         return (S.compare(sa[l], T.size(), T) == 0 ? r : -1);
     }
 
-    bool contain(const string &S, const string &T)
+    bool contain(const string& S, const string& T)
     {
         int l = 0, r = N;
         while (r - l > 1) {

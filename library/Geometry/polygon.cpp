@@ -6,25 +6,26 @@
 
 using namespace std;
 
-#define EPS 1e-10
-#define equal(a,b) (fabs(a-b) < EPS)
-#define not_equal(a,b) (!equal(a,b))
-#define lt(a,b) (a-b < -EPS)
+constexpr double EPS = (1e-10);
+constexpr double INF = (1e55);
+#define equal(a, b) (fabs(a - b) < EPS)
+#define not_equal(a, b) (!equal(a, b))
+#define lt(a, b) (a - b < -EPS)
 #define PI acos(-1)
-#define INF (1e50)
 
 struct Point {
     double x, y;
 
-    Point(){}
-    Point(double x, double y) : x(x), y(y) {}
+    Point() {}
+    Point(double x, double y) : x{x}, y{y} {}
 
-    Point operator + (const Point &p)const{ return Point(x+p.x,y+p.y); }
-    Point operator - (const Point &p)const{ return Point(x-p.x,y-p.y); }
-    Point operator * (const double &k)const{ return Point(x*k,y*k); }
-    Point operator / (const double &k)const{ return Point(x/k,y/k); }
-    bool operator < (const Point &p)const{ return x != p.x ? x < p.x : y < p.y; }
-    bool operator == (Point &p)const
+    Point operator + (const Point& p) const { return Point(x + p.x, y + p.y); }
+    Point operator - (const Point& p) const { return Point(x - p.x, y - p.y); }
+    Point operator * (const double& k) const { return Point(x * k, y * k); }
+    Point operator / (const double& k) const { return Point(x / k, y / k); }
+    bool operator < (const Point& p) const { return x != p.x ? x < p.x : y < p.y; }
+    
+    bool operator == (Point& p) const
     {
 	if (equal(x, p.x) && equal(y, p.y)) {
 	    return true;
@@ -33,47 +34,47 @@ struct Point {
     }
 };
 
-double dot(const Point &a, const Point &b)
+double dot(const Point& a, const Point& b)
 {
-    return a.x*b.x+a.y*b.y;
+    return a.x * b.x + a.y * b.y;
 }
 
-double cross(const Point &a, const Point &b)
+double cross(const Point& a, const Point& b)
 {
-    return a.x*b.y - b.x*a.y;
+    return a.x * b.y - b.x * a.y;
 }
 
-double norm(const Point &p)
+double norm(const Point& p)
 {
-    return dot(p,p);
+    return dot(p, p);
 }
 
-double abs(const Point &p)
+double abs(const Point& p)
 {
     return sqrt(norm(p));
 }
 
-double dist(const Point &a, const Point &b)
+double dist(const Point& a, const Point& b)
 {
-    return sqrt(pow(a.x-b.x, 2) + pow(a.y-b.y, 2));
+    return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
 }
 
-Point rotate(const Point &p, double th)
+Point rotate(const Point& p, double th)
 {
-    return Point(cos(th)*p.x-sin(th)*p.y,sin(th)*p.x+cos(th)*p.y);
+    return Point(cos(th) * p.x - sin(th) * p.y, sin(th) * p.x + cos(th) * p.y);
 }
 
-Point rotate90(const Point &p)
+Point rotate90(const Point& p)
 {
-    return Point(-p.y,p.x);
+    return Point(-p.y, p.x);
 }
 
-istream &operator >> (istream &is, Point &p)
+istream& operator >> (istream& is, Point& p)
 { 
     return is >> p.x >> p.y;
 }
 
-ostream &operator << (ostream &os, Point &p)
+ostream& operator << (ostream& os, Point& p)
 { 
     return os << "(" << p.x << "," << p.y << ")";
 }
@@ -83,21 +84,21 @@ ostream &operator << (ostream &os, Point &p)
 #define ONLINE_BACK       +2
 #define ONLINE_FRONT      -2
 #define ON_SEGMENT        +0
-typedef Point Vector;
+using Vector = Point;
 
-int ccw(const Point &p0, const Point &p1, const Point &p2)
+int ccw(const Point& p0, const Point& p1, const Point& p2)
 {
     Vector a = p1 - p0;
     Vector b = p2 - p0;
-    if (cross(a, b) > EPS) return COUNTER_CLOCKWISE;
+    if (cross(a, b) > EPS)  return COUNTER_CLOCKWISE;
     if (cross(a, b) < -EPS) return CLOCKWISE;
-    if (dot(a, b) < -EPS) return ONLINE_BACK;
-    if (norm(a) < norm(b)) return ONLINE_FRONT;
+    if (dot(a, b) < -EPS)   return ONLINE_BACK;
+    if (norm(a) < norm(b))  return ONLINE_FRONT;
     return ON_SEGMENT;
 }
 
 /* 参照渡しをしてはいけない */
-bool sortX(Point p1,Point p2){
+bool sortX(Point p1, Point p2){
     if(p1.x != p2.x){ 
 	return (p1.x - p2.x < -EPS);
     }else{
@@ -118,9 +119,10 @@ bool sortY(Point p1, Point p2)
 struct Segment {
     Point s, t;
     
-    Segment(){}
-    Segment(Point s, Point t) : s(s), t(t) {}
-    bool operator == (Segment &seg)const
+    Segment() {}
+    Segment(Point s, Point t) : s{s}, t{t} {}
+    
+    bool operator == (Segment& seg) const
     {
 	if (s == seg.s && t == seg.t) {
 	    return true;
@@ -132,12 +134,12 @@ struct Segment {
     }
 };
 
-typedef Segment Line;
+using Line = Segment;
 
 /*
   Polygonは反時計回りの順で与えられていること前提.
 */
-typedef vector<Point> Polygon;
+using Polygon = vector<Point>;
 
 /*
   最近点対を求める.
@@ -145,18 +147,18 @@ typedef vector<Point> Polygon;
   verified
 */
 
-bool compare_y(const Point &a, const Point &b)
+bool compare_y(const Point& a, const Point& b)
 {
     return a.y < b.y;
 }
 
-double closest_pair(Point *a, int n)
+double closest_pair(Point* a, int n)
 {
     if (n <= 1) return INF;
     int m = n / 2;
     double x = a[m].x;
-    double d = min(closest_pair(a,m), closest_pair(a+m,n-m));
-    inplace_merge(a, a+m, a+n, compare_y);
+    double d = min(closest_pair(a, m), closest_pair(a + m, n - m));
+    inplace_merge(a, a + m, a + n, compare_y);
 
     Polygon b;
     for (int i = 0; i < n; i++) {
@@ -167,12 +169,12 @@ double closest_pair(Point *a, int n)
             if (dy >= d) break;
             d = min(d,sqrt(dx * dx + dy * dy));
         }
-        b.push_back(a[i]);
+        b.emplace_back(a[i]);
     }
     return d;
 }
 
-#define MAX_N 114514 // MAX_N is the number of Points
+constexpr int MAX_N = 114514; // MAX_N is the number of Points
 
 void solve_cp(){
     int N = MAX_N;
@@ -187,25 +189,25 @@ void solve_cp(){
   
   verified (AOJ Lib)
 */
-Polygon convex_hull(Polygon &ps)
+Polygon convex_hull(Polygon& ps)
 {
     int N = ps.size(), j = 0;
-    Polygon pg(N*2);
+    Polygon pg(N * 2);
     sort(ps.begin(), ps.end(), sortY);
     for (int i = 0; i < N; i++, j++) {
-	while (j >= 2 && ccw(pg[j-2], pg[j-1], ps[i]) == -1) {
+	while (j >= 2 && ccw(pg[j - 2], pg[j - 1], ps[i]) == -1) {
 	    j--;
 	}
 	pg[j] = ps[i];
     }
-    int k = j+1;
-    for (int i = N-2; i >= 0; i--, j++) {
-	while (j >= k && ccw(pg[j-2], pg[j-1], ps[i]) == -1) {
+    int k = j + 1;
+    for (int i = N - 2; i >= 0; i--, j++) {
+	while (j >= k && ccw(pg[j - 2], pg[j - 1], ps[i]) == -1) {
 	    j--;
 	}
 	pg[j] = ps[i];
     }
-    pg.resize(j-1);
+    pg.resize(j - 1);
     return pg;
 }
 
@@ -213,7 +215,7 @@ Polygon convex_hull(Polygon &ps)
   多角形の重心を求める。
   O(N)
 */
-Point getCenterOfGravity(const Polygon &pg)
+Point get_center_of_gravity(const Polygon& pg)
 {
     int N = pg.size();
     Point p(0, 0);
@@ -223,6 +225,10 @@ Point getCenterOfGravity(const Polygon &pg)
     return p * (1.0 / N);
 }
 
+#define prev(G, i) (G[(i - 1 + G.size()) % G.size()])
+#define curr(G, i) (G[i % G.size()])
+#define next(G, i) (G[(i + 1) % G.size()])
+
 /*
   凸多角形の直径を求める.
   (ただし凸多角形の直径とはその最遠頂点対間距離である.)
@@ -230,22 +236,22 @@ Point getCenterOfGravity(const Polygon &pg)
   verified (AOJ Lib)
   
 */
-double getPolygonDiameter(Polygon &p)
+double polygon_diameter(Polygon& p)
 {
     Polygon np = convex_hull(p);
     int N = np.size();
-    if (N == 2) return dist(np[0],np[1]);
-    int i = 0,j = 0;
+    if (N == 2) return dist(np[0], np[1]);
+    int i = 0, j = 0;
     for (int k = 0; k < N; k++) {
-	if (!sortX(np[i],np[k])) i = k;
-	if (sortX(np[j],np[k])) j = k;
+	if (!sortX(np[i], np[k])) i = k;
+	if (sortX(np[j], np[k]))  j = k;
     }
     double res = 0;
     int si = i, sj = j;
     while (i != sj || j != si) {
 	res = max(res, dist(np[i], np[j]));
-	Point p1 = np[(i+1)%N]-np[i];
-	Point p2 = np[(j+1)%N]-np[j];
+	Point p1 = next(np, i) - curr(np, i);
+        Point p2 = next(np, j) - curr(np, j);
 	if (cross(p1, p2) < 0) {
 	    i = (i + 1) % N;
 	} else {
@@ -261,14 +267,11 @@ double getPolygonDiameter(Polygon &p)
   ただし,Pointは反時計回りに与えられるものとする.
   verified (AOJ Lib)
 */
-#define prev(G,i) (G[(i-1+G.size())%G.size()])
-#define curr(G,i) (G[i%G.size()])
-#define next(G,i) (G[(i+1)%G.size()])
 
-bool isConvex(const Polygon &p)
+bool is_convex(const Polygon& p)
 {
     for (int i = 0; i < (int)p.size(); i++) {
-        if (ccw(prev(p,i), curr(p,i), next(p,i)) == CLOCKWISE) {
+        if (ccw(prev(p, i), curr(p, i), next(p, i)) == CLOCKWISE) {
             return false; 
         }
     }
@@ -281,12 +284,12 @@ bool isConvex(const Polygon &p)
   ただし,Pointは反時計回りに与えられるものとする.
   verified (AOJ Lib)
 */
-double getArea(const Polygon &p)
+double get_area(const Polygon& p)
 {
     int N = p.size();
     double res = 0;
-    for (int i = 1; i < N+1; i++) {
-	res += (p[i%N].x-p[i-1].x)*(p[i%N].y+p[i-1].y);
+    for (int i = 1; i < N + 1; i++) {
+	res += (p[i % N].x - p[i - 1].x) * (p[i % N].y + p[i - 1].y);
     }
     res /= 2.0;
     return abs(res);
@@ -296,21 +299,21 @@ double getArea(const Polygon &p)
 /*
   単純多角形の面積を計算する
  */
-double area(const Polygon &pg)
+double area(const Polygon& pg)
 {
     double res = 0;
     for (int i = 0; i < (int)pg.size(); i++) {
 	res += cross(pg[i], next(pg, i));
     }
-    return abs(res)/2.0;
+    return abs(res) / 2.0;
 }
 
-Point crosspointLL(const Line &a, const Line &b)
+Point crosspointLL(const Line& a, const Line& b)
 {
-    Vector va = a.t-a.s, vb = b.t-b.s;
+    Vector va = a.t - a.s, vb = b.t - b.s;
     double d = cross(vb, va);
     if (abs(d) < EPS) return b.s;
-    return a.s+va*cross(vb,b.t-a.s)*(1.0/d);
+    return a.s + va * cross(vb, b.t - a.s) * (1.0 / d);
 }
 
 /*
@@ -320,14 +323,14 @@ Point crosspointLL(const Line &a, const Line &b)
   verified (AOJ Lib)
 */
 
-Polygon convex_cut(const Polygon &pg, const Line &l)
+Polygon convex_cut(const Polygon& pg, const Line& l)
 {
     Polygon res;
     for (int i = 0; i < (int)pg.size(); i++) {
-	Point cp = curr(pg,i), np = next(pg,i);
-	if(ccw(l.s, l.t, cp) != -1) res.push_back(cp);
-	if(ccw(l.s, l.t, cp)*ccw(l.s, l.t, np) < 0){
-	    res.push_back(crosspointLL(Line(cp, np), l));
+	Point cp = curr(pg, i), np = next(pg, i);
+	if (ccw(l.s, l.t, cp) != -1) res.emplace_back(cp);
+	if (ccw(l.s, l.t, cp) * ccw(l.s, l.t, np) < 0) {
+	    res.emplace_back(crosspointLL(Line(cp, np), l));
 	}
     }
     return res;
@@ -351,12 +354,12 @@ Polygon convex_cut(const Polygon &pg, const Line &l)
   verified (AOJ Lib)
 */
 
-int containPP(const Polygon &pg, const Point &p)
+int containPP(const Polygon& pg, const Point& p)
 {
     int N = pg.size();
     bool in = false;
     for (int i = 0; i < N; i++) {
-	Point a = curr(pg, i)-p, b = next(pg, i)-p;
+	Point a = curr(pg, i) - p, b = next(pg, i) - p;
 	if (a.y > b.y) swap(a, b);
 	if (a.y <= 0 && 0 < b.y && cross(a, b) < 0) in = !in;
 	if (cross(a, b) == 0 && dot(a, b) <= 0) return 1;
@@ -371,10 +374,10 @@ int containPP(const Polygon &pg, const Point &p)
 struct Data {
     Point p;
     double d;
-    Data(Point p, double d) : p(p), d(d) {}
-    bool operator < (const Data &data)const
+    Data(Point p, double d) : p{p}, d{d} {}
+    bool operator < (const Data& data) const
     {
-	if (!equal(d,data.d)) {
+	if (!equal(d, data.d)) {
 	    return lt(d, data.d);
 	} else {
 	    return p < data.p;
@@ -382,18 +385,18 @@ struct Data {
     }
 };
 
-bool isIntersectSS(const Segment &a, const Segment &b)
+bool isIntersectSS(const Segment& a, const Segment& b)
 {
     Point s[2] = {a.s, a.t}, t[2] = {b.s, b.t};
-    return (ccw(s[0], s[1], t[0])*ccw(s[0], s[1], t[1]) <= 0 &&
-            ccw(t[0], t[1], s[0])*ccw(t[0], t[1], s[1]) <= 0);
+    return (ccw(s[0], s[1], t[0]) * ccw(s[0], s[1], t[1]) <= 0 &&
+            ccw(t[0], t[1], s[0]) * ccw(t[0], t[1], s[1]) <= 0);
 }
  
-Point crosspointSS(const Segment &a, const Segment &b)
+Point crosspointSS(const Segment& a, const Segment& b)
 {
-    Vector va = a.t-a.s, vb = b.t-b.s;
+    Vector va = a.t - a.s, vb = b.t - b.s;
     double d = cross(vb, va);
-    return a.s+va*cross(vb, b.t-a.s)*(1.0/d);
+    return a.s + va * cross(vb, b.t - a.s) * (1.0 / d);
 }
 
 /*
@@ -404,16 +407,16 @@ Point crosspointSS(const Segment &a, const Segment &b)
   verified (AOJ 2514)
 */
 
-bool containPS(const Polygon &pg, Segment &s)
+bool containPS(const Polygon& pg, Segment& s)
 {
     vector<Data> v;
-    v.push_back(Data(s.s, 0));
-    v.push_back(Data(s.t,dist(s.s, s.t)));
+    v.emplace_back(s.s, 0);
+    v.emplace_back(s.t,dist(s.s, s.t));
     set<Point> st;
     for (int i = 0; i < (int)pg.size(); i++) {
 	Segment seg(curr(pg, i), next(pg, i));
 	if (seg == s) return true;
-	if (ccw(seg.s, seg.t, s.s) == 0 && ccw(seg.s, seg.t, s.t) == 0){
+	if (ccw(seg.s, seg.t, s.s) == 0 && ccw(seg.s, seg.t, s.t) == 0) {
 	    return true;
 	}
  
@@ -424,7 +427,7 @@ bool containPS(const Polygon &pg, Segment &s)
 		continue;
 	    }
 	    st.insert(cp);
-	    v.push_back(Data(cp, d));
+	    v.emplace_back(cp, d);
 	}
     }
     sort(v.begin(), v.end());

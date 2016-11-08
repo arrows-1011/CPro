@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#define MAX_N 1000
+constexpr int MAX_N = 1000;
 
 //入力
 int n;
@@ -21,7 +21,7 @@ void solve()
 	dp[i] = 1;
 	for (int j = 0; j < i; j++) {
 	    if (a[j] < a[i]) {
-		dp[i] = max(dp[i], dp[j]+1);
+		dp[i] = max(dp[i], dp[j] + 1);
 	    }
 	}
 	res = max(res, dp[i]);

@@ -8,15 +8,15 @@
 
 using namespace std;
 
-#define INF (1<<29)
+constexpr int INF = (1 << 29);
 
 struct Edge {
     int src, dst, cost;
     
     Edge(int src, int dst, int cost) :
-        src(src), dst(dst), cost(cost) {}
+        src{src}, dst{dst}, cost{cost} {}
     
-    bool operator < (const Edge &e)const
+    bool operator < (const Edge& e) const
     {
         if (cost != e.cost) {
             return cost > e.cost;
@@ -28,10 +28,10 @@ struct Edge {
     }
 };
 
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
+using Edges = vector<Edge>;
+using Graph = vector<Edges>;
 
-int chinesePostman(const Graph &g)
+int chinesePostman(const Graph& g)
 {
     int sum = 0, size = g.size();
     vector<int> odds;
@@ -40,11 +40,11 @@ int chinesePostman(const Graph &g)
             sum += x.cost;
         }
         if (g[i].size() % 2) {
-            odds.push_back(i);
+            odds.emplace_back(i);
         }
     }
     sum /= 2;
-    int n = odds.size(), N = (1<<n);
+    int n = odds.size(), N = (1 << n);
     int d[n][n];
     for (int i = 0; i < n; i++) {
         int s = odds[i];
@@ -72,14 +72,14 @@ int chinesePostman(const Graph &g)
     for (int S = 0; S < N; S++) {
         for (int i = 0; i < n; i++) {
             if (S >> i & 1) continue;
-            for (int j = i+1; j < n; j++) {
+            for (int j = i + 1; j < n; j++) {
                 if (S >> j & 1) continue;
-                dp[S|(1<<i)|(1<<j)] =
-                    min(dp[S|(1<<i)|(1<<j)], dp[S]+d[i][j]);
+                dp[S | (1 << i)|(1 << j)] =
+                    min(dp[S | (1 << i) | (1 << j)], dp[S] + d[i][j]);
             }
         }
     }
-    return sum + dp[N-1];
+    return sum + dp[N - 1];
 }
 
 int main()
@@ -89,8 +89,8 @@ int main()
     Graph g(V);
     for (int i = 0; i < E; i++) {
         cin >> s >> t >> d;
-        g[s].push_back(Edge(s, t, d));
-        g[t].push_back(Edge(t, s, d));
+        g[s].emplace_back(s, t, d);
+        g[t].emplace_back(t, s, d);
     }
     cout << chinesePostman(g) << endl;
     return 0;

@@ -6,14 +6,14 @@
 
 using namespace std;
 
-#define MAX 100000
+constexpr int MAX = 100000;
 
 //1個だけの場合
 int eulerPhi(int n)
 {
     if (n == 0) return 0;
     int ans = n;
-    for (int i = 2; i*i <= n; i++) {
+    for (int i = 2; i * i <= n; i++) {
 	if (n % i == 0) {
 	    ans -= ans / i;
 	    while (n % i == 0) n /= i;
@@ -35,7 +35,7 @@ int EulerPhi(int n)
 	for (int i = 2; i < MAX; i++) {
 	    if (P[i]) {
 		f[i] -= f[i] / i;
-		for (int j = i+i; j < MAX; j += i) {
+		for (int j = i + i; j < MAX; j += i) {
 		    P[j] = 0;
 		    f[j] -= f[j] / i;
 		}

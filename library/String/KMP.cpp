@@ -7,11 +7,11 @@
 
 using namespace std;
 
-typedef vector<int> Vec;
+using Vec = vector<int>;
 
-Vec build_fail(const string &s)
+Vec build_fail(const string& s)
 {
-    Vec fail(s.size()+1);
+    Vec fail(s.size() + 1);
     int j = fail[0] = -1;
     for (int i = 1; i <= (int)s.size(); i++) {
 	while (j >= 0 && s[j] != s[i-1]) j = fail[j];
@@ -20,7 +20,7 @@ Vec build_fail(const string &s)
     return fail;
 }
 
-int match(const string &t, const string &s, const Vec &fail)
+int match(const string& t, const string& s, const Vec& fail)
 {
     int res = 0, n = t.size(), m = s.size();
     for (int i = 0, k = 0; i < n; i++) {
