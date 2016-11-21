@@ -24,7 +24,7 @@ int rec(int L, int R)
     }
     
     for (int i = L; i <= R; i++) {
-        res = max(res, rec(L, i) + rec(i+1, R));
+        res = max(res, rec(L, i) + rec(i + 1, R));
     }   
     return res;
 }
