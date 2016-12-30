@@ -1,136 +1,100 @@
-#include <bits/stdc++.h>
- 
+#include <iostream>
+#include <vector>
+
 using namespace std;
  
-#define LIMIT 20
- 
-struct P{
-    int y,x;
-    P(int y,int x) : y(y),x(x) {}
+struct P {
+    int x, y;
+    P(int x, int y) : x{x}, y{y} {}
 };
  
 int limit;
 vector<int> v;
+
+constexpr int X[] = {2, 1, 2, 3, 0, 1, 2, 3, 4, 1, 2, 3, 2};
+constexpr int Y[] = {0, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4};
  
-P getPos(int x)
+int next_pos(int x, int y)
 {
-    if(x == 0) return P(0,2);
-    if(1 <= x && x <= 3) return P(1,x);
-    if(4 <= x && x <= 8) return P(2,x-4);
-    if(9 <= x && x <= 11) return P(3,x-8);
-    return P(4,2);
-}
- 
-int getPos(P p)
-{
-    if(p.y == 0){
-	if(p.x == 2) return 0;
-	else return -1;
-    }
-    if(p.y == 1){
-	if(1 <= p.x && p.x <= 3){
-	    return p.x;
-	}else{
-	    return -1;
-	}
-    }
-    if(p.y == 2){
-	if(0 <= p.x && p.x <= 4){
-	    return p.x+4;
-	}else{
-	    return -1;
-	}
-    }
-    if(p.y == 3){
-	if(1 <= p.x && p.x <= 3){
-	    return p.x+8;
-	}else{
-	    return -1;
-	}
-    }
-    if(p.y == 4){
-	if(p.x == 2){
-	    return 12;
-	}else{
-	    return -1;
-	}
-    }
+    for (int i = 0; i < 13; i++) {
+        if (x == X[i] && y == Y[i]) {
+            return i;
+        }
+    }        
     return -1;
 }
  
 int getMD()
 {
     int sum = 0;
-    for(int i = 0 ; i < 13 ; i++){
-	if(v[i] == 0) continue;
-	P np = getPos(i);
-	P tp = getPos(v[i]);
-	sum += abs(np.x-tp.x) + abs(np.y-tp.y);
+    for (int i = 0; i < 13; i++) {
+        if (v[i] == 0) continue;
+        sum += abs(X[i] - X[v[i]]) + abs(Y[i] - Y[v[i]]);
     }
     return sum;
 }
  
-const int dx[] = {-1,0,1,0};
-const int dy[] = {0,-1,0,1};
+constexpr int dx[] = {-1, 0, 1, 0};
+constexpr int dy[] = {0, -1, 0, 1};
  
-bool dfs(int sp1,int sp2,int step)
+bool dfs(const int* sp, int step)
 {
     int md = getMD();
-    if(md == 0) return true;
-    if(md + step > limit){
-	return false;
+    if (md == 0) return 1;
+    if (md + step > limit) {
+        return 0;
     }
-    P p[2] = {getPos(sp1),getPos(sp2)};
-    for(int i = 0 ; i < 2 ; i++){
-	int x = p[i].x, y = p[i].y;
-	for(int j = 0 ; j < 4 ; j++){
-	    int nx = x + dx[j], ny = y + dy[j];
-	    P np(ny,nx);
-	    int next = getPos(np);
-	    if(next == -1) continue;
-	    if(i == 0){
-		swap(v[sp1],v[next]);
-		if(dfs(next,sp2,step+1)){
-		    return true;
-		}
-		swap(v[sp1],v[next]);
-	    }else{
-		swap(v[sp2],v[next]);
-		if(dfs(sp1,next,step+1)){
-		    return true;
-		}
-		swap(v[sp2],v[next]);
-	    }
-	}
+    
+    for (int i = 0; i < 2; i++) {
+        int x = X[sp[i]], y = Y[sp[i]];
+        for (int j = 0; j < 4; j++) {
+            int nx = x + dx[j], ny = y + dy[j];
+            int next = next_pos(nx, ny);
+            if (next == -1) continue;
+            
+            const int nsp1[] = {next, sp[1]}, nsp2[] = {sp[0], next};
+            
+            swap(v[sp[i]], v[next]);
+            if (i == 0 && dfs(nsp1, step + 1)) {
+                return 1;
+            }
+            if (i == 1 && dfs(nsp2, step + 1)) {
+                return 1;
+            }
+            swap(v[sp[i]], v[next]);
+        }
     }
-    return false;
+    return 0;
 }
  
 int main()
 {
     int x;
-    while(cin >> x, x != -1){
-	int sp[2];
-	v.resize(13); v[0] = x;
-	for(int i = 1 ; i < 13 ; i++){
-	    cin >> v[i];
-	}
-	for(int i = 0, j = 0 ; i < 13 ; i++){
-	    if(v[i] == 0){
-		sp[j++] = i;
-	    }
-	}
-	bool found = false;
-	for(limit = 0 ; limit <= LIMIT ; limit++){
-	    if(dfs(sp[0],sp[1],0)){
-		cout << limit << endl;
-		found = true;
-		break;
-	    }
-	}
-	if(!found){
-	    cout << "NA" << endl;
-	}
+    while (cin >> x, x != -1) {
+        int sp[2];
+        v.resize(13); v[0] = x;
+        for (int i = 1; i < 13; i++) {
+            cin >> v[i];
+        }
+
+        for (int i = 0, j = 0; i < 13; i++) {
+            if (v[i] == 0) {
+                sp[j++] = i;
+            }
+        }
+
+        bool found = 0;
+        constexpr int LIMIT = 20;
+        for (limit = 0; limit <= LIMIT; limit++) {
+            if (dfs(sp, 0)) {
+                cout << limit << endl;
+                found = 1;
+                break;
+            }
+        }
+        if (!found) {
+            cout << "NA" << endl;
+        }
     }
     return 0;
 }
