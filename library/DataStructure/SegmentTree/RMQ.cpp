@@ -1,3 +1,7 @@
+/*
+  verify AOJ lib
+ */
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
