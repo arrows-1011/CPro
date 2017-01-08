@@ -1,3 +1,7 @@
+/*
+  verified AOJ 1508
+ */
+
 #include <iostream>
 
 using namespace std;
