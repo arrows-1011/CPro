@@ -112,7 +112,7 @@
 - Trie
 
 ## Tree
+- Kruskal
 - The diameter of Tree
 - The height of Tree
-- Kruskal
 - Tree Walk (Preorder & Inorder -> Postorder)
