@@ -3,6 +3,8 @@
   |V| = n, |T| = t としたとき，
   時間計算量 O(n 3^t + n^2 2^t + n^3)．
   空間計算量 O(n 2^t)．
+
+  verified AOJ 1040
  */
 
 #include <iostream>

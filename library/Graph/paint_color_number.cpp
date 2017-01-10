@@ -1,3 +1,10 @@
+/*
+  O(n * 2^n)
+  n <= 20 くらいまでならOK
+  
+  verified AOJ(1254, 2136)
+*/
+
 #include <iostream>
 #include <vector>
 
