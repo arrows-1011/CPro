@@ -3,9 +3,9 @@
 - BigInteger (JAVA)
 
 ## Data Structure
-- BIT
-- RBST
-- RMQ
+- Binary Indexed Tree
+- Segment Tree
+- Treap
 - Union Find
 
 ## Dice
@@ -13,13 +13,13 @@
 
 ## DP
 - Coin
+- Digit DP
 - Division number
 - Duplicate combination
-- Knapsack
-- 01Knapsack
+- Knapsack, 01Knapsack
 - LCS
 - Levenshtein Distance
-- LIS
+- LIS, LIS Fast
 - Maximum rectangle
 - Maximum square
 - One line DP
@@ -43,12 +43,13 @@
 - Bridge
 - Chinese Postman Problem
 - Cycle Detection
-- Dijkstra
+- Dijkstra, Dijkstra Fast
 - Largest Cycle
 - LCA
 - Max flow
 - Min cost flow
-- Prim
+- Paint Color Number
+- Prim, Prim Fast
 - SCC
 - Topological Sort
 - Warshall Floyd
@@ -69,6 +70,7 @@
 - Fraction
 - Gauss Jordan
 - GCD
+- LCM
 - Matrix pow
 - Miller rabin
 - Minus N number
@@ -76,6 +78,7 @@
 - Mod combination
 - Mod power
 - Prime Factor
+- Route
 - Segment sieve
 - Simpson
 - Stern Brocot Tree
