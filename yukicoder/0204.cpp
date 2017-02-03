@@ -32,7 +32,7 @@ int main()
             if (!ok) continue;
             
             int sum = 0;
-            for (int j = 0; j < 14 + 2 * d; j++) {
+            for (int j = 0; j <= 14 + 2 * d; j++) {
                 if (t[j] == 'o' || (l <= j && j < r)) {
                     sum++;
                 } else {
