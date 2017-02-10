@@ -14,6 +14,7 @@
 - C++
 - JavaScript
 - Linux
+- contest
 
 ## Library
 - BigInteger
