@@ -8,10 +8,9 @@ using namespace std;
 
 constexpr double EPS = (1e-10);
 constexpr double INF = (1e55);
+constexpr double PI = acos(-1);
 #define equal(a, b) (fabs(a - b) < EPS)
-#define not_equal(a, b) (!equal(a, b))
 #define lt(a, b) (a - b < -EPS)
-#define PI acos(-1)
 
 struct Point {
     double x, y;
@@ -19,11 +18,30 @@ struct Point {
     Point() {}
     Point(double x, double y) : x{x}, y{y} {}
 
-    Point operator + (const Point& p) const { return Point(x + p.x, y + p.y); }
-    Point operator - (const Point& p) const { return Point(x - p.x, y - p.y); }
-    Point operator * (const double& k) const { return Point(x * k, y * k); }
-    Point operator / (const double& k) const { return Point(x / k, y / k); }
-    bool operator < (const Point& p) const { return x != p.x ? x < p.x : y < p.y; }
+    Point operator + (const Point& p) const
+    {
+        return Point(x + p.x, y + p.y);
+    }
+    
+    Point operator - (const Point& p) const
+    {
+        return Point(x - p.x, y - p.y);
+    }
+    
+    Point operator * (const double& k) const
+    {
+        return Point(x * k, y * k);
+    }
+    
+    Point operator / (const double& k) const
+    {
+        return Point(x / k, y / k);
+    }
+    
+    bool operator < (const Point& p) const
+    {
+        return x != p.x ? x < p.x : y < p.y;
+    }
     
     bool operator == (Point& p) const
     {
@@ -79,11 +97,11 @@ ostream& operator << (ostream& os, Point& p)
     return os << "(" << p.x << "," << p.y << ")";
 }
 
-#define COUNTER_CLOCKWISE +1
-#define CLOCKWISE         -1
-#define ONLINE_BACK       +2
-#define ONLINE_FRONT      -2
-#define ON_SEGMENT        +0
+constexpr int COUNTER_CLOCKWISE = +1;
+constexpr int CLOCKWISE         = -1;
+constexpr int ONLINE_BACK       = +2;
+constexpr int ONLINE_FRONT      = -2;
+constexpr int ON_SEGMENT        = +0;
 using Vector = Point;
 
 int ccw(const Point& p0, const Point& p1, const Point& p2)
@@ -189,23 +207,23 @@ void solve_cp(){
   
   verified (AOJ Lib)
 */
-Polygon convex_hull(Polygon& ps)
+Polygon convex_hull(Polygon &ps)
 {
     int N = ps.size(), j = 0;
     Polygon pg(N * 2);
     sort(ps.begin(), ps.end(), sortY);
-    for (int i = 0; i < N; i++, j++) {
-	while (j >= 2 && ccw(pg[j - 2], pg[j - 1], ps[i]) == -1) {
-	    j--;
-	}
-	pg[j] = ps[i];
+    for (int i = 0; i < N; i++) {
+        while (j > 1 && cross(pg[j - 1] - pg[j - 2], ps[i] - pg[j - 1]) <= 0) {
+            j--;
+        }
+        pg[j++] = ps[i];
     }
-    int k = j + 1;
-    for (int i = N - 2; i >= 0; i--, j++) {
-	while (j >= k && ccw(pg[j - 2], pg[j - 1], ps[i]) == -1) {
-	    j--;
-	}
-	pg[j] = ps[i];
+    int k = j;
+    for (int i = N - 2; i >= 0; i--) {
+        while (j > k && cross(pg[j - 1] - pg[j - 2], ps[i] - pg[j - 1]) <= 0) {
+            j--;
+        }
+        pg[j++] = ps[i];
     }
     pg.resize(j - 1);
     return pg;
