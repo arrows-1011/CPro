@@ -6,10 +6,8 @@
 using namespace std;
 
 constexpr double EPS = (1e-10);
-#define equal(a, b) (fabs(a - b) < EPS)
-#define lt(a, b) (a - b < -EPS)
-#define le(a, b) (lt(a, b) || equal(a, b))
-#define PI acos(-1)
+constexpr double PI = acos(-1);
+#define equals(a, b) (fabs(a - b) < EPS)
 
 struct Point {
     double x, y;
@@ -17,12 +15,35 @@ struct Point {
     Point() {}
     Point(double x, double y) : x{x}, y{y} {}
  
-    Point operator + (const Point& p) const { return Point(x + p.x, y + p.y); }
-    Point operator - (const Point& p) const { return Point(x - p.x, y - p.y); }
-    Point operator * (const double& k) const { return Point(x * k, y * k); }
-    Point operator / (const double& k) const { return Point(x / k, y / k); }
-    bool operator < (const Point& p) const { return x != p.x ? x < p.x : y < p.y; }
-    bool operator == (const Point& p) const { return (x == p.x && y == p.y); }
+    Point operator + (const Point& p) const
+    {
+        return Point(x + p.x, y + p.y);
+    }
+    
+    Point operator - (const Point& p) const
+    {
+        return Point(x - p.x, y - p.y);
+    }
+    
+    Point operator * (const double& k) const
+    {
+        return Point(x * k, y * k);
+    }
+    
+    Point operator / (const double& k) const
+    {
+        return Point(x / k, y / k);
+    }
+    
+    bool operator < (const Point& p) const
+    {
+        return x != p.x ? x < p.x : y < p.y;
+    }
+    
+    bool operator == (const Point& p) const
+    {
+        return (x == p.x && y == p.y);
+    }
 };
 
 double dot(const Point& a, const Point& b)
@@ -35,7 +56,8 @@ double cross(const Point& a, const Point& b)
     return a.x * b.y - b.x * a.y;
 }
 
-double norm(const Point& p){
+double norm(const Point& p)
+{
     return dot(p, p);
 }
 
@@ -49,12 +71,12 @@ double dist(const Point& a, const Point& b)
     return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
 }
 
-double toRad(double ang)
+double to_rad(double ang)
 {
     return ang * PI / 180;
 }
 
-double toAng(double rad)
+double to_ang(double rad)
 {
     return rad * 180 / PI;
 }
@@ -86,31 +108,31 @@ ostream& operator << (ostream& os, Point& p)
     return os << "(" << p.x << "," << p.y << ")";
 }
 
-#define COUNTER_CLOCKWISE +1
-#define CLOCKWISE         -1
-#define ONLINE_BACK       +2
-#define ONLINE_FRONT      -2
-#define ON_SEGMENT        +0
+constexpr int COUNTER_CLOCKWISE = +1;
+constexpr int CLOCKWISE         = -1;
+constexpr int ONLINE_BACK       = +2;
+constexpr int ONLINE_FRONT      = -2;
+constexpr int ON_SEGMENT        = +0;
 using Vector = Point;
 
 int ccw(const Point& p0, const Point& p1, const Point& p2)
 {
     Vector a = p1 - p0;
     Vector b = p2 - p0;
-    if(cross(a, b) > EPS)  return COUNTER_CLOCKWISE;
-    if(cross(a, b) < -EPS) return CLOCKWISE;
-    if(dot(a, b) < -EPS)   return ONLINE_BACK;  // p2-p0-p1
-    if(norm(a) < norm(b))  return ONLINE_FRONT; // p0-p1-p2
+    if (cross(a, b) > EPS)  return COUNTER_CLOCKWISE;
+    if (cross(a, b) < -EPS) return CLOCKWISE;
+    if (dot(a, b) < -EPS)   return ONLINE_BACK;  // p2-p0-p1
+    if (norm(a) < norm(b))  return ONLINE_FRONT; // p0-p1-p2
     return ON_SEGMENT;                          // p0-p2-p1
 }
 
 /* verified (AOJ 1033) */
-double getAngle(const Point& a, const Point& b, const Point& c)
+double get_angle(const Point& a, const Point& b, const Point& c)
 {
     Vector v1 = b - a, v2 = c - b;
-    double aa = atan2(v1.y, v1.x),ba = atan2(v2.y, v2.x);
-    if(aa > ba) swap(aa, ba);
-    double ang = toAng(ba - aa);
+    double aa = atan2(v1.y, v1.x), ba = atan2(v2.y, v2.x);
+    if (aa > ba) swap(aa, ba);
+    double ang = to_ang(ba - aa);
     return min(ang, 360 - ang);
 }
 
@@ -193,7 +215,7 @@ Point reflection(const Segment& s, const Point& p)
 
 //交差判定
 /* verified (AOJ Lib) */
-bool isIntersectSS(const Segment& a, const Segment& b)
+bool intersect_SS(const Segment& a, const Segment& b)
 {
     Point s[2] = {a.s, a.t}, t[2] = {b.s, b.t};
     return (ccw(s[0], s[1], t[0]) * ccw(s[0], s[1], t[1]) <= 0 &&
@@ -201,30 +223,30 @@ bool isIntersectSS(const Segment& a, const Segment& b)
 }
 
 /* verified (AOJ Lib) */
-bool isIntersectSP(const Segment& s, const Point& p)
+bool intersect_SP(const Segment& s, const Point& p)
 {
     return (ccw(s.s, s.t, p) == 0);
 }
 
-bool isIntersectLL(const Line& a, const Line& b)
+bool intersect_LL(const Line& a, const Line& b)
 {
     return (abs(cross(a.t - a.s, b.t - b.s)) > EPS || // 傾きが異なる
 	    abs(cross(a.t - a.s, b.t - b.s)) < EPS);  // 同じ直線である
 }
 
-bool isIntersectLP(const Line& l, const Point& p)
+bool intersect_LP(const Line& l, const Point& p)
 {
     return (abs(ccw(l.s, l.t, p)) != 1);
 }
 
-bool isIntersectLS(const Line& l, const Segment& s)
+bool intersect_LS(const Line& l, const Segment& s)
 {
     return (cross(l.t - l.s, s.s - l.s) * cross(l.t - l.s, s.t - l.s) < EPS);
 }
 
 //交点
 /* verified (AOJ Lib) */
-Point crosspointSS(const Segment& a, const Segment& b)
+Point crosspoint_SS(const Segment& a, const Segment& b)
 {
     Vector va = a.t - a.s, vb = b.t - b.s;
     double d = cross(vb, va);
@@ -232,7 +254,7 @@ Point crosspointSS(const Segment& a, const Segment& b)
 }
 
 /* verified (AOJ Lib) */
-Point crosspointLL(const Line& a, const Line& b)
+Point crosspoint_LL(const Line& a, const Line& b)
 {
     Vector va = a.t - a.s, vb = b.t - b.s;
     double d = cross(vb, va);
@@ -241,55 +263,55 @@ Point crosspointLL(const Line& a, const Line& b)
 }
 
 //距離
-double distanceLP(const Line& l, const Point& p)
+double distance_LP(const Line& l, const Point& p)
 {
     return abs(p - projection(l, p));
 }
 
-double distanceLL(const Line& a, const Line& b)
+double distance_LL(const Line& a, const Line& b)
 {
-    if (isIntersectLL(a, b)) return 0;
-    return distanceLP(a, b.s);
+    if (intersect_LL(a, b)) return 0;
+    return distance_LP(a, b.s);
 }
 
-double distanceLS(const Line& l, const Segment& s)
+double distance_LS(const Line& l, const Segment& s)
 {
-    if (isIntersectLS(l, s)) return 0;
-    return min(distanceLP(l, s.s), distanceLP(l, s.t));
+    if (intersect_LS(l, s)) return 0;
+    return min(distance_LP(l, s.s), distance_LP(l, s.t));
 }
 
 /* verified (AOJ Lib) */
-double distanceSP(const Segment& s, const Point& p)
+double distance_SP(const Segment& s, const Point& p)
 {
     Point r = projection(s, p);
-    if (isIntersectSP(s, r)) return abs(r - p);
+    if (intersect_SP(s, r)) return abs(r - p);
     return min(abs(s.s - p), abs(s.t - p));
 }
 
 /* verified (AOJ Lib) */
-double distanceSS(const Segment& a, const Segment& b)
+double distance_SS(const Segment& a, const Segment& b)
 {
-    if (isIntersectSS(a,b)) return 0;
-    return min(min(distanceSP(a, b.s), distanceSP(a, b.t)),
-	       min(distanceSP(b, a.s), distanceSP(b, a.t)));
+    if (intersect_SS(a, b)) return 0;
+    return min(min(distance_SP(a, b.s), distance_SP(a, b.t)),
+	       min(distance_SP(b, a.s), distance_SP(b, a.t)));
 }
 
 // 線分の垂直判定
 // verify(AOJ 0058)
-bool isOrthogonalSS(const Segment& s1, const Segment& s2)
+bool orthogonal_SS(const Segment& s1, const Segment& s2)
 {
     Vector a = s1.t - s1.s;
     Vector b = s2.t - s2.s;
-    return equal(dot(a, b), 0);
+    return equals(dot(a, b), 0);
 }
 
 // 線分の平行判定
 // verify(AOJ 0021)
-bool isParallelSS(const Segment& s1, const Segment& s2)
+bool parallel_SS(const Segment& s1, const Segment& s2)
 {
     Vector a = s1.t - s1.s;
     Vector b = s2.t - s2.s;
-    return equal(cross(a, b), 0);
+    return equals(cross(a, b), 0);
 }
 
 /*
@@ -320,7 +342,7 @@ struct Edge {
     
     bool operator < (const Edge& e) const
     {
-	return lt(cost, e.cost);
+	return cost < e.cost;
     }
 };
 
@@ -329,7 +351,7 @@ using Graph = vector<vector<Edge>>;
 /*
   線分アレンジメント
   重なる線分がないこと前提(
-  equal(cross(a,b),0) (ベクトル同士のなす角が0°か180°)により取り除く.
+  equals(cross(a,b),0) (ベクトル同士のなす角が0°か180°)により取り除く.
   )
   各線分の端点と線分同士の交点を頂点とする.
   bool operator == (const Point &p)const{ return (x == p.x && y == p.y); } を書かないとエラーでる
@@ -344,17 +366,18 @@ Graph segment_arrangement(vector<Segment>& segs, vector<Point>& ps)
     for (int i = 0; i < N; i++) {
 	ps.emplace_back(segs[i].s);
 	ps.emplace_back(segs[i].t);
-	for (int j = i+1; j < N; j++) {
+	for (int j = i + 1; j < N; j++) {
 	    Vector a = segs[i].t - segs[i].s;
 	    Vector b = segs[j].t - segs[j].s;
-	    if (equal(cross(a, b), 0)) {
+	    if (equals(cross(a, b), 0)) {
                 continue;
             }
-	    if (isIntersectSS(segs[i], segs[j])) {
-		ps.emplace_back(crosspointSS(segs[i], segs[j]));
+	    if (intersect_SS(segs[i], segs[j])) {
+		ps.emplace_back(crosspoint_SS(segs[i], segs[j]));
 	    }
 	}
     }
+    
     sort(ps.begin(), ps.end());
     ps.erase(unique(ps.begin(), ps.end()), ps.end());
 
@@ -363,14 +386,14 @@ Graph segment_arrangement(vector<Segment>& segs, vector<Point>& ps)
     for (int i = 0; i < N; i++) {
 	vector<pair<double,int>> vec;
 	for (int j = 0; j < N2; j++) {
-	    if (isIntersectSP(segs[i], ps[j])) {
+	    if (intersect_SP(segs[i], ps[j])) {
 		double d = dist(segs[i].s, ps[j]);
 		vec.emplace_back(d, j);
 	    }
 	}
 	sort(vec.begin(), vec.end());
-	for (int j = 0; j < (int)vec.size()-1; j++) {
-	    int u = vec[j].second, v = vec[j+1].second;
+	for (int j = 0; j < (int)vec.size() - 1; j++) {
+	    int u = vec[j].second, v = vec[j + 1].second;
 	    double d = dist(ps[u], ps[v]);
 	    G[u].emplace_back(v, d);
 	    G[v].emplace_back(u, d);
