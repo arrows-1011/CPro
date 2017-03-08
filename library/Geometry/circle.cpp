@@ -5,10 +5,10 @@
 using namespace std;
 
 constexpr double EPS = (1e-10);
-#define equal(a, b) (fabs(a - b) < EPS)
+constexpr double PI = acos(-1);
+#define equals(a, b) (fabs(a - b) < EPS)
 #define lt(a, b) (a - b < -EPS)
-#define le(a, b) (lt(a, b) || equal(a, b))
-#define PI acos(-1)
+#define le(a, b) (lt(a, b) || equals(a, b))
 
 struct Point {
     double x, y;
@@ -16,16 +16,35 @@ struct Point {
     Point() {}
     Point(double x, double y) : x{x}, y{y} {}
 
-    Point operator + (const Point& p) const { return Point(x + p.x, y + p.y); }
-    Point operator - (const Point& p) const { return Point(x - p.x, y - p.y); }
-    Point operator * (const double& k) const { return Point(x * k, y * k); }
-    Point operator / (const double& k) const { return Point(x / k, y / k); }
-    bool operator < (const Point& p) const { return x != p.x ? x < p.x : y < p.y; }
+    Point operator + (const Point& p) const
+    {
+        return Point(x + p.x, y + p.y);
+    }
+    
+    Point operator - (const Point& p) const
+    {
+        return Point(x - p.x, y - p.y);
+    }
+    
+    Point operator * (const double& k) const
+    {
+        return Point(x * k, y * k);
+    }
+    
+    Point operator / (const double& k) const
+    {
+        return Point(x / k, y / k);
+    }
+    
+    bool operator < (const Point& p) const
+    {
+        return x != p.x ? x < p.x : y < p.y;
+    }
 };
 
 Point operator * (const Point& a, const Point& b)
 {
-    return Point(a.x * b.x -a.y * b.y, a.x * b.y + a.y * b.x);
+    return Point(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x);
 }
 
 double dot(const Point& a, const Point& b)
@@ -73,11 +92,11 @@ ostream& operator << (ostream& os, Point& p)
     return os << "(" << p.x << "," << p.y << ")";
 }
 
-#define COUNTER_CLOCKWISE +1
-#define CLOCKWISE         -1
-#define ONLINE_BACK       +2
-#define ONLINE_FRONT      -2
-#define ON_SEGMENT        +0
+constexpr int COUNTER_CLOCKWISE = +1;
+constexpr int CLOCKWISE         = -1;
+constexpr int ONLINE_BACK       = +2;
+constexpr int ONLINE_FRONT      = -2;
+constexpr int ON_SEGMENT        = +0;
 using Vector = Point;
 
 int ccw(const Point& p0, const Point& p1, const Point& p2)
@@ -106,7 +125,7 @@ Point projection(const Line& l, const Point& p)
     return l.s + b * t;
 }
 
-double distanceLP(const Line& l, const Point& p)
+double distance_LP(const Line& l, const Point& p)
 {
     return abs(p - projection(l, p));
 }
@@ -118,22 +137,22 @@ struct Circle {
     Circle(Point p, double r) : p{p}, r{r} {}
 };
 
-bool isIntersectCP(const Circle& c, const Point& p)
+bool intersect_CP(const Circle& c, const Point& p)
 {
     return (abs(c.p - p) <= c.r + EPS);
 }
 
-bool isIntersectCC(const Circle& a, const Circle& b)
+bool intersect_CC(const Circle& a, const Circle& b)
 {
     double d = abs(a.p - b.p);
     return (d <= a.r + b.r && d >= abs(a.r - b.r));
 }
 
-vector<Point> crosspointCC(const Circle& a, const Circle& b)
+vector<Point> crosspoint_CC(const Circle& a, const Circle& b)
 {
     vector<Point> res;
     double d = abs(a.p - b.p);
-    if (!isIntersectCC(a, b) || d < EPS) {
+    if (!intersect_CC(a, b) || d < EPS) {
         return res;
     }
     double rc = (a.r * a.r - b.r * b.r + d * d) / (2.0 * d);
@@ -144,10 +163,10 @@ vector<Point> crosspointCC(const Circle& a, const Circle& b)
     return res;
 }
 
-vector<Point> crosspointCL(const Circle& c, const Line& l)
+vector<Point> crosspoint_CL(const Circle& c, const Line& l)
 {
     vector<Point> res;
-    double d = distanceLP(l, c.p);
+    double d = distance_LP(l, c.p);
     if (le(d, c.r)) {
 	Point p = projection(l, c.p);
 	Vector v = (l.t - l.s) / abs(l.t - l.s);
@@ -161,7 +180,7 @@ vector<Point> crosspointCL(const Circle& c, const Line& l)
 /*
   点pから引いた円の接点
  */
-vector<Point> tangentCP(const Circle& c, const Point& p)
+vector<Point> tangent_CP(const Circle& c, const Point& p)
 {
     double x = norm(p - c.p);
     double d = x - c.r * c.r;
@@ -178,7 +197,7 @@ vector<Point> tangentCP(const Circle& c, const Point& p)
 /*
   2円の共通接線を求める.
 */
-vector<Line> tangentCC(const Circle& a, const Circle& b)
+vector<Line> tangent_CC(const Circle& a, const Circle& b)
 {
     vector<Line> res;
     vector<Point> ps, qs;
@@ -191,8 +210,8 @@ vector<Line> tangentCC(const Circle& a, const Circle& b)
     } else {
 	Point p = a.p * (-b.r) + b.p * a.r;
 	p = p * (1.0 / (a.r - b.r));
-	ps = tangentCP(a, p);
-	qs = tangentCP(b, p);
+	ps = tangent_CP(a, p);
+	qs = tangent_CP(b, p);
 	int n = ps.size(), m = qs.size();
 	for (int i = 0; i < min(n, m); i++) {
 	    res.emplace_back(ps[i], qs[i]);
@@ -200,8 +219,8 @@ vector<Line> tangentCC(const Circle& a, const Circle& b)
     }
     Point p = a.p * b.r + b.p * a.r;
     p = p * (1.0 / (a.r + b.r));
-    ps = tangentCP(a, p);
-    qs = tangentCP(b, p);
+    ps = tangent_CP(a, p);
+    qs = tangent_CP(b, p);
     int n = ps.size(), m = qs.size();
     for (int i = 0; i < min(n, m); i++) {
 	res.emplace_back(ps[i], qs[i]);
@@ -214,7 +233,7 @@ using Polygon = vector<Point>;
 /*
   最小包含円
 */
-Circle smallestEnclosingCircle(const Polygon& pg)
+Circle smallest_enclosing_circle(const Polygon& pg)
 {
     Point p(0, 0);
     int N = pg.size();

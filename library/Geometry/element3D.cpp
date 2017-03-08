@@ -60,6 +60,11 @@ double abs(const Point3D& p)
     return sqrt(norm(p));
 }
 
+double dist(const Point3D& a, const Point3D& b)
+{
+    return abs(a - b);
+}
+
 double cross(const Point3D& a, const Point3D& b)
 {
     return abs(Point3D(a.y * b.z - a.z * b.y,
@@ -92,16 +97,21 @@ struct Segment {
 
 using Line =  Segment;
 
-Point3D projection(const Line &l, const Point3D &p)
+Point3D proj(const Line &l, const Point3D &p)
 {
     Point3D b = l.t - l.s;
     double t = dot(p - l.s, b) / norm(b);
     return l.s + b * t;
 }
 
+Point3D refl(const Line& l, const Point3D& p)
+{    
+    return p + (proj(l, p) - p) * 2.0;
+}
+
 double distance_LP(const Line& l, const Point3D& p)
 {
-    return abs(p - projection(l, p));
+    return abs(p - proj(l, p));
 }
 
 double distance_LL(const Line& a, const Line& b)
@@ -160,7 +170,7 @@ double distance_SS(const Segment& s1, const Segment& s2)
   ラジアン注意
   未確認,wikipediaより引用
  */
-Point3D getP3(double r, double ido, double keido)
+Point3D get_P3(double r, double ido, double keido)
 {
     Point3D res;
     res.x = r * sin(ido) * cos(keido);
@@ -261,23 +271,26 @@ int ccw(const Point3D& p0, const Point3D& p1, const Point3D& p2)
 }
 
 /*
-  vecが球と直線の交点
+  球と直線の交差判定
 */
-bool isIntersectSL(const Sphere& c, const Segment& l)
+bool intersect_SL(const Sphere& s, const Line& l)
 {
-    vector<Point3D> vec;
-    double d = distance_LP(l, c.p);
-    if (le(d, c.r)) {
-	Point3D p = projection(l, c.p);
-	Point3D v = (l.t - l.s) / abs(l.t - l.s);
-	d = sqrt(c.r * c.r - d * d);
-	vec.push_back(p - v * d);
-	vec.push_back(p + v * d);
-	for (Point3D vp : vec) {
-	    if (ccw(l.s, l.t, vp) == ON_SEGMENT) {
-		return true;
-	    }
-	}
+    return distance_LP(l, s.p) <= s.r + EPS;
+}
+
+/*
+  球と直線の交点
+*/
+vector<Point3D> crosspoint_SL(const Sphere& s, const Line& l)
+{
+    /* 交差しない -> 交点なし */
+    if (!intersect_SL(s, l)) {
+        return {};
     }
-    return false;
+    
+    Point3D x = proj(l, s.p);
+    Vector3D vp = x - s.p;
+    Vector3D uv = (l.t - l.s) / abs(l.t - l.s);
+    double t = sqrt(s.r * s.r - norm(vp));
+    return {x - uv * t, x + uv * t};
 }
